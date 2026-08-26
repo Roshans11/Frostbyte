@@ -5,6 +5,7 @@ import React, {
   ReactNode,
 } from 'react';
 
+<<<<<<< HEAD
 import {
   defaultMission,
   type RouteType,
@@ -75,6 +76,13 @@ interface RouteState {
   /* ----------------------------------------------------------
      VIEW
   ---------------------------------------------------------- */
+=======
+interface RouteState {
+
+  /* =========================================================
+     VIEW MODE
+  ========================================================= */
+>>>>>>> ice
 
   viewMode: '2D' | '3D';
 
@@ -83,9 +91,15 @@ interface RouteState {
   ) => void;
 
 
+<<<<<<< HEAD
   /* ----------------------------------------------------------
      VESSEL
   ---------------------------------------------------------- */
+=======
+  /* =========================================================
+     VESSEL
+  ========================================================= */
+>>>>>>> ice
 
   vessel: string;
 
@@ -94,9 +108,15 @@ interface RouteState {
   ) => void;
 
 
+<<<<<<< HEAD
   /* ----------------------------------------------------------
      INTRO
   ---------------------------------------------------------- */
+=======
+  /* =========================================================
+     INTRO
+  ========================================================= */
+>>>>>>> ice
 
   introFinished: boolean;
 
@@ -105,6 +125,7 @@ interface RouteState {
   ) => void;
 
 
+<<<<<<< HEAD
   /* ----------------------------------------------------------
      SELECTED ROUTE
   ---------------------------------------------------------- */
@@ -119,12 +140,29 @@ interface RouteState {
   /* ----------------------------------------------------------
      ICEBERG TRAJECTORY
   ---------------------------------------------------------- */
+=======
+  /* =========================================================
+     SELECTED ROUTE
+  ========================================================= */
+
+  selectedRoute: string;
+
+  setSelectedRoute: (
+    route: string
+  ) => void;
+
+
+  /* =========================================================
+     ICEBERG TRAJECTORY
+  ========================================================= */
+>>>>>>> ice
 
   showTrajectory: boolean;
 
   setShowTrajectory: (
     show: boolean
   ) => void;
+<<<<<<< HEAD
 
 
   /* ----------------------------------------------------------
@@ -147,6 +185,8 @@ interface RouteState {
   setLayerVisibility: React.Dispatch<
     React.SetStateAction<LayerVisibility>
   >;
+=======
+>>>>>>> ice
 }
 
 
@@ -166,6 +206,7 @@ const RouteContext =
 
 export const RouteProvider: React.FC<{
   children: ReactNode;
+<<<<<<< HEAD
 }> = ({
   children,
 }) => {
@@ -173,14 +214,24 @@ export const RouteProvider: React.FC<{
 
   /* ==========================================================
      VIEW MODE
+=======
+}> = ({ children }) => {
+
+  /* ==========================================================
+     VIEW
+>>>>>>> ice
   ========================================================== */
 
   const [
     viewMode,
     setViewMode,
+<<<<<<< HEAD
   ] = useState<'2D' | '3D'>(
     '3D'
   );
+=======
+  ] = useState<'2D' | '3D'>('3D');
+>>>>>>> ice
 
 
   /* ==========================================================
@@ -190,9 +241,13 @@ export const RouteProvider: React.FC<{
   const [
     vessel,
     setVessel,
+<<<<<<< HEAD
   ] = useState(
     defaultMission.vessel
   );
+=======
+  ] = useState('PC6');
+>>>>>>> ice
 
 
   /* ==========================================================
@@ -202,9 +257,13 @@ export const RouteProvider: React.FC<{
   const [
     introFinished,
     setIntroFinished,
+<<<<<<< HEAD
   ] = useState(
     false
   );
+=======
+  ] = useState(false);
+>>>>>>> ice
 
 
   /* ==========================================================
@@ -214,9 +273,13 @@ export const RouteProvider: React.FC<{
   const [
     selectedRoute,
     setSelectedRoute,
+<<<<<<< HEAD
   ] = useState<RouteType>(
     defaultMission.selectedRoute
   );
+=======
+  ] = useState('safest');
+>>>>>>> ice
 
 
   /* ==========================================================
@@ -226,6 +289,7 @@ export const RouteProvider: React.FC<{
   const [
     showTrajectory,
     setShowTrajectory,
+<<<<<<< HEAD
   ] = useState(
     true
   );
@@ -355,11 +419,17 @@ export const RouteProvider: React.FC<{
      PROVIDER
   ========================================================== */
 
+=======
+  ] = useState(true);
+
+
+>>>>>>> ice
   return (
 
     <RouteContext.Provider
       value={{
 
+<<<<<<< HEAD
         /* ----------------------------------------------------
            VIEW
         ---------------------------------------------------- */
@@ -423,15 +493,36 @@ export const RouteProvider: React.FC<{
 
         setLayerVisibility,
 
+=======
+        viewMode,
+        setViewMode,
+
+        vessel,
+        setVessel,
+
+        introFinished,
+        setIntroFinished,
+
+        selectedRoute,
+        setSelectedRoute,
+
+        showTrajectory,
+        setShowTrajectory,
+
+>>>>>>> ice
       }}
     >
 
       {children}
 
     </RouteContext.Provider>
+<<<<<<< HEAD
 
   );
 
+=======
+  );
+>>>>>>> ice
 };
 
 
@@ -442,10 +533,14 @@ export const RouteProvider: React.FC<{
 export const useRoute = () => {
 
   const context =
+<<<<<<< HEAD
     useContext(
       RouteContext
     );
 
+=======
+    useContext(RouteContext);
+>>>>>>> ice
 
   if (!context) {
 
@@ -455,7 +550,11 @@ export const useRoute = () => {
 
   }
 
+<<<<<<< HEAD
 
   return context;
 
+=======
+  return context;
+>>>>>>> ice
 };
