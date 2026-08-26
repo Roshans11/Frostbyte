@@ -7,37 +7,62 @@ import React, {
 
 import {
   defaultMission,
-} from '../data/mockData';
-
-import type {
-  RouteType,
+  type RouteType,
 } from '../data/mockData';
 
 
 /* ============================================================
-   MISSION TYPE
+   MISSION CONFIG
 ============================================================ */
 
-export interface MissionState {
-
-  /* Origin location ID */
+export interface MissionConfig {
   origin: string;
 
-  /* Destination location ID */
   destination: string;
 
-  /* Vessel / polar class */
   vessel: string;
 
-  /* Departure date */
   departureDate: string;
 
-  /* Departure time */
   departureTime: string;
 
-  /* Forecast duration in hours */
   forecastHours: number;
+}
 
+
+/* ============================================================
+   LAYER VISIBILITY
+============================================================ */
+
+export interface LayerVisibility {
+
+  /* ----------------------------------------------------------
+     ENVIRONMENTAL LAYERS
+  ---------------------------------------------------------- */
+
+  seaIce: boolean;
+
+  wind: boolean;
+
+  waves: boolean;
+
+  temperature: boolean;
+
+
+  /* ----------------------------------------------------------
+     ICEBERG LAYERS
+  ---------------------------------------------------------- */
+
+  icebergs: boolean;
+
+  trajectory: boolean;
+
+
+  /* ----------------------------------------------------------
+     ROUTE LAYERS
+  ---------------------------------------------------------- */
+
+  routeRisk: boolean;
 }
 
 
@@ -47,9 +72,9 @@ export interface MissionState {
 
 interface RouteState {
 
-  /* =========================================================
-     VIEW MODE
-  ========================================================= */
+  /* ----------------------------------------------------------
+     VIEW
+  ---------------------------------------------------------- */
 
   viewMode: '2D' | '3D';
 
@@ -58,9 +83,9 @@ interface RouteState {
   ) => void;
 
 
-  /* =========================================================
+  /* ----------------------------------------------------------
      VESSEL
-  ========================================================= */
+  ---------------------------------------------------------- */
 
   vessel: string;
 
@@ -69,9 +94,9 @@ interface RouteState {
   ) => void;
 
 
-  /* =========================================================
+  /* ----------------------------------------------------------
      INTRO
-  ========================================================= */
+  ---------------------------------------------------------- */
 
   introFinished: boolean;
 
@@ -80,9 +105,9 @@ interface RouteState {
   ) => void;
 
 
-  /* =========================================================
+  /* ----------------------------------------------------------
      SELECTED ROUTE
-  ========================================================= */
+  ---------------------------------------------------------- */
 
   selectedRoute: RouteType;
 
@@ -91,26 +116,37 @@ interface RouteState {
   ) => void;
 
 
-  /* =========================================================
-     MISSION
-  ========================================================= */
-
-  mission: MissionState;
-
-  setMission: React.Dispatch<
-    React.SetStateAction<MissionState>
-  >;
-
-
-  /* =========================================================
+  /* ----------------------------------------------------------
      ICEBERG TRAJECTORY
-  ========================================================= */
+  ---------------------------------------------------------- */
 
   showTrajectory: boolean;
 
   setShowTrajectory: (
     show: boolean
   ) => void;
+
+
+  /* ----------------------------------------------------------
+     MISSION
+  ---------------------------------------------------------- */
+
+  mission: MissionConfig;
+
+  setMission: React.Dispatch<
+    React.SetStateAction<MissionConfig>
+  >;
+
+
+  /* ----------------------------------------------------------
+     DATA LAYERS
+  ---------------------------------------------------------- */
+
+  layerVisibility: LayerVisibility;
+
+  setLayerVisibility: React.Dispatch<
+    React.SetStateAction<LayerVisibility>
+  >;
 }
 
 
@@ -134,6 +170,7 @@ export const RouteProvider: React.FC<{
   children,
 }) => {
 
+
   /* ==========================================================
      VIEW MODE
   ========================================================== */
@@ -153,7 +190,7 @@ export const RouteProvider: React.FC<{
   const [
     vessel,
     setVessel,
-  ] = useState<string>(
+  ] = useState(
     defaultMission.vessel
   );
 
@@ -165,7 +202,7 @@ export const RouteProvider: React.FC<{
   const [
     introFinished,
     setIntroFinished,
-  ] = useState<boolean>(
+  ] = useState(
     false
   );
 
@@ -183,13 +220,26 @@ export const RouteProvider: React.FC<{
 
 
   /* ==========================================================
+     ICEBERG TRAJECTORY
+  ========================================================== */
+
+  const [
+    showTrajectory,
+    setShowTrajectory,
+  ] = useState(
+    true
+  );
+
+
+  /* ==========================================================
      MISSION
   ========================================================== */
 
   const [
     mission,
     setMission,
-  ] = useState<MissionState>({
+  ] = useState<MissionConfig>({
+
     origin:
       defaultMission.origin,
 
@@ -207,40 +257,97 @@ export const RouteProvider: React.FC<{
 
     forecastHours:
       defaultMission.forecastHours,
+
   });
 
 
   /* ==========================================================
-     ICEBERG TRAJECTORY
+     DATA LAYER VISIBILITY
   ========================================================== */
 
   const [
-    showTrajectory,
-    setShowTrajectory,
-  ] = useState<boolean>(
-    true
-  );
+    layerVisibility,
+    setLayerVisibility,
+  ] = useState<LayerVisibility>({
+
+    /* --------------------------------------------------------
+       SEA ICE
+       -------------------------------------------------------- */
+
+    seaIce: true,
+
+
+    /* --------------------------------------------------------
+       ICEBERGS
+       -------------------------------------------------------- */
+
+    icebergs: true,
+
+
+    /* --------------------------------------------------------
+       TRAJECTORY
+       -------------------------------------------------------- */
+
+    trajectory: true,
+
+
+    /* --------------------------------------------------------
+       ENVIRONMENTAL DATA
+       -------------------------------------------------------- */
+
+    wind: false,
+
+    waves: false,
+
+    temperature: false,
+
+
+    /* --------------------------------------------------------
+       ROUTE RISK
+       -------------------------------------------------------- */
+
+    routeRisk: true,
+
+  });
 
 
   /* ==========================================================
-     KEEP VESSEL STATE + MISSION VESSEL IN SYNC
+     MISSION UPDATE
   ========================================================== */
 
-  const handleSetVessel = (
-    newVessel: string
+  const updateMission: React.Dispatch<
+    React.SetStateAction<MissionConfig>
+  > = (
+    value
   ) => {
 
-    setVessel(
-      newVessel
+    setMission(
+      (current) => {
+
+        const next =
+          typeof value === 'function'
+            ? value(current)
+            : value;
+
+
+        /* ----------------------------------------------------
+           KEEP TOP-LEVEL VESSEL STATE SYNCHRONIZED
+        ---------------------------------------------------- */
+
+        if (
+          next.vessel !== vessel
+        ) {
+          setVessel(
+            next.vessel
+          );
+        }
+
+
+        return next;
+
+      }
     );
 
-    setMission(
-      (current) => ({
-        ...current,
-        vessel:
-          newVessel,
-      })
-    );
   };
 
 
@@ -249,50 +356,72 @@ export const RouteProvider: React.FC<{
   ========================================================== */
 
   return (
+
     <RouteContext.Provider
       value={{
 
-        /* VIEW */
+        /* ----------------------------------------------------
+           VIEW
+        ---------------------------------------------------- */
 
         viewMode,
 
         setViewMode,
 
 
-        /* VESSEL */
+        /* ----------------------------------------------------
+           VESSEL
+        ---------------------------------------------------- */
 
         vessel,
 
-        setVessel:
-          handleSetVessel,
+        setVessel,
 
 
-        /* INTRO */
+        /* ----------------------------------------------------
+           INTRO
+        ---------------------------------------------------- */
 
         introFinished,
 
         setIntroFinished,
 
 
-        /* ROUTE */
+        /* ----------------------------------------------------
+           ROUTE
+        ---------------------------------------------------- */
 
         selectedRoute,
 
         setSelectedRoute,
 
 
-        /* MISSION */
-
-        mission,
-
-        setMission,
-
-
-        /* ICEBERG */
+        /* ----------------------------------------------------
+           ICEBERG
+        ---------------------------------------------------- */
 
         showTrajectory,
 
         setShowTrajectory,
+
+
+        /* ----------------------------------------------------
+           MISSION
+        ---------------------------------------------------- */
+
+        mission,
+
+        setMission:
+          updateMission,
+
+
+        /* ----------------------------------------------------
+           DATA LAYERS
+        ---------------------------------------------------- */
+
+        layerVisibility,
+
+        setLayerVisibility,
 
       }}
     >
@@ -300,7 +429,9 @@ export const RouteProvider: React.FC<{
       {children}
 
     </RouteContext.Provider>
+
   );
+
 };
 
 
@@ -308,7 +439,7 @@ export const RouteProvider: React.FC<{
    HOOK
 ============================================================ */
 
-export const useRoute = (): RouteState => {
+export const useRoute = () => {
 
   const context =
     useContext(
@@ -326,4 +457,5 @@ export const useRoute = (): RouteState => {
 
 
   return context;
+
 };
