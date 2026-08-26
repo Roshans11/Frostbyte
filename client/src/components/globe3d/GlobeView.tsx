@@ -19,8 +19,12 @@ import * as Cesium from 'cesium';
 import { useRoute } from '../../state/RouteContext';
 
 import {
-  routes,
+  missionRoutes,
+  locations,
+  routeMetadata,
+  icebergs,
   icebergTrajectory,
+  type RouteType,
 } from '../../data/mockData';
 
 
@@ -30,19 +34,20 @@ import {
 
 export default function GlobeView() {
 
-  /* ==========================================================
-     SHARED ROUTE STATE
-  ========================================================== */
-
   const {
     introFinished,
     setIntroFinished,
+
     selectedRoute,
+
+    showTrajectory,
+
+    mission,
   } = useRoute();
 
 
   /* ==========================================================
-     CESIUM VIEWER REF
+     VIEWER
   ========================================================== */
 
   const viewerRef =
@@ -50,17 +55,222 @@ export default function GlobeView() {
 
 
   /* ==========================================================
-     GRID IMAGERY
+     CURRENT ORIGIN
+  ========================================================== */
+
+  const origin = useMemo(() => {
+
+    return locations.find(
+      location =>
+        location.id === mission.origin
+    );
+
+  }, [
+    mission.origin,
+  ]);
+
+
+  /* ==========================================================
+     CURRENT DESTINATION
+  ========================================================== */
+
+  const destination = useMemo(() => {
+
+    return locations.find(
+      location =>
+        location.id === mission.destination
+    );
+
+  }, [
+    mission.destination,
+  ]);
+
+
+  /* ==========================================================
+     SELECTED ROUTE
+  ========================================================== */
+
+  const selectedRouteType: RouteType =
+    selectedRoute === 'fastest' ||
+    selectedRoute === 'fuel' ||
+    selectedRoute === 'safest'
+      ? selectedRoute
+      : 'safest';
+
+
+  /* ==========================================================
+     GRID
   ========================================================== */
 
   const gridImagery = useMemo(
-    () => new Cesium.GridImageryProvider(),
+    () =>
+      new Cesium.GridImageryProvider(),
     []
   );
 
 
   /* ==========================================================
-     CAMERA AFTER INTRO
+     CURRENT MISSION ROUTES
+  ========================================================== */
+
+  const currentMissionRoutes =
+    useMemo(() => {
+
+      const originRoutes =
+        missionRoutes[
+          mission.origin
+        ];
+
+      if (!originRoutes) {
+        return [];
+      }
+
+      const destinationRoutes =
+        originRoutes[
+          mission.destination
+        ];
+
+      if (!destinationRoutes) {
+        return [];
+      }
+
+      const routeTypes: RouteType[] = [
+        'safest',
+        'fastest',
+        'fuel',
+      ];
+
+      return routeTypes
+        .map(routeType => {
+
+          const coordinates =
+            destinationRoutes[
+              routeType
+            ];
+
+          if (
+            !coordinates ||
+            coordinates.length < 2
+          ) {
+            return null;
+          }
+
+          return {
+
+            id: routeType,
+
+            name:
+              routeMetadata[
+                routeType
+              ].name,
+
+            color:
+              routeMetadata[
+                routeType
+              ].color,
+
+            risk:
+              routeMetadata[
+                routeType
+              ].risk,
+
+            eta:
+              routeMetadata[
+                routeType
+              ].eta,
+
+            fuel:
+              routeMetadata[
+                routeType
+              ].fuel,
+
+            geoJsonCoords:
+              coordinates,
+
+          };
+
+        })
+        .filter(
+          (
+            route
+          ): route is NonNullable<
+            typeof route
+          > =>
+            route !== null
+        );
+
+    }, [
+      mission.origin,
+      mission.destination,
+    ]);
+
+
+  /* ==========================================================
+     ACTIVE ROUTE
+  ========================================================== */
+
+  const activeRoute =
+    useMemo(() => {
+
+      return (
+        currentMissionRoutes.find(
+          route =>
+            route.id ===
+            selectedRouteType
+        )
+        ??
+        currentMissionRoutes[0]
+      );
+
+    }, [
+      currentMissionRoutes,
+      selectedRouteType,
+    ]);
+
+
+  /* ==========================================================
+     CESIUM POSITIONS
+  ========================================================== */
+
+  const getCesiumPositions = (
+    coordinates: number[][]
+  ) => {
+
+    if (
+      !coordinates ||
+      coordinates.length < 2
+    ) {
+
+      return [];
+
+    }
+
+    return Cesium.Cartesian3.fromDegreesArray(
+      coordinates.flat()
+    );
+
+  };
+
+
+  /* ==========================================================
+     SINGLE POSITION
+  ========================================================== */
+
+  const getPosition = (
+    longitude: number,
+    latitude: number
+  ) => {
+
+    return Cesium.Cartesian3.fromDegrees(
+      longitude,
+      latitude
+    );
+
+  };
+
+
+  /* ==========================================================
+     CAMERA
   ========================================================== */
 
   useEffect(() => {
@@ -74,121 +284,18 @@ export default function GlobeView() {
 
         destination:
           Cesium.Cartesian3.fromDegrees(
-            40,
+            55,
             -68,
-            6000000
+            8500000
           ),
 
       });
 
     }
 
-  }, [introFinished]);
-
-
-  /* ==========================================================
-     ACTIVE ROUTE
-  ========================================================== */
-
-  const activeRoute =
-    routes.find(
-      (route) =>
-        route.id === selectedRoute
-    ) ?? routes[0];
-
-
-  /* ==========================================================
-     CONVERT [LNG, LAT] ARRAYS TO CESIUM POSITIONS
-
-     Input:
-
-     [
-       [76, -69],
-       [60, -68],
-       [40, -67]
-     ]
-
-     Cesium expects:
-
-     [
-       76, -69,
-       60, -68,
-       40, -67
-     ]
-  ========================================================== */
-
-  const getCesiumPositions = (
-    coordinates: number[][]
-  ): Cesium.Cartesian3[] => {
-
-    if (
-      !coordinates ||
-      coordinates.length < 2
-    ) {
-      return [];
-    }
-
-    return Cesium.Cartesian3.fromDegreesArray(
-      coordinates.flat()
-    );
-
-  };
-
-
-  /* ==========================================================
-     ROUTE POSITION
-  ========================================================== */
-
-  const getRouteStartPosition = (
-    route: {
-      geoJsonCoords: number[][];
-    }
-  ) => {
-
-    if (
-      !route.geoJsonCoords ||
-      route.geoJsonCoords.length === 0
-    ) {
-      return undefined;
-    }
-
-    const [
-      longitude,
-      latitude,
-    ] = route.geoJsonCoords[0];
-
-    return Cesium.Cartesian3.fromDegrees(
-      longitude,
-      latitude
-    );
-
-  };
-
-
-  /* ==========================================================
-     ICEBERG CURRENT POSITION
-  ========================================================== */
-
-  const icebergPosition = useMemo(() => {
-
-    if (
-      !icebergTrajectory?.geoJsonCoords ||
-      icebergTrajectory.geoJsonCoords.length === 0
-    ) {
-      return undefined;
-    }
-
-    const lastPoint =
-      icebergTrajectory.geoJsonCoords[
-        icebergTrajectory.geoJsonCoords.length - 1
-      ];
-
-    return Cesium.Cartesian3.fromDegrees(
-      lastPoint[0],
-      lastPoint[1]
-    );
-
-  }, []);
+  }, [
+    introFinished,
+  ]);
 
 
   /* ==========================================================
@@ -204,6 +311,7 @@ export default function GlobeView() {
         z-0
         transition-opacity
         duration-1000
+
         ${
           introFinished
             ? 'opacity-50'
@@ -216,7 +324,7 @@ export default function GlobeView() {
 
         full
 
-        ref={(element) => {
+        ref={element => {
 
           if (
             element?.cesiumElement
@@ -252,151 +360,184 @@ export default function GlobeView() {
       >
 
         {/* ====================================================
-            POLAR GRID
+            GRID
         ==================================================== */}
 
         <ImageryLayer
-          imageryProvider={gridImagery}
+          imageryProvider={
+            gridImagery
+          }
           alpha={0.18}
         />
 
 
         {/* ====================================================
-            NAVIGATION ROUTES
+            ALL THREE ROUTES
         ==================================================== */}
 
-        {routes.map((route) => {
+        {currentMissionRoutes.map(
+          route => {
 
-          const isSelected =
-            route.id === selectedRoute;
-
-
-          const positions =
-            getCesiumPositions(
-              route.geoJsonCoords
-            );
+            const isSelected =
+              route.id ===
+              selectedRouteType;
 
 
-          const routeColor =
-            Cesium.Color.fromCssColorString(
-              route.color
-            );
+            const positions =
+              getCesiumPositions(
+                route.geoJsonCoords
+              );
 
 
-          return (
+            const routeColor =
+              Cesium.Color.fromCssColorString(
+                route.color
+              );
 
-            <React.Fragment
-              key={route.id}
-            >
 
-              {/* =================================================
-                  SELECTED ROUTE GLOW
-              ================================================= */}
+            return (
 
-              {isSelected && (
+              <React.Fragment
+                key={route.id}
+              >
+
+                {/* ==================================================
+                    GLOW
+                ================================================== */}
+
+                {isSelected && (
+
+                  <Entity
+                    name={
+                      `${route.name} Glow`
+                    }
+                  >
+
+                    <PolylineGraphics
+
+                      positions={
+                        positions
+                      }
+
+                      width={20}
+
+                      material={
+                        routeColor.withAlpha(
+                          0.12
+                        )
+                      }
+
+                      clampToGround
+                    />
+
+                  </Entity>
+
+                )}
+
+
+                {/* ==================================================
+                    CASING
+                ================================================== */}
 
                 <Entity
-                  name={`${route.name} Glow`}
+                  name={
+                    `${route.name} Casing`
+                  }
                 >
 
                   <PolylineGraphics
 
-                    positions={positions}
+                    positions={
+                      positions
+                    }
 
-                    width={14}
+                    width={
+                      isSelected
+                        ? 9
+                        : 5
+                    }
 
                     material={
-                      routeColor.withAlpha(
-                        0.10
+                      Cesium.Color.BLACK.withAlpha(
+                        isSelected
+                          ? 0.9
+                          : 0.55
                       )
                     }
 
-                    clampToGround={true}
-
+                    clampToGround
                   />
 
                 </Entity>
 
-              )}
 
+                {/* ==================================================
+                    MAIN ROUTE
+                ================================================== */}
 
-              {/* =================================================
-                  ROUTE CASING
-              ================================================= */}
+                <Entity
 
-              <Entity
-                name={`${route.name} Casing`}
-              >
-
-                <PolylineGraphics
-
-                  positions={positions}
-
-                  width={
-                    isSelected
-                      ? 7
-                      : 4
+                  name={
+                    route.name
                   }
 
-                  material={
-                    Cesium.Color.BLACK.withAlpha(
+                  description={`
+Route: ${route.name}
+Origin: ${
+                    origin?.name ??
+                    mission.origin
+                  }
+Destination: ${
+                    destination?.name ??
+                    mission.destination
+                  }
+Vessel: ${mission.vessel}
+Departure: ${
+                    mission.departureDate
+                  } ${
+                    mission.departureTime
+                  }
+Forecast: ${
+                    mission.forecastHours
+                  } hours
+Risk: ${route.risk}
+ETA: ${route.eta}
+Fuel: ${route.fuel}
+                  `}
+
+                >
+
+                  <PolylineGraphics
+
+                    positions={
+                      positions
+                    }
+
+                    width={
                       isSelected
-                        ? 0.85
-                        : 0.35
-                    )
-                  }
+                        ? 5
+                        : 3
+                    }
 
-                  clampToGround={true}
+                    material={
+                      routeColor.withAlpha(
+                        isSelected
+                          ? 1
+                          : 0.55
+                      )
+                    }
 
-                />
+                    clampToGround
+                  />
 
-              </Entity>
-
-
-              {/* =================================================
-                  MAIN ROUTE
-              ================================================= */}
-
-              <Entity
-                name={route.name}
-
-                description={
-                  `AI navigation route: ${route.name}`
-                }
-
-              >
-
-                <PolylineGraphics
-
-                  positions={positions}
-
-                  width={
-                    isSelected
-                      ? 4
-                      : 2
-                  }
-
-                  material={
-                    routeColor.withAlpha(
-                      isSelected
-                        ? 1
-                        : 0.22
-                    )
-                  }
-
-                  clampToGround={true}
-
-                />
-
-              </Entity>
+                </Entity>
 
 
-              {/* =================================================
-                  ROUTE WAYPOINTS
-              ================================================= */}
+                {/* ==================================================
+                    WAYPOINTS
+                ================================================== */}
 
-              {isSelected &&
-                route.geoJsonCoords
+                {route.geoJsonCoords
                   .slice(1, -1)
                   .map(
                     (
@@ -413,12 +554,8 @@ export default function GlobeView() {
                           `${route.id}-waypoint-${index}`
                         }
 
-                        name={
-                          `${route.name} waypoint ${index + 1}`
-                        }
-
                         position={
-                          Cesium.Cartesian3.fromDegrees(
+                          getPosition(
                             longitude,
                             latitude
                           )
@@ -428,17 +565,29 @@ export default function GlobeView() {
 
                         <PointGraphics
 
-                          pixelSize={5}
+                          pixelSize={
+                            isSelected
+                              ? 6
+                              : 3
+                          }
 
                           color={
-                            routeColor
+                            routeColor.withAlpha(
+                              isSelected
+                                ? 0.95
+                                : 0.55
+                            )
                           }
 
                           outlineColor={
                             Cesium.Color.WHITE
                           }
 
-                          outlineWidth={1}
+                          outlineWidth={
+                            isSelected
+                              ? 1
+                              : 0
+                          }
 
                         />
 
@@ -447,28 +596,125 @@ export default function GlobeView() {
                     )
                   )}
 
-            </React.Fragment>
+              </React.Fragment>
 
-          );
+            );
 
-        })}
+          }
+        )}
 
 
         {/* ====================================================
-            ACTIVE VESSEL — RV PC6
+            ACTIVE VESSEL
         ==================================================== */}
 
         {activeRoute &&
-          activeRoute.geoJsonCoords &&
-          activeRoute.geoJsonCoords.length > 0 && (
+          activeRoute.geoJsonCoords.length > 0 &&
+          (() => {
+
+            const [
+              longitude,
+              latitude,
+            ] =
+              activeRoute
+                .geoJsonCoords[0];
+
+            return (
+
+              <Entity
+
+                name={
+                  `RV ${mission.vessel}`
+                }
+
+                position={
+                  getPosition(
+                    longitude,
+                    latitude
+                  )
+                }
+
+              >
+
+                <PointGraphics
+
+                  pixelSize={14}
+
+                  color={
+                    Cesium.Color.CYAN
+                  }
+
+                  outlineColor={
+                    Cesium.Color.WHITE
+                  }
+
+                  outlineWidth={2}
+
+                  disableDepthTestDistance={
+                    Number.POSITIVE_INFINITY
+                  }
+
+                />
+
+                <LabelGraphics
+
+                  text={
+                    `RV ${mission.vessel}`
+                  }
+
+                  font="12px sans-serif"
+
+                  fillColor={
+                    Cesium.Color.CYAN
+                  }
+
+                  outlineColor={
+                    Cesium.Color.BLACK
+                  }
+
+                  outlineWidth={3}
+
+                  style={
+                    Cesium.LabelStyle
+                      .FILL_AND_OUTLINE
+                  }
+
+                  pixelOffset={
+                    new Cesium.Cartesian2(
+                      16,
+                      0
+                    )
+                  }
+
+                  disableDepthTestDistance={
+                    Number.POSITIVE_INFINITY
+                  }
+
+                />
+
+              </Entity>
+
+            );
+
+          })()}
+
+
+        {/* ====================================================
+            ORIGIN
+        ==================================================== */}
+
+        {origin && (
 
           <Entity
 
-            name="RV PC6"
+            name={
+              `Origin: ${origin.name}`
+            }
 
             position={
-              getRouteStartPosition(
-                activeRoute
+              getPosition(
+                origin.longitude,
+                origin.latitude
               )
             }
 
@@ -476,10 +722,12 @@ export default function GlobeView() {
 
             <PointGraphics
 
-              pixelSize={12}
+              pixelSize={15}
 
               color={
-                Cesium.Color.CYAN
+                Cesium.Color.fromCssColorString(
+                  '#22c55e'
+                )
               }
 
               outlineColor={
@@ -488,16 +736,26 @@ export default function GlobeView() {
 
               outlineWidth={2}
 
+              disableDepthTestDistance={
+                Number.POSITIVE_INFINITY
+              }
+
             />
 
             <LabelGraphics
 
-              text="RV PC6"
+              text={
+                `ORIGIN • ${
+                  origin.shortName.toUpperCase()
+                }`
+              }
 
-              font="12px sans-serif"
+              font="11px sans-serif"
 
               fillColor={
-                Cesium.Color.CYAN
+                Cesium.Color.fromCssColorString(
+                  '#86efac'
+                )
               }
 
               outlineColor={
@@ -513,9 +771,30 @@ export default function GlobeView() {
 
               pixelOffset={
                 new Cesium.Cartesian2(
-                  16,
+                  18,
                   0
                 )
+              }
+
+              showBackground
+
+              backgroundColor={
+                Cesium.Color.fromCssColorString(
+                  '#06111a'
+                ).withAlpha(
+                  0.85
+                )
+              }
+
+              backgroundPadding={
+                new Cesium.Cartesian2(
+                  6,
+                  4
+                )
+              }
+
+              disableDepthTestDistance={
+                Number.POSITIVE_INFINITY
               }
 
             />
@@ -526,168 +805,35 @@ export default function GlobeView() {
 
 
         {/* ====================================================
-            ICEBERG TRAJECTORY
+            DESTINATION
         ==================================================== */}
 
-        {icebergTrajectory &&
-          icebergTrajectory.geoJsonCoords &&
-          icebergTrajectory.geoJsonCoords.length > 1 && (
-
-          <>
-
-            {/* ==================================================
-                TRAJECTORY GLOW
-            ================================================== */}
-
-            <Entity
-              name="Iceberg Trajectory Glow"
-            >
-
-              <PolylineGraphics
-
-                positions={
-                  getCesiumPositions(
-                    icebergTrajectory.geoJsonCoords
-                  )
-                }
-
-                width={9}
-
-                material={
-                  Cesium.Color.fromCssColorString(
-                    '#06b6d4'
-                  ).withAlpha(0.10)
-                }
-
-                clampToGround={true}
-
-              />
-
-            </Entity>
-
-
-            {/* ==================================================
-                DASHED TRAJECTORY
-            ================================================== */}
-
-            <Entity
-              name="Iceberg A102 Trajectory"
-            >
-
-              <PolylineGraphics
-
-                positions={
-                  getCesiumPositions(
-                    icebergTrajectory.geoJsonCoords
-                  )
-                }
-
-                width={3}
-
-                material={
-                  new Cesium.PolylineDashMaterialProperty(
-                    {
-                      color:
-                        Cesium.Color.fromCssColorString(
-                          icebergTrajectory.color
-                        ),
-
-                      dashLength: 12,
-
-                    }
-                  )
-                }
-
-                clampToGround={true}
-
-              />
-
-            </Entity>
-
-
-            {/* ==================================================
-                TRAJECTORY WAYPOINTS
-            ================================================== */}
-
-            {icebergTrajectory.geoJsonCoords
-              .slice(0, -1)
-              .map(
-                (
-                  [
-                    longitude,
-                    latitude,
-                  ],
-                  index
-                ) => (
-
-                  <Entity
-
-                    key={
-                      `iceberg-point-${index}`
-                    }
-
-                    name={
-                      `Iceberg trajectory point ${index + 1}`
-                    }
-
-                    position={
-                      Cesium.Cartesian3.fromDegrees(
-                        longitude,
-                        latitude
-                      )
-                    }
-
-                  >
-
-                    <PointGraphics
-
-                      pixelSize={5}
-
-                      color={
-                        Cesium.Color.CYAN
-                      }
-
-                      outlineColor={
-                        Cesium.Color.WHITE
-                      }
-
-                      outlineWidth={1}
-
-                    />
-
-                  </Entity>
-
-                )
-              )}
-
-          </>
-
-        )}
-
-
-        {/* ====================================================
-            CURRENT ICEBERG
-        ==================================================== */}
-
-        {icebergPosition && (
+        {destination && (
 
           <Entity
 
-            name="Iceberg A102"
+            name={
+              `Destination: ${
+                destination.name
+              }`
+            }
 
             position={
-              icebergPosition
+              getPosition(
+                destination.longitude,
+                destination.latitude
+              )
             }
 
           >
 
             <PointGraphics
 
-              pixelSize={14}
+              pixelSize={15}
 
               color={
                 Cesium.Color.fromCssColorString(
-                  '#06b6d4'
+                  '#22d3ee'
                 )
               }
 
@@ -697,11 +843,19 @@ export default function GlobeView() {
 
               outlineWidth={2}
 
+              disableDepthTestDistance={
+                Number.POSITIVE_INFINITY
+              }
+
             />
 
             <LabelGraphics
 
-              text="ICEBERG A102"
+              text={
+                `DESTINATION • ${
+                  destination.shortName.toUpperCase()
+                }`
+              }
 
               font="11px sans-serif"
 
@@ -729,6 +883,27 @@ export default function GlobeView() {
                 )
               }
 
+              showBackground
+
+              backgroundColor={
+                Cesium.Color.fromCssColorString(
+                  '#06111a'
+                ).withAlpha(
+                  0.85
+                )
+              }
+
+              backgroundPadding={
+                new Cesium.Cartesian2(
+                  6,
+                  4
+                )
+              }
+
+              disableDepthTestDistance={
+                Number.POSITIVE_INFINITY
+              }
+
             />
 
           </Entity>
@@ -737,7 +912,294 @@ export default function GlobeView() {
 
 
         {/* ====================================================
-            BHARATI RESEARCH STATION
+            USNIC ICEBERGS
+        ==================================================== */}
+
+        {icebergs.map(iceberg => {
+
+          const [
+            longitude,
+            latitude,
+          ] =
+            iceberg.geoJsonCoords[0];
+
+          const pixelSize =
+            Math.max(
+              7,
+              Math.min(
+                24,
+                7 +
+                  Math.sqrt(
+                    iceberg.areaSqNm
+                  ) *
+                  0.45
+              )
+            );
+
+          return (
+
+            <Entity
+
+              key={
+                `usnic-iceberg-${iceberg.id}`
+              }
+
+              name={
+                `Iceberg ${iceberg.name}`
+              }
+
+              description={`
+Source: ${iceberg.source}
+Observation: ${iceberg.observationDate}
+Area: ${iceberg.areaSqNm} NM²
+Size: ${
+                iceberg.sizeNm[0]
+              } × ${
+                iceberg.sizeNm[1]
+              } NM
+Position: ${
+                latitude.toFixed(3)
+              }° S, ${
+                longitude.toFixed(3)
+              }° E
+              `}
+
+              position={
+                getPosition(
+                  longitude,
+                  latitude
+                )
+              }
+
+            >
+
+              <PointGraphics
+
+                pixelSize={
+                  pixelSize
+                }
+
+                color={
+                  Cesium.Color.fromCssColorString(
+                    '#06b6d4'
+                  ).withAlpha(
+                    0.95
+                  )
+                }
+
+                outlineColor={
+                  Cesium.Color.fromCssColorString(
+                    '#a5f3fc'
+                  )
+                }
+
+                outlineWidth={2}
+
+                disableDepthTestDistance={
+                  Number.POSITIVE_INFINITY
+                }
+
+              />
+
+              <LabelGraphics
+
+                text={
+                  iceberg.name
+                }
+
+                font="10px sans-serif"
+
+                fillColor={
+                  Cesium.Color.fromCssColorString(
+                    '#67e8f9'
+                  )
+                }
+
+                outlineColor={
+                  Cesium.Color.BLACK
+                }
+
+                outlineWidth={3}
+
+                style={
+                  Cesium.LabelStyle
+                    .FILL_AND_OUTLINE
+                }
+
+                verticalOrigin={
+                  Cesium.VerticalOrigin.BOTTOM
+                }
+
+                pixelOffset={
+                  new Cesium.Cartesian2(
+                    0,
+                    -12
+                  )
+                }
+
+                showBackground
+
+                backgroundColor={
+                  Cesium.Color.fromCssColorString(
+                    '#06111a'
+                  ).withAlpha(
+                    0.8
+                  )
+                }
+
+                backgroundPadding={
+                  new Cesium.Cartesian2(
+                    5,
+                    3
+                  )
+                }
+
+                disableDepthTestDistance={
+                  Number.POSITIVE_INFINITY
+                }
+
+              />
+
+            </Entity>
+
+          );
+
+        })}
+
+
+        {/* ====================================================
+            ICEBERG TRAJECTORY
+        ==================================================== */}
+
+        {showTrajectory &&
+          icebergTrajectory.geoJsonCoords.length > 1 && (
+
+            <>
+
+              {/* GLOW */}
+
+              <Entity
+                name="Iceberg Trajectory Glow"
+              >
+
+                <PolylineGraphics
+
+                  positions={
+                    getCesiumPositions(
+                      icebergTrajectory
+                        .geoJsonCoords
+                    )
+                  }
+
+                  width={10}
+
+                  material={
+                    Cesium.Color.fromCssColorString(
+                      icebergTrajectory.color
+                    ).withAlpha(
+                      0.12
+                    )
+                  }
+
+                  clampToGround
+                />
+
+              </Entity>
+
+
+              {/* DASHED LINE */}
+
+              <Entity
+                name="Iceberg Predicted Trajectory"
+              >
+
+                <PolylineGraphics
+
+                  positions={
+                    getCesiumPositions(
+                      icebergTrajectory
+                        .geoJsonCoords
+                    )
+                  }
+
+                  width={3}
+
+                  material={
+                    new Cesium.PolylineDashMaterialProperty(
+                      {
+                        color:
+                          Cesium.Color.fromCssColorString(
+                            icebergTrajectory.color
+                          ),
+
+                        dashLength: 12,
+                      }
+                    )
+                  }
+
+                  clampToGround
+                />
+
+              </Entity>
+
+
+              {/* TRAJECTORY POINTS */}
+
+              {icebergTrajectory
+                .geoJsonCoords
+                .slice(0, -1)
+                .map(
+                  (
+                    [
+                      longitude,
+                      latitude,
+                    ],
+                    index
+                  ) => (
+
+                    <Entity
+
+                      key={
+                        `trajectory-point-${index}`
+                      }
+
+                      position={
+                        getPosition(
+                          longitude,
+                          latitude
+                        )
+                      }
+
+                    >
+
+                      <PointGraphics
+
+                        pixelSize={5}
+
+                        color={
+                          Cesium.Color.CYAN
+                        }
+
+                        outlineColor={
+                          Cesium.Color.WHITE
+                        }
+
+                        outlineWidth={1}
+
+                      />
+
+                    </Entity>
+
+                  )
+                )}
+
+            </>
+
+          )}
+
+
+        {/* ====================================================
+            BHARATI
         ==================================================== */}
 
         <Entity
@@ -745,7 +1207,7 @@ export default function GlobeView() {
           name="Bharati Research Station"
 
           position={
-            Cesium.Cartesian3.fromDegrees(
+            getPosition(
               76.3268,
               -69.4068
             )
@@ -754,8 +1216,7 @@ export default function GlobeView() {
         >
 
           <PointGraphics
-
-            pixelSize={10}
+            pixelSize={11}
 
             color={
               Cesium.Color.fromCssColorString(
@@ -769,6 +1230,9 @@ export default function GlobeView() {
 
             outlineWidth={2}
 
+            disableDepthTestDistance={
+              Number.POSITIVE_INFINITY
+            }
           />
 
           <LabelGraphics
@@ -801,13 +1265,17 @@ export default function GlobeView() {
               )
             }
 
+            disableDepthTestDistance={
+              Number.POSITIVE_INFINITY
+            }
+
           />
 
         </Entity>
 
 
         {/* ====================================================
-            MAITRI RESEARCH STATION
+            MAITRI
         ==================================================== */}
 
         <Entity
@@ -815,7 +1283,7 @@ export default function GlobeView() {
           name="Maitri Research Station"
 
           position={
-            Cesium.Cartesian3.fromDegrees(
+            getPosition(
               11.7397,
               -70.7667
             )
@@ -825,7 +1293,7 @@ export default function GlobeView() {
 
           <PointGraphics
 
-            pixelSize={10}
+            pixelSize={11}
 
             color={
               Cesium.Color.fromCssColorString(
@@ -838,6 +1306,10 @@ export default function GlobeView() {
             }
 
             outlineWidth={2}
+
+            disableDepthTestDistance={
+              Number.POSITIVE_INFINITY
+            }
 
           />
 
@@ -869,6 +1341,88 @@ export default function GlobeView() {
               )
             }
 
+            disableDepthTestDistance={
+              Number.POSITIVE_INFINITY
+            }
+
+          />
+
+        </Entity>
+
+
+        {/* ====================================================
+            CAPE TOWN
+        ==================================================== */}
+
+        <Entity
+
+          name="Cape Town"
+
+          position={
+            getPosition(
+              18.4232,
+              -33.9249
+            )
+          }
+
+        >
+
+          <PointGraphics
+
+            pixelSize={10}
+
+            color={
+              Cesium.Color.fromCssColorString(
+                '#f59e0b'
+              )
+            }
+
+            outlineColor={
+              Cesium.Color.WHITE
+            }
+
+            outlineWidth={2}
+
+            disableDepthTestDistance={
+              Number.POSITIVE_INFINITY
+            }
+
+          />
+
+          <LabelGraphics
+
+            text="CAPE TOWN"
+
+            font="11px sans-serif"
+
+            fillColor={
+              Cesium.Color.fromCssColorString(
+                '#fbbf24'
+              )
+            }
+
+            outlineColor={
+              Cesium.Color.BLACK
+            }
+
+            outlineWidth={3}
+
+            style={
+              Cesium.LabelStyle
+                .FILL_AND_OUTLINE
+            }
+
+            pixelOffset={
+              new Cesium.Cartesian2(
+                14,
+                0
+              )
+            }
+
+            disableDepthTestDistance={
+              Number.POSITIVE_INFINITY
+            }
+
           />
 
         </Entity>
@@ -886,17 +1440,15 @@ export default function GlobeView() {
 
             destination={
               Cesium.Cartesian3.fromDegrees(
-                40,
+                55,
                 -68,
-                6000000
+                8500000
               )
             }
 
-            onComplete={() => {
-
-              setIntroFinished(true);
-
-            }}
+            onComplete={() =>
+              setIntroFinished(true)
+            }
 
           />
 
