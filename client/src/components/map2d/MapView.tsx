@@ -1,8 +1,17 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 import React, { useMemo } from 'react';
 
 =======
 >>>>>>> ice
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 import Map, {
   Source,
   Layer,
@@ -13,6 +22,11 @@ import Map, {
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 import {
   missionRoutes,
   locations,
@@ -72,6 +86,10 @@ const MAP_STYLE = {
 };
 
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 import { routes, icebergTrajectory } from '../../data/mockData';
 import { useRoute } from '../../state/RouteContext';
 
@@ -113,7 +131,14 @@ const LOCATIONS = [
     type: 'destination',
   },
 ];
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
 /* ============================================================
    MAP VIEW
@@ -122,6 +147,11 @@ const LOCATIONS = [
 export default function MapView() {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
   const {
     selectedRoute,
     setSelectedRoute,
@@ -248,6 +278,10 @@ export default function MapView() {
 
 
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
   /*
    * Route and map state are shared through RouteContext.
    *
@@ -262,12 +296,24 @@ export default function MapView() {
     setShowTrajectory,
   } = useRoute();
 
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
   /* ==========================================================
      ACTIVE ROUTE
   ========================================================== */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
   const activeRoute = useMemo(() => {
 
     return (
@@ -383,6 +429,10 @@ export default function MapView() {
 
         attributionControl
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
   const activeRoute =
     routes.find(
       (route) => route.id === selectedRoute
@@ -427,12 +477,27 @@ export default function MapView() {
         mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
 
         attributionControl={false}
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
         reuseMaps
       >
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        {/* ===================================================
+            MAP CONTROLS
+        =================================================== */}
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
         {/* ====================================================
             NAVIGATION
         ==================================================== */}
@@ -441,12 +506,21 @@ export default function MapView() {
             MAP CONTROLS
         =================================================== */}
 >>>>>>> ice
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
         <NavigationControl
           position="bottom-right"
           showCompass
           showZoom
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
           visualizePitch
         />
 
@@ -518,6 +592,10 @@ export default function MapView() {
 
               {/* ROUTE CASING */}
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
         />
 
         {/* ===================================================
@@ -585,22 +663,44 @@ export default function MapView() {
               {/* =================================================
                   DARK CASING
               ================================================= */}
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
               <Layer
                 id={`route-casing-${route.id}`}
                 type="line"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                source={sourceId}
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
                 source={`route-source-${route.id}`}
 
 =======
                 source={sourceId}
 >>>>>>> ice
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
                 layout={{
                   'line-join': 'round',
                   'line-cap': 'round',
                 }}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
                 paint={{
                   'line-color':
@@ -619,6 +719,10 @@ export default function MapView() {
 
               {/* MAIN ROUTE */}
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
                 paint={{
                   'line-color': '#02080d',
 
@@ -635,22 +739,44 @@ export default function MapView() {
               {/* =================================================
                   MAIN ROUTE
               ================================================= */}
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
               <Layer
                 id={`route-main-${route.id}`}
                 type="line"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                source={sourceId}
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
                 source={`route-source-${route.id}`}
 
 =======
                 source={sourceId}
 >>>>>>> ice
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
                 layout={{
                   'line-join': 'round',
                   'line-cap': 'round',
                 }}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
                 paint={{
                   'line-color':
@@ -664,6 +790,10 @@ export default function MapView() {
                       ? 1
                       : 0.38,
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
                 paint={{
                   'line-color': route.color,
 
@@ -683,12 +813,24 @@ export default function MapView() {
                   'line-dasharray': isSelected
                     ? [1, 0]
                     : [3, 3],
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
                 }}
               />
 
             </Source>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
           );
 
@@ -732,6 +874,10 @@ export default function MapView() {
                     "
                   />
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
           );
         })}
 
@@ -876,7 +1022,14 @@ export default function MapView() {
                 >
 
                   <div className="w-1.5 h-1.5 rounded-full bg-cyan-300/70 shadow-[0_0_7px_rgba(85,214,255,0.7)]" />
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
                 </Marker>
 
@@ -884,6 +1037,11 @@ export default function MapView() {
             )}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
         {/* ====================================================
             ORIGIN
@@ -954,6 +1112,10 @@ export default function MapView() {
                 />
 
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
         {/* =====================================================
             IMPORTANT LOCATIONS
         ===================================================== */}
@@ -1075,7 +1237,14 @@ export default function MapView() {
 
                 </div>
 
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
               </div>
 
             </div>
@@ -1085,6 +1254,11 @@ export default function MapView() {
         )}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
         {/* ====================================================
             DESTINATION
@@ -1831,6 +2005,10 @@ export default function MapView() {
             {' → '}
             {mission.destination}
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
         {/* =====================================================
             ICEBERG
         ===================================================== */}
@@ -1914,13 +2092,25 @@ export default function MapView() {
             <div className="text-[10px] text-slate-300 mt-1 font-mono">
               SOUTHERN OCEAN / ANTARCTIC SECTOR
             </div>
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
           </div>
 
         </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
       )}
 
 
@@ -2042,6 +2232,10 @@ export default function MapView() {
 
             return (
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
         {/* ===================================================
             TOP RIGHT — ROUTE SELECTOR
         =================================================== */}
@@ -2057,12 +2251,24 @@ export default function MapView() {
             </div>
 
             {routes.map((route) => (
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
               <button
                 key={route.id}
                 type="button"
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
 
                 onClick={() =>
                   setSelectedRoute(
@@ -2185,6 +2391,10 @@ export default function MapView() {
             />
 
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
                 onClick={() =>
                   setSelectedRoute(route.id)
                 }
@@ -2300,7 +2510,14 @@ export default function MapView() {
 
             Iceberg Trajectory
 
+<<<<<<< HEAD
 >>>>>>> ice
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
           </button>
 
         </div>
@@ -2309,8 +2526,17 @@ export default function MapView() {
 
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> ice
+=======
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> ice
+>>>>>>> main
+>>>>>>> 7654897937d6c0d8b561d0355200ff59db16af32
   );
 }
