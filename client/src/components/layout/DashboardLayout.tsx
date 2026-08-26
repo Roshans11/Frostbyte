@@ -22,8 +22,11 @@ import {
   Database,
   Brain,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   Play,
   CheckCircle2,
   Loader2,
@@ -47,6 +50,7 @@ import ModelDiagnostics from './ModelDiagnostics';
    DASHBOARD
 ============================================================ */
 
+<<<<<<< HEAD
 =======
 >>>>>>> main
 } from 'lucide-react';
@@ -59,13 +63,18 @@ import ModelDiagnostics from './ModelDiagnostics';
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 export default function DashboardLayout() {
   const {
     viewMode,
     setViewMode,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
     introFinished,
 
@@ -209,6 +218,7 @@ export default function DashboardLayout() {
   /* ==========================================================
      INTRO
   ========================================================== */
+<<<<<<< HEAD
 =======
 >>>>>>> main
     introFinished,
@@ -232,6 +242,8 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
   if (!introFinished) {
     return null;
@@ -241,8 +253,11 @@ export default function DashboardLayout() {
     <AnimatePresence>
       <motion.div
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         initial={{
           opacity: 0,
         }}
@@ -262,6 +277,7 @@ export default function DashboardLayout() {
           text-slate-100
         "
       >
+<<<<<<< HEAD
 =======
 >>>>>>> main
         initial={{ opacity: 0 }}
@@ -274,13 +290,18 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         {/* =====================================================
             TOP BAR
         ===================================================== */}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         <header
           className="
             h-16
@@ -413,6 +434,7 @@ export default function DashboardLayout() {
                   text-slate-500
                 "
               />
+<<<<<<< HEAD
 =======
 >>>>>>> main
         <header className="h-16 shrink-0 bg-[#06111a]/95 backdrop-blur-xl border-b border-cyan-300/10 flex items-center justify-between px-5 pointer-events-auto shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
@@ -469,6 +491,8 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
               <span className="text-slate-500">
                 DATA
@@ -481,9 +505,12 @@ export default function DashboardLayout() {
 
             <div className="flex items-center gap-2">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Brain className="w-3.5 h-3.5 text-cyan-400" />
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               <Brain
                 className="
                   w-3.5
@@ -491,10 +518,13 @@ export default function DashboardLayout() {
                   text-cyan-400
                 "
               />
+<<<<<<< HEAD
 =======
               <Brain className="w-3.5 h-3.5 text-cyan-400" />
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
               <span className="text-slate-500">
                 AI MODEL
@@ -507,9 +537,12 @@ export default function DashboardLayout() {
 
             <div className="flex items-center gap-2">
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Gauge className="w-3.5 h-3.5 text-slate-500" />
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               <Gauge
                 className="
                   w-3.5
@@ -517,10 +550,13 @@ export default function DashboardLayout() {
                   text-slate-500
                 "
               />
+<<<<<<< HEAD
 =======
               <Gauge className="w-3.5 h-3.5 text-slate-500" />
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
               <span className="text-slate-500">
                 CONFIDENCE
@@ -531,8 +567,11 @@ export default function DashboardLayout() {
               </span>
             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           </div>
 
           {/* VIEW SWITCHER */}
@@ -575,6 +614,7 @@ export default function DashboardLayout() {
                 "
               />
 
+<<<<<<< HEAD
 =======
 >>>>>>> main
 
@@ -597,13 +637,18 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               2D MAP
             </button>
 
             <button
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               type="button"
               onClick={() => setViewMode('3D')}
               className={`
@@ -633,6 +678,7 @@ export default function DashboardLayout() {
               3D GLOBE
             </button>
           </div>
+<<<<<<< HEAD
 =======
 >>>>>>> main
               onClick={() => setViewMode('3D')}
@@ -652,6 +698,8 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         </header>
 
         {/* =====================================================
@@ -659,8 +707,11 @@ export default function DashboardLayout() {
         ===================================================== */}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         <div
           className="
             flex-1
@@ -684,6 +735,7 @@ export default function DashboardLayout() {
               pointer-events-auto
             "
           >
+<<<<<<< HEAD
 =======
 >>>>>>> main
         <div className="flex-1 min-h-0 flex">
@@ -698,6 +750,8 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             <NavButton
               icon={<Home />}
               label="Dashboard"
@@ -736,6 +790,7 @@ export default function DashboardLayout() {
               label="System"
             />
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 <<<<<<< HEAD
@@ -743,6 +798,8 @@ export default function DashboardLayout() {
 
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           </nav>
 
           {/* ===================================================
@@ -750,8 +807,11 @@ export default function DashboardLayout() {
           =================================================== */}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           <aside
             className="
               w-[300px]
@@ -1364,6 +1424,7 @@ export default function DashboardLayout() {
                 border-white/5
               "
             >
+<<<<<<< HEAD
 =======
 >>>>>>> main
           <aside className="w-[300px] shrink-0 bg-[#07151f]/94 backdrop-blur-xl border-r border-cyan-300/10 pointer-events-auto overflow-y-auto">
@@ -1424,14 +1485,19 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               <SectionTitle
                 icon={<Route />}
                 title="Recommended Routes"
               />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               <div
                 className="
                   space-y-2
@@ -1575,6 +1641,7 @@ export default function DashboardLayout() {
                               ? 'LOW'
                               : 'MED')
                           }
+<<<<<<< HEAD
 =======
 >>>>>>> main
               <div className="space-y-2 mt-4">
@@ -1633,30 +1700,41 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                           positive={isSafest}
                         />
 
                         <Metric
                           label="ETA"
 <<<<<<< HEAD
+<<<<<<< HEAD
                           value={isSafest ? '74h' : '62h'}
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                           value={
                             route.eta ??
                             '--'
                           }
+<<<<<<< HEAD
 =======
                           value={isSafest ? '74h' : '62h'}
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                         />
 
                         <Metric
                           label="FUEL"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                           value={
                             route.fuel ??
                             '--'
@@ -1674,6 +1752,7 @@ export default function DashboardLayout() {
             ================================================= */}
 
             <section className="p-4">
+<<<<<<< HEAD
 =======
 >>>>>>> main
                           value={isSafest ? '18.4t' : '21.2t'}
@@ -1697,27 +1776,35 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               <SectionTitle
                 icon={<Layers />}
                 title="Data Layers"
               />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
               <div className="space-y-1 mt-4">
 
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               <div
                 className="
                   space-y-1
                   mt-4
                 "
               >
+<<<<<<< HEAD
 =======
               <div className="space-y-1 mt-4">
 
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 <LayerToggle
                   label="Sea Ice Concentration"
                   active
@@ -1757,8 +1844,11 @@ export default function DashboardLayout() {
                   icon={<Shield />}
                 />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               </div>
 
               {/* SEA ICE LEGEND */}
@@ -1793,6 +1883,7 @@ export default function DashboardLayout() {
                     overflow-hidden
                   "
                 >
+<<<<<<< HEAD
 =======
 >>>>>>> main
 
@@ -1812,13 +1903,18 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                   <div className="flex-1 bg-blue-300" />
                   <div className="flex-1 bg-cyan-300" />
                   <div className="flex-1 bg-yellow-400" />
                   <div className="flex-1 bg-red-400" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 </div>
 
                 <div
@@ -1830,6 +1926,7 @@ export default function DashboardLayout() {
                     text-slate-600
                   "
                 >
+<<<<<<< HEAD
 =======
 >>>>>>> main
 
@@ -1840,12 +1937,15 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                   <span>0%</span>
                   <span>25%</span>
                   <span>50%</span>
                   <span>75%</span>
                   <span>100%</span>
                 </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -1862,6 +1962,10 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+              </div>
+            </section>
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           </aside>
 
           {/* ===================================================
@@ -1869,8 +1973,11 @@ export default function DashboardLayout() {
           =================================================== */}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           <main
             className="
               flex-1
@@ -1944,6 +2051,7 @@ export default function DashboardLayout() {
                       tracking-wider
                     "
                   >
+<<<<<<< HEAD
 =======
 >>>>>>> main
           <main className="flex-1 min-w-0 relative pointer-events-none">
@@ -1975,13 +2083,18 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                     Route
                   </div>
 
                   <div
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                     className="
                       text-xs
                       font-bold
@@ -2165,6 +2278,7 @@ export default function DashboardLayout() {
                 />
               </button>
             </div>
+<<<<<<< HEAD
 =======
 >>>>>>> main
                     className="text-xs font-bold"
@@ -2215,6 +2329,8 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           </main>
 
           {/* ===================================================
@@ -2222,8 +2338,11 @@ export default function DashboardLayout() {
           =================================================== */}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           <aside
             className="
               w-[350px]
@@ -2446,6 +2565,7 @@ export default function DashboardLayout() {
                         ? 'safe'
                         : 'warning'
                     }
+<<<<<<< HEAD
 =======
 >>>>>>> main
           <aside className="w-[350px] shrink-0 bg-[#07151f]/92 backdrop-blur-xl border-l border-cyan-300/10 pointer-events-auto overflow-y-auto">
@@ -2520,15 +2640,20 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                   />
 
                   <RiskCard
                     label="ICEBERG"
 <<<<<<< HEAD
+<<<<<<< HEAD
                     value="LOW"
                     type="safe"
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                     value={
                       activeRouteType ===
                       'safest'
@@ -2541,11 +2666,14 @@ export default function DashboardLayout() {
                         ? 'safe'
                         : 'warning'
                     }
+<<<<<<< HEAD
 =======
                     value="LOW"
                     type="safe"
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                   />
 
                   <RiskCard
@@ -2554,8 +2682,11 @@ export default function DashboardLayout() {
                     type="warning"
                   />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 </div>
               </div>
             </section>
@@ -2577,6 +2708,7 @@ export default function DashboardLayout() {
                   mb-4
                 "
               >
+<<<<<<< HEAD
 =======
 >>>>>>> main
 
@@ -2596,14 +2728,19 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 <SectionTitle
                   icon={<Crosshair />}
                   title="Iceberg Intelligence"
                 />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 <span
                   className="
                     text-[9px]
@@ -2622,6 +2759,7 @@ export default function DashboardLayout() {
                   gap-2
                 "
               >
+<<<<<<< HEAD
 =======
 >>>>>>> main
                 <span className="text-[9px] font-mono text-cyan-300">
@@ -2636,6 +2774,8 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 <InfoCard
                   label="POSITION"
                   value="68.42° S"
@@ -2660,8 +2800,11 @@ export default function DashboardLayout() {
                   sub="Satellite"
                 />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               </div>
 
               {/* PREDICTION TIMELINE */}
@@ -2729,6 +2872,7 @@ export default function DashboardLayout() {
                       justify-between
                     "
                   >
+<<<<<<< HEAD
 =======
 >>>>>>> main
 
@@ -2760,14 +2904,19 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                     {[
                       'NOW',
                       '+12H',
                       '+24H',
                       '+48H',
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                       `+${mission.forecastHours}H`,
                     ].map(
                       (time, index) => (
@@ -2819,6 +2968,7 @@ export default function DashboardLayout() {
                 border-white/5
               "
             >
+<<<<<<< HEAD
 =======
 >>>>>>> main
                       '+96H',
@@ -2861,14 +3011,19 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               <SectionTitle
                 icon={<Ship />}
                 title="Vessel Safety"
               />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               <div
                 className="
                   mt-4
@@ -2878,6 +3033,7 @@ export default function DashboardLayout() {
                 <TelemetryRow
                   label="Polar Class"
                   value={mission.vessel}
+<<<<<<< HEAD
 =======
 >>>>>>> main
               <div className="mt-4 space-y-2">
@@ -2889,6 +3045,8 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 />
 
                 <TelemetryRow
@@ -2909,8 +3067,11 @@ export default function DashboardLayout() {
                   valueClass="text-emerald-300"
                 />
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               </div>
             </section>
 
@@ -2998,6 +3159,7 @@ export default function DashboardLayout() {
 
               <AnimatePresence>
                 {showDiagnostics && (
+<<<<<<< HEAD
 =======
 >>>>>>> main
 
@@ -3052,6 +3214,8 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                   <motion.div
                     initial={{
                       opacity: 0,
@@ -3066,8 +3230,11 @@ export default function DashboardLayout() {
                       height: 0,
                     }}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                     className="
                       mt-3
                       overflow-hidden
@@ -3079,6 +3246,7 @@ export default function DashboardLayout() {
               </AnimatePresence>
             </section>
           </aside>
+<<<<<<< HEAD
 =======
 >>>>>>> main
                     className="mt-3 overflow-hidden"
@@ -3098,6 +3266,8 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         </div>
 
         {/* =====================================================
@@ -3105,10 +3275,13 @@ export default function DashboardLayout() {
         ===================================================== */}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         <footer className="h-12 shrink-0 bg-[#030a10]/96 border-t border-cyan-300/10 backdrop-blur-xl flex items-center px-5 pointer-events-auto">
 
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         <footer
           className="
             h-12
@@ -3123,11 +3296,14 @@ export default function DashboardLayout() {
             pointer-events-auto
           "
         >
+<<<<<<< HEAD
 =======
         <footer className="h-12 shrink-0 bg-[#030a10]/96 border-t border-cyan-300/10 backdrop-blur-xl flex items-center px-5 pointer-events-auto">
 
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           <Telemetry
             icon={<Snowflake />}
             label="SEA ICE"
@@ -3181,8 +3357,11 @@ export default function DashboardLayout() {
           <div className="flex-1" />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           <div
             className="
               hidden
@@ -3207,6 +3386,7 @@ export default function DashboardLayout() {
             </span>
           </div>
         </footer>
+<<<<<<< HEAD
 =======
 >>>>>>> main
           <div className="hidden md:flex items-center gap-2 text-[8px] text-slate-600 font-mono">
@@ -3227,6 +3407,8 @@ export default function DashboardLayout() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       </motion.div>
     </AnimatePresence>
   );
@@ -3248,8 +3430,11 @@ function NavButton({
   return (
     <button
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       type="button"
       className={`
         relative
@@ -3269,6 +3454,7 @@ function NavButton({
         }
       `}
     >
+<<<<<<< HEAD
 =======
 >>>>>>> main
       className={`relative w-10 h-10 mb-2 rounded-lg flex items-center justify-center group transition-all ${
@@ -3282,13 +3468,18 @@ function NavButton({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       <span className="[&>svg]:w-4 [&>svg]:h-4">
         {icon}
       </span>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       <span
         className="
           absolute
@@ -3312,6 +3503,7 @@ function NavButton({
       >
         {label}
       </span>
+<<<<<<< HEAD
 =======
 >>>>>>> main
       <span className="absolute left-12 z-50 px-2 py-1 rounded bg-[#0b1b26] border border-white/10 text-[9px] text-slate-300 whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity shadow-xl">
@@ -3322,6 +3514,8 @@ function NavButton({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     </button>
   );
 }
@@ -3339,8 +3533,11 @@ function SectionTitle({
 }) {
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     <div
       className="
         flex
@@ -3369,6 +3566,7 @@ function SectionTitle({
       >
         {title}
       </span>
+<<<<<<< HEAD
 =======
 >>>>>>> main
     <div className="flex items-center gap-2">
@@ -3385,6 +3583,8 @@ function SectionTitle({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     </div>
   );
 }
@@ -3397,8 +3597,11 @@ function SelectField({
   label,
   value,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   options,
   onChange,
 }: {
@@ -3424,6 +3627,7 @@ function SelectField({
           mb-1.5
         "
       >
+<<<<<<< HEAD
 =======
 >>>>>>> main
 }: {
@@ -3438,13 +3642,18 @@ function SelectField({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         {label}
       </label>
 
       <div className="relative">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         <select
           value={value}
           onChange={(event) =>
@@ -3706,6 +3915,7 @@ function AnalysisStep({
       >
         {label}
       </span>
+<<<<<<< HEAD
 =======
 >>>>>>> main
 
@@ -3726,6 +3936,8 @@ function AnalysisStep({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     </div>
   );
 }
@@ -3746,10 +3958,13 @@ function Metric({
   return (
     <div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       <div className="text-[7px] text-slate-600 uppercase">
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       <div
         className="
           text-[7px]
@@ -3757,18 +3972,24 @@ function Metric({
           uppercase
         "
       >
+<<<<<<< HEAD
 =======
 
       <div className="text-[7px] text-slate-600 uppercase">
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         {label}
       </div>
 
       <div
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         className={`
           mt-0.5
           font-semibold
@@ -3781,6 +4002,7 @@ function Metric({
       >
         {value}
       </div>
+<<<<<<< HEAD
 =======
 >>>>>>> main
         className={`mt-0.5 font-semibold ${
@@ -3796,6 +4018,8 @@ function Metric({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     </div>
   );
 }
@@ -3815,8 +4039,11 @@ function LayerToggle({
 }) {
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     <label
       className="
         flex
@@ -3862,6 +4089,7 @@ function LayerToggle({
       >
         {label}
       </span>
+<<<<<<< HEAD
 =======
 >>>>>>> main
     <label className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-white/[0.025] cursor-pointer group">
@@ -3884,6 +4112,8 @@ function LayerToggle({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     </label>
   );
 }
@@ -3903,11 +4133,14 @@ function RiskCard({
 }) {
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div className="p-2 rounded-lg bg-black/20 border border-white/5 text-center">
 
       <div className="text-[7px] text-slate-600 uppercase">
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     <div
       className="
         p-2
@@ -3925,19 +4158,25 @@ function RiskCard({
           uppercase
         "
       >
+<<<<<<< HEAD
 =======
     <div className="p-2 rounded-lg bg-black/20 border border-white/5 text-center">
 
       <div className="text-[7px] text-slate-600 uppercase">
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         {label}
       </div>
 
       <div
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         className={`
           text-[9px]
           font-bold
@@ -3951,6 +4190,7 @@ function RiskCard({
       >
         {value}
       </div>
+<<<<<<< HEAD
 =======
 >>>>>>> main
         className={`text-[9px] font-bold mt-1 ${
@@ -3966,6 +4206,8 @@ function RiskCard({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     </div>
   );
 }
@@ -3985,8 +4227,11 @@ function InfoCard({
 }) {
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     <div
       className="
         p-2.5
@@ -4027,6 +4272,7 @@ function InfoCard({
       >
         {sub}
       </div>
+<<<<<<< HEAD
 =======
 >>>>>>> main
     <div className="p-2.5 rounded-lg bg-black/20 border border-white/5">
@@ -4047,6 +4293,8 @@ function InfoCard({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     </div>
   );
 }
@@ -4066,11 +4314,14 @@ function TelemetryRow({
 }) {
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div className="flex items-center justify-between py-1.5 border-b border-white/[0.03] last:border-0">
 
       <span className="text-[9px] text-slate-600">
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     <div
       className="
         flex
@@ -4088,19 +4339,25 @@ function TelemetryRow({
           text-slate-600
         "
       >
+<<<<<<< HEAD
 =======
     <div className="flex items-center justify-between py-1.5 border-b border-white/[0.03] last:border-0">
 
       <span className="text-[9px] text-slate-600">
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         {label}
       </span>
 
       <span
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         className={`
           text-[9px]
           font-semibold
@@ -4109,6 +4366,7 @@ function TelemetryRow({
       >
         {value}
       </span>
+<<<<<<< HEAD
 =======
 >>>>>>> main
         className={`text-[9px] font-semibold ${valueClass}`}
@@ -4120,6 +4378,8 @@ function TelemetryRow({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     </div>
   );
 }
@@ -4141,8 +4401,11 @@ function Telemetry({
 }) {
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     <div
       className="
         flex
@@ -4169,6 +4432,7 @@ function Telemetry({
           tracking-wider
         "
       >
+<<<<<<< HEAD
 =======
 >>>>>>> main
     <div className="flex items-center gap-2 px-4">
@@ -4182,13 +4446,18 @@ function Telemetry({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         {label}
       </span>
 
       <span
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         className={`
           text-[9px]
           font-bold
@@ -4203,6 +4472,7 @@ function Telemetry({
       >
         {value}
       </span>
+<<<<<<< HEAD
 =======
 >>>>>>> main
         className={`text-[9px] font-bold ${
@@ -4220,6 +4490,8 @@ function Telemetry({
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     </div>
   );
 }
@@ -4231,9 +4503,12 @@ function Telemetry({
 function Divider() {
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <div className="h-5 w-px bg-white/5" />
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     <div
       className="
         h-5
@@ -4241,9 +4516,12 @@ function Divider() {
         bg-white/5
       "
     />
+<<<<<<< HEAD
 =======
     <div className="h-5 w-px bg-white/5" />
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   );
 }

@@ -6,8 +6,11 @@ import React, {
 } from 'react';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 import {
   defaultMission,
   type RouteType,
@@ -78,6 +81,7 @@ interface RouteState {
   /* ----------------------------------------------------------
      VIEW
   ---------------------------------------------------------- */
+<<<<<<< HEAD
 =======
 >>>>>>> main
 interface RouteState {
@@ -89,6 +93,8 @@ interface RouteState {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
   viewMode: '2D' | '3D';
 
@@ -98,6 +104,7 @@ interface RouteState {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   /* =========================================================
      VESSEL
   ========================================================= */
@@ -112,6 +119,11 @@ interface RouteState {
   ========================================================= */
 >>>>>>> ice
 >>>>>>> main
+=======
+  /* ----------------------------------------------------------
+     VESSEL
+  ---------------------------------------------------------- */
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
   vessel: string;
 
@@ -121,6 +133,7 @@ interface RouteState {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   /* =========================================================
      INTRO
   ========================================================= */
@@ -135,6 +148,11 @@ interface RouteState {
   ========================================================= */
 >>>>>>> ice
 >>>>>>> main
+=======
+  /* ----------------------------------------------------------
+     INTRO
+  ---------------------------------------------------------- */
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
   introFinished: boolean;
 
@@ -144,8 +162,11 @@ interface RouteState {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   /* ----------------------------------------------------------
      SELECTED ROUTE
   ---------------------------------------------------------- */
@@ -160,6 +181,7 @@ interface RouteState {
   /* ----------------------------------------------------------
      ICEBERG TRAJECTORY
   ---------------------------------------------------------- */
+<<<<<<< HEAD
 =======
 >>>>>>> main
   /* =========================================================
@@ -180,6 +202,8 @@ interface RouteState {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
   showTrajectory: boolean;
 
@@ -187,8 +211,11 @@ interface RouteState {
     show: boolean
   ) => void;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
 
   /* ----------------------------------------------------------
@@ -211,9 +238,12 @@ interface RouteState {
   setLayerVisibility: React.Dispatch<
     React.SetStateAction<LayerVisibility>
   >;
+<<<<<<< HEAD
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 }
 
 
@@ -234,8 +264,11 @@ const RouteContext =
 export const RouteProvider: React.FC<{
   children: ReactNode;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 }> = ({
   children,
 }) => {
@@ -243,6 +276,7 @@ export const RouteProvider: React.FC<{
 
   /* ==========================================================
      VIEW MODE
+<<<<<<< HEAD
 =======
 >>>>>>> main
 }> = ({ children }) => {
@@ -253,11 +287,14 @@ export const RouteProvider: React.FC<{
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   ========================================================== */
 
   const [
     viewMode,
     setViewMode,
+<<<<<<< HEAD
 <<<<<<< HEAD
   ] = useState<'2D' | '3D'>('3D');
 =======
@@ -269,6 +306,11 @@ export const RouteProvider: React.FC<{
   ] = useState<'2D' | '3D'>('3D');
 >>>>>>> ice
 >>>>>>> main
+=======
+  ] = useState<'2D' | '3D'>(
+    '3D'
+  );
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
 
   /* ==========================================================
@@ -278,6 +320,7 @@ export const RouteProvider: React.FC<{
   const [
     vessel,
     setVessel,
+<<<<<<< HEAD
 <<<<<<< HEAD
   ] = useState('PC6');
 =======
@@ -289,6 +332,11 @@ export const RouteProvider: React.FC<{
   ] = useState('PC6');
 >>>>>>> ice
 >>>>>>> main
+=======
+  ] = useState(
+    defaultMission.vessel
+  );
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
 
   /* ==========================================================
@@ -298,6 +346,7 @@ export const RouteProvider: React.FC<{
   const [
     introFinished,
     setIntroFinished,
+<<<<<<< HEAD
 <<<<<<< HEAD
   ] = useState(false);
 =======
@@ -309,6 +358,11 @@ export const RouteProvider: React.FC<{
   ] = useState(false);
 >>>>>>> ice
 >>>>>>> main
+=======
+  ] = useState(
+    false
+  );
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
 
   /* ==========================================================
@@ -318,6 +372,7 @@ export const RouteProvider: React.FC<{
   const [
     selectedRoute,
     setSelectedRoute,
+<<<<<<< HEAD
 <<<<<<< HEAD
   ] = useState('safest');
 =======
@@ -329,6 +384,11 @@ export const RouteProvider: React.FC<{
   ] = useState('safest');
 >>>>>>> ice
 >>>>>>> main
+=======
+  ] = useState<RouteType>(
+    defaultMission.selectedRoute
+  );
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
 
   /* ==========================================================
@@ -339,11 +399,14 @@ export const RouteProvider: React.FC<{
     showTrajectory,
     setShowTrajectory,
 <<<<<<< HEAD
+<<<<<<< HEAD
   ] = useState(true);
 
 
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   ] = useState(
     true
   );
@@ -473,20 +536,26 @@ export const RouteProvider: React.FC<{
      PROVIDER
   ========================================================== */
 
+<<<<<<< HEAD
 =======
   ] = useState(true);
 
 
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   return (
 
     <RouteContext.Provider
       value={{
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         /* ----------------------------------------------------
            VIEW
         ---------------------------------------------------- */
@@ -550,6 +619,7 @@ export const RouteProvider: React.FC<{
 
         setLayerVisibility,
 
+<<<<<<< HEAD
 =======
 >>>>>>> main
         viewMode,
@@ -571,12 +641,15 @@ export const RouteProvider: React.FC<{
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       }}
     >
 
       {children}
 
     </RouteContext.Provider>
+<<<<<<< HEAD
 <<<<<<< HEAD
   );
 =======
@@ -588,6 +661,11 @@ export const RouteProvider: React.FC<{
   );
 >>>>>>> ice
 >>>>>>> main
+=======
+
+  );
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 };
 
 
@@ -599,17 +677,23 @@ export const useRoute = () => {
 
   const context =
 <<<<<<< HEAD
+<<<<<<< HEAD
     useContext(RouteContext);
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     useContext(
       RouteContext
     );
 
+<<<<<<< HEAD
 =======
     useContext(RouteContext);
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
   if (!context) {
 
@@ -620,6 +704,7 @@ export const useRoute = () => {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   return context;
 =======
 <<<<<<< HEAD
@@ -630,4 +715,9 @@ export const useRoute = () => {
   return context;
 >>>>>>> ice
 >>>>>>> main
+=======
+
+  return context;
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 };

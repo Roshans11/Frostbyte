@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 import React, { useMemo } from 'react';
@@ -6,6 +7,10 @@ import React, { useMemo } from 'react';
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+import React, { useMemo } from 'react';
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 import Map, {
   Source,
   Layer,
@@ -16,8 +21,11 @@ import Map, {
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 import {
   missionRoutes,
   locations,
@@ -76,6 +84,7 @@ const MAP_STYLE = {
   ],
 };
 
+<<<<<<< HEAD
 =======
 >>>>>>> main
 import { routes, icebergTrajectory } from '../../data/mockData';
@@ -123,6 +132,8 @@ const LOCATIONS = [
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
 /* ============================================================
    MAP VIEW
@@ -131,8 +142,11 @@ const LOCATIONS = [
 export default function MapView() {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   const {
     selectedRoute,
     setSelectedRoute,
@@ -258,6 +272,7 @@ export default function MapView() {
   ]);
 
 
+<<<<<<< HEAD
 =======
 >>>>>>> main
   /*
@@ -278,13 +293,18 @@ export default function MapView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   /* ==========================================================
      ACTIVE ROUTE
   ========================================================== */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   const activeRoute = useMemo(() => {
 
     return (
@@ -399,6 +419,7 @@ export default function MapView() {
         mapStyle={MAP_STYLE}
 
         attributionControl
+<<<<<<< HEAD
 =======
 >>>>>>> main
   const activeRoute =
@@ -449,10 +470,13 @@ export default function MapView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
         reuseMaps
       >
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         {/* ===================================================
             MAP CONTROLS
@@ -468,14 +492,22 @@ export default function MapView() {
         =================================================== */}
 >>>>>>> ice
 >>>>>>> main
+=======
+        {/* ====================================================
+            NAVIGATION
+        ==================================================== */}
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
         <NavigationControl
           position="bottom-right"
           showCompass
           showZoom
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           visualizePitch
         />
 
@@ -546,6 +578,7 @@ export default function MapView() {
 
 
               {/* ROUTE CASING */}
+<<<<<<< HEAD
 =======
 >>>>>>> main
         />
@@ -619,10 +652,13 @@ export default function MapView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
               <Layer
                 id={`route-casing-${route.id}`}
                 type="line"
+<<<<<<< HEAD
 <<<<<<< HEAD
                 source={sourceId}
 =======
@@ -633,13 +669,20 @@ export default function MapView() {
                 source={sourceId}
 >>>>>>> ice
 >>>>>>> main
+=======
+                source={`route-source-${route.id}`}
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 layout={{
                   'line-join': 'round',
                   'line-cap': 'round',
                 }}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
                 paint={{
                   'line-color':
@@ -657,6 +700,7 @@ export default function MapView() {
 
 
               {/* MAIN ROUTE */}
+<<<<<<< HEAD
 =======
 >>>>>>> main
                 paint={{
@@ -679,10 +723,13 @@ export default function MapView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
               <Layer
                 id={`route-main-${route.id}`}
                 type="line"
+<<<<<<< HEAD
 <<<<<<< HEAD
                 source={sourceId}
 =======
@@ -693,13 +740,20 @@ export default function MapView() {
                 source={sourceId}
 >>>>>>> ice
 >>>>>>> main
+=======
+                source={`route-source-${route.id}`}
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 layout={{
                   'line-join': 'round',
                   'line-cap': 'round',
                 }}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
                 paint={{
                   'line-color':
@@ -712,6 +766,7 @@ export default function MapView() {
                     isSelected
                       ? 1
                       : 0.38,
+<<<<<<< HEAD
 =======
 >>>>>>> main
                 paint={{
@@ -737,13 +792,18 @@ export default function MapView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 }}
               />
 
             </Source>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
           );
 
@@ -786,6 +846,7 @@ export default function MapView() {
                       shadow-[0_0_10px_rgba(85,214,255,0.9)]
                     "
                   />
+<<<<<<< HEAD
 =======
 >>>>>>> main
           );
@@ -936,6 +997,8 @@ export default function MapView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
                 </Marker>
 
@@ -943,8 +1006,11 @@ export default function MapView() {
             )}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
         {/* ====================================================
             ORIGIN
@@ -1014,6 +1080,7 @@ export default function MapView() {
                   "
                 />
 
+<<<<<<< HEAD
 =======
 >>>>>>> main
         {/* =====================================================
@@ -1141,6 +1208,8 @@ export default function MapView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               </div>
 
             </div>
@@ -1150,8 +1219,11 @@ export default function MapView() {
         )}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
         {/* ====================================================
             DESTINATION
@@ -1897,6 +1969,7 @@ export default function MapView() {
             {mission.origin}
             {' → '}
             {mission.destination}
+<<<<<<< HEAD
 =======
 >>>>>>> main
         {/* =====================================================
@@ -1986,14 +2059,19 @@ export default function MapView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
           </div>
 
         </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       )}
 
 
@@ -2114,6 +2192,7 @@ export default function MapView() {
               route.id === selectedRouteType;
 
             return (
+<<<<<<< HEAD
 =======
 >>>>>>> main
         {/* ===================================================
@@ -2135,13 +2214,18 @@ export default function MapView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
               <button
                 key={route.id}
                 type="button"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
                 onClick={() =>
                   setSelectedRoute(
@@ -2263,6 +2347,7 @@ export default function MapView() {
               `}
             />
 
+<<<<<<< HEAD
 =======
 >>>>>>> main
                 onClick={() =>
@@ -2384,6 +2469,8 @@ export default function MapView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           </button>
 
         </div>
@@ -2392,11 +2479,15 @@ export default function MapView() {
 
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   );
 }

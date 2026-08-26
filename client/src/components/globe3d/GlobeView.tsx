@@ -20,21 +20,27 @@ import { useRoute } from '../../state/RouteContext';
 
 import {
 <<<<<<< HEAD
+<<<<<<< HEAD
   routes,
   icebergTrajectory,
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   missionRoutes,
   locations,
   routeMetadata,
   icebergs,
   icebergTrajectory,
   type RouteType,
+<<<<<<< HEAD
 =======
   routes,
   icebergTrajectory,
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 } from '../../data/mockData';
 
 
@@ -45,8 +51,11 @@ import {
 export default function GlobeView() {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   const {
     introFinished,
     setIntroFinished,
@@ -56,6 +65,7 @@ export default function GlobeView() {
     showTrajectory,
 
     mission,
+<<<<<<< HEAD
 =======
 >>>>>>> main
   /* ==========================================================
@@ -70,10 +80,13 @@ export default function GlobeView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   } = useRoute();
 
 
   /* ==========================================================
+<<<<<<< HEAD
 <<<<<<< HEAD
      CESIUM VIEWER REF
 =======
@@ -83,6 +96,9 @@ export default function GlobeView() {
      CESIUM VIEWER REF
 >>>>>>> ice
 >>>>>>> main
+=======
+     VIEWER
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   ========================================================== */
 
   const viewerRef =
@@ -91,8 +107,11 @@ export default function GlobeView() {
 
   /* ==========================================================
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
      CURRENT ORIGIN
   ========================================================== */
 
@@ -143,6 +162,7 @@ export default function GlobeView() {
   const gridImagery = useMemo(
     () =>
       new Cesium.GridImageryProvider(),
+<<<<<<< HEAD
 =======
 >>>>>>> main
      GRID IMAGERY
@@ -154,15 +174,20 @@ export default function GlobeView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     []
   );
 
 
   /* ==========================================================
 <<<<<<< HEAD
+<<<<<<< HEAD
      CAMERA AFTER INTRO
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
      CURRENT MISSION ROUTES
   ========================================================== */
 
@@ -324,10 +349,13 @@ export default function GlobeView() {
 
   /* ==========================================================
      CAMERA
+<<<<<<< HEAD
 =======
      CAMERA AFTER INTRO
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   ========================================================== */
 
   useEffect(() => {
@@ -341,6 +369,7 @@ export default function GlobeView() {
 
         destination:
           Cesium.Cartesian3.fromDegrees(
+<<<<<<< HEAD
 <<<<<<< HEAD
             40,
             -68,
@@ -356,12 +385,18 @@ export default function GlobeView() {
             6000000
 >>>>>>> ice
 >>>>>>> main
+=======
+            55,
+            -68,
+            8500000
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           ),
 
       });
 
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -480,6 +515,11 @@ export default function GlobeView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+  }, [
+    introFinished,
+  ]);
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
 
   /* ==========================================================
@@ -496,12 +536,16 @@ export default function GlobeView() {
         transition-opacity
         duration-1000
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         ${
           introFinished
             ? 'opacity-50'
@@ -515,6 +559,7 @@ export default function GlobeView() {
         full
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         ref={(element) => {
 =======
 <<<<<<< HEAD
@@ -523,6 +568,9 @@ export default function GlobeView() {
         ref={(element) => {
 >>>>>>> ice
 >>>>>>> main
+=======
+        ref={element => {
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
           if (
             element?.cesiumElement
@@ -559,8 +607,11 @@ export default function GlobeView() {
 
         {/* ====================================================
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             GRID
         ==================================================== */}
 
@@ -568,6 +619,7 @@ export default function GlobeView() {
           imageryProvider={
             gridImagery
           }
+<<<<<<< HEAD
 =======
 >>>>>>> main
             POLAR GRID
@@ -579,14 +631,19 @@ export default function GlobeView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           alpha={0.18}
         />
 
 
         {/* ====================================================
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             ALL THREE ROUTES
         ==================================================== */}
 
@@ -658,6 +715,7 @@ export default function GlobeView() {
                   name={
                     `${route.name} Casing`
                   }
+<<<<<<< HEAD
 =======
 >>>>>>> main
             NAVIGATION ROUTES
@@ -699,13 +757,18 @@ export default function GlobeView() {
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 >
 
                   <PolylineGraphics
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                     positions={
                       positions
                     }
@@ -787,6 +850,7 @@ Fuel: ${route.fuel}
                     }
 
                     clampToGround
+<<<<<<< HEAD
 =======
 >>>>>>> main
                     positions={positions}
@@ -805,19 +869,25 @@ Fuel: ${route.fuel}
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                   />
 
                 </Entity>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
                 {/* ==================================================
                     WAYPOINTS
                 ================================================== */}
 
                 {route.geoJsonCoords
+<<<<<<< HEAD
 =======
 >>>>>>> main
               )}
@@ -904,6 +974,8 @@ Fuel: ${route.fuel}
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                   .slice(1, -1)
                   .map(
                     (
@@ -921,6 +993,7 @@ Fuel: ${route.fuel}
                         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
                         position={
@@ -937,6 +1010,10 @@ Fuel: ${route.fuel}
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+                        position={
+                          getPosition(
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                             longitude,
                             latitude
                           )
@@ -947,8 +1024,11 @@ Fuel: ${route.fuel}
                         <PointGraphics
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                           pixelSize={
                             isSelected
                               ? 6
@@ -961,6 +1041,7 @@ Fuel: ${route.fuel}
                                 ? 0.95
                                 : 0.55
                             )
+<<<<<<< HEAD
 =======
 >>>>>>> main
                           pixelSize={5}
@@ -971,6 +1052,8 @@ Fuel: ${route.fuel}
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                           }
 
                           outlineColor={
@@ -978,18 +1061,24 @@ Fuel: ${route.fuel}
                           }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                           outlineWidth={1}
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                           outlineWidth={
                             isSelected
                               ? 1
                               : 0
                           }
+<<<<<<< HEAD
 =======
                           outlineWidth={1}
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
                         />
 
@@ -999,8 +1088,11 @@ Fuel: ${route.fuel}
                   )}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               </React.Fragment>
 
             );
@@ -1120,6 +1212,7 @@ Fuel: ${route.fuel}
               getPosition(
                 origin.longitude,
                 origin.latitude
+<<<<<<< HEAD
 =======
 >>>>>>> main
             </React.Fragment>
@@ -1148,6 +1241,8 @@ Fuel: ${route.fuel}
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               )
             }
 
@@ -1156,14 +1251,18 @@ Fuel: ${route.fuel}
             <PointGraphics
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               pixelSize={15}
 
               color={
                 Cesium.Color.fromCssColorString(
                   '#22c55e'
                 )
+<<<<<<< HEAD
 =======
 >>>>>>> main
               pixelSize={12}
@@ -1174,6 +1273,8 @@ Fuel: ${route.fuel}
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               }
 
               outlineColor={
@@ -1183,22 +1284,31 @@ Fuel: ${route.fuel}
               outlineWidth={2}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               disableDepthTestDistance={
                 Number.POSITIVE_INFINITY
               }
 
+<<<<<<< HEAD
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             />
 
             <LabelGraphics
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               text={
                 `ORIGIN • ${
                   origin.shortName.toUpperCase()
@@ -1211,6 +1321,7 @@ Fuel: ${route.fuel}
                 Cesium.Color.fromCssColorString(
                   '#86efac'
                 )
+<<<<<<< HEAD
 =======
 >>>>>>> main
               text="RV PC6"
@@ -1223,6 +1334,8 @@ Fuel: ${route.fuel}
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               }
 
               outlineColor={
@@ -1239,6 +1352,7 @@ Fuel: ${route.fuel}
               pixelOffset={
                 new Cesium.Cartesian2(
 <<<<<<< HEAD
+<<<<<<< HEAD
                   16,
 =======
 <<<<<<< HEAD
@@ -1247,13 +1361,19 @@ Fuel: ${route.fuel}
                   16,
 >>>>>>> ice
 >>>>>>> main
+=======
+                  18,
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                   0
                 )
               }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               showBackground
 
               backgroundColor={
@@ -1275,9 +1395,12 @@ Fuel: ${route.fuel}
                 Number.POSITIVE_INFINITY
               }
 
+<<<<<<< HEAD
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             />
 
           </Entity>
@@ -1287,8 +1410,11 @@ Fuel: ${route.fuel}
 
         {/* ====================================================
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             DESTINATION
         ==================================================== */}
 
@@ -1307,6 +1433,7 @@ Fuel: ${route.fuel}
                 destination.longitude,
                 destination.latitude
               )
+<<<<<<< HEAD
 =======
 >>>>>>> main
             ICEBERG TRAJECTORY
@@ -1464,6 +1591,8 @@ Fuel: ${route.fuel}
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             }
 
           >
@@ -1471,13 +1600,17 @@ Fuel: ${route.fuel}
             <PointGraphics
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               pixelSize={15}
 
               color={
                 Cesium.Color.fromCssColorString(
                   '#22d3ee'
+<<<<<<< HEAD
 =======
 >>>>>>> main
               pixelSize={14}
@@ -1489,6 +1622,8 @@ Fuel: ${route.fuel}
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 )
               }
 
@@ -1499,32 +1634,44 @@ Fuel: ${route.fuel}
               outlineWidth={2}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               disableDepthTestDistance={
                 Number.POSITIVE_INFINITY
               }
 
+<<<<<<< HEAD
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             />
 
             <LabelGraphics
 
 <<<<<<< HEAD
+<<<<<<< HEAD
               text="ICEBERG A102"
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               text={
                 `DESTINATION • ${
                   destination.shortName.toUpperCase()
                 }`
               }
+<<<<<<< HEAD
 =======
               text="ICEBERG A102"
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
               font="11px sans-serif"
 
@@ -1553,8 +1700,11 @@ Fuel: ${route.fuel}
               }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               showBackground
 
               backgroundColor={
@@ -1576,9 +1726,12 @@ Fuel: ${route.fuel}
                 Number.POSITIVE_INFINITY
               }
 
+<<<<<<< HEAD
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             />
 
           </Entity>
@@ -1588,9 +1741,12 @@ Fuel: ${route.fuel}
 
         {/* ====================================================
 <<<<<<< HEAD
+<<<<<<< HEAD
             BHARATI RESEARCH STATION
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             USNIC ICEBERGS
         ==================================================== */}
 
@@ -1879,10 +2035,13 @@ Position: ${
 
         {/* ====================================================
             BHARATI
+<<<<<<< HEAD
 =======
             BHARATI RESEARCH STATION
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         ==================================================== */}
 
         <Entity
@@ -1890,6 +2049,7 @@ Position: ${
           name="Bharati Research Station"
 
           position={
+<<<<<<< HEAD
 <<<<<<< HEAD
             Cesium.Cartesian3.fromDegrees(
 =======
@@ -1899,6 +2059,9 @@ Position: ${
             Cesium.Cartesian3.fromDegrees(
 >>>>>>> ice
 >>>>>>> main
+=======
+            getPosition(
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               76.3268,
               -69.4068
             )
@@ -1907,6 +2070,7 @@ Position: ${
         >
 
           <PointGraphics
+<<<<<<< HEAD
 <<<<<<< HEAD
 
             pixelSize={10}
@@ -1918,6 +2082,9 @@ Position: ${
             pixelSize={10}
 >>>>>>> ice
 >>>>>>> main
+=======
+            pixelSize={11}
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
             color={
               Cesium.Color.fromCssColorString(
@@ -1932,6 +2099,7 @@ Position: ${
             outlineWidth={2}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
             disableDepthTestDistance={
@@ -1940,6 +2108,11 @@ Position: ${
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+            disableDepthTestDistance={
+              Number.POSITIVE_INFINITY
+            }
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           />
 
           <LabelGraphics
@@ -1973,21 +2146,28 @@ Position: ${
             }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             disableDepthTestDistance={
               Number.POSITIVE_INFINITY
             }
 
+<<<<<<< HEAD
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           />
 
         </Entity>
 
 
         {/* ====================================================
+<<<<<<< HEAD
 <<<<<<< HEAD
             MAITRI RESEARCH STATION
 =======
@@ -1997,6 +2177,9 @@ Position: ${
             MAITRI RESEARCH STATION
 >>>>>>> ice
 >>>>>>> main
+=======
+            MAITRI
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
         ==================================================== */}
 
         <Entity
@@ -2004,6 +2187,7 @@ Position: ${
           name="Maitri Research Station"
 
           position={
+<<<<<<< HEAD
 <<<<<<< HEAD
             Cesium.Cartesian3.fromDegrees(
 =======
@@ -2013,6 +2197,9 @@ Position: ${
             Cesium.Cartesian3.fromDegrees(
 >>>>>>> ice
 >>>>>>> main
+=======
+            getPosition(
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
               11.7397,
               -70.7667
             )
@@ -2023,6 +2210,7 @@ Position: ${
           <PointGraphics
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             pixelSize={10}
 =======
 <<<<<<< HEAD
@@ -2031,6 +2219,9 @@ Position: ${
             pixelSize={10}
 >>>>>>> ice
 >>>>>>> main
+=======
+            pixelSize={11}
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
             color={
               Cesium.Color.fromCssColorString(
@@ -2045,15 +2236,21 @@ Position: ${
             outlineWidth={2}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             disableDepthTestDistance={
               Number.POSITIVE_INFINITY
             }
 
+<<<<<<< HEAD
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           />
 
           <LabelGraphics
@@ -2085,8 +2282,11 @@ Position: ${
             }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
             disableDepthTestDistance={
               Number.POSITIVE_INFINITY
             }
@@ -2169,9 +2369,12 @@ Position: ${
               Number.POSITIVE_INFINITY
             }
 
+<<<<<<< HEAD
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
           />
 
         </Entity>
@@ -2190,8 +2393,11 @@ Position: ${
             destination={
               Cesium.Cartesian3.fromDegrees(
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
                 55,
                 -68,
                 8500000
@@ -2201,6 +2407,7 @@ Position: ${
             onComplete={() =>
               setIntroFinished(true)
             }
+<<<<<<< HEAD
 =======
 >>>>>>> main
                 40,
@@ -2218,6 +2425,8 @@ Position: ${
 =======
 >>>>>>> ice
 >>>>>>> main
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
           />
 

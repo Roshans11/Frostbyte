@@ -1,11 +1,23 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 /* ============================================================
    ICEROUTE INDIA
    Antarctic Navigation Intelligence
    ============================================================
 
+<<<<<<< HEAD
+=======
+   FRONTEND MOCK DATA
+
+   This file is intentionally structured so that the backend /
+   AI model can replace these values later without requiring
+   major frontend changes.
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
    DATA SOURCES
 
    USNIC:
@@ -19,7 +31,11 @@
    - Sea-ice concentration
    - Sea-ice edge
    - Sea-ice drift
+<<<<<<< HEAD
    - High-resolution Antarctic sea-ice information
+=======
+   - Antarctic sea-ice information
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
    ROUTING:
    - Mission origin
@@ -29,11 +45,14 @@
    - Departure time
    - Forecast duration
 
+<<<<<<< HEAD
    IMPORTANT:
    Copernicus product definitions are included below, but
    real numerical Copernicus observations should be loaded
    from the Copernicus Marine data service rather than invented
    in frontend mock data.
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 
@@ -49,10 +68,20 @@ export type RouteType =
 
 export interface Location {
   id: string;
+<<<<<<< HEAD
   name: string;
   shortName: string;
 
   longitude: number;
+=======
+
+  name: string;
+
+  shortName: string;
+
+  longitude: number;
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   latitude: number;
 
   type:
@@ -79,15 +108,22 @@ export interface RouteDefinition {
 
 
 /* ============================================================
+<<<<<<< HEAD
    2. KEY ANTARCTIC / MISSION LOCATIONS
+=======
+   2. LOCATIONS
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const locations: Location[] = [
 
+<<<<<<< HEAD
   /* ----------------------------------------------------------
      BHARATI
   ---------------------------------------------------------- */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'bharati',
 
@@ -108,10 +144,13 @@ export const locations: Location[] = [
   },
 
 
+<<<<<<< HEAD
   /* ----------------------------------------------------------
      MAITRI
   ---------------------------------------------------------- */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'maitri',
 
@@ -132,10 +171,13 @@ export const locations: Location[] = [
   },
 
 
+<<<<<<< HEAD
   /* ----------------------------------------------------------
      CAPE TOWN
   ---------------------------------------------------------- */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'cape-town',
 
@@ -159,6 +201,7 @@ export const locations: Location[] = [
 
 
 /* ============================================================
+<<<<<<< HEAD
    3. DEFAULT ROUTES
 ============================================================
 
@@ -169,6 +212,9 @@ export const locations: Location[] = [
 
       import { routes } from '../data/mockData';
 
+=======
+   3. DEFAULT BHARATI → MAITRI ROUTES
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const routes: RouteDefinition[] = [
@@ -328,6 +374,7 @@ export const routes: RouteDefinition[] = [
 
 
 /* ============================================================
+<<<<<<< HEAD
    4. MISSION ROUTE DATA
 ============================================================
 
@@ -344,6 +391,17 @@ export const routes: RouteDefinition[] = [
       fuel
 
    Coordinates are [longitude, latitude].
+=======
+   4. MISSION ROUTES
+============================================================
+
+   Supports:
+
+   Cape Town → Maitri
+   Bharati → Maitri
+   Maitri → Bharati
+   Cape Town → Bharati
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
 ============================================================ */
 
@@ -355,7 +413,10 @@ export const missionRoutes: Record<
   >
 > = {
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   /* ==========================================================
      CAPE TOWN → MAITRI
   ========================================================== */
@@ -364,10 +425,13 @@ export const missionRoutes: Record<
 
     maitri: {
 
+<<<<<<< HEAD
       /* ------------------------------------------------------
          SAFEST
       ------------------------------------------------------ */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       safest: [
 
         [18.4232, -33.9249],
@@ -387,10 +451,13 @@ export const missionRoutes: Record<
       ],
 
 
+<<<<<<< HEAD
       /* ------------------------------------------------------
          FASTEST
       ------------------------------------------------------ */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       fastest: [
 
         [18.4232, -33.9249],
@@ -408,10 +475,13 @@ export const missionRoutes: Record<
       ],
 
 
+<<<<<<< HEAD
       /* ------------------------------------------------------
          FUEL EFFICIENT
       ------------------------------------------------------ */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       fuel: [
 
         [18.4232, -33.9249],
@@ -441,10 +511,13 @@ export const missionRoutes: Record<
 
     maitri: {
 
+<<<<<<< HEAD
       /* ------------------------------------------------------
          SAFEST
       ------------------------------------------------------ */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       safest: [
 
         [76.3268, -69.4068],
@@ -474,10 +547,13 @@ export const missionRoutes: Record<
       ],
 
 
+<<<<<<< HEAD
       /* ------------------------------------------------------
          FASTEST
       ------------------------------------------------------ */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       fastest: [
 
         [76.3268, -69.4068],
@@ -503,10 +579,13 @@ export const missionRoutes: Record<
       ],
 
 
+<<<<<<< HEAD
       /* ------------------------------------------------------
          FUEL EFFICIENT
       ------------------------------------------------------ */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       fuel: [
 
         [76.3268, -69.4068],
@@ -548,10 +627,13 @@ export const missionRoutes: Record<
 
     bharati: {
 
+<<<<<<< HEAD
       /* ------------------------------------------------------
          SAFEST
       ------------------------------------------------------ */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       safest: [
 
         [11.7397, -70.7667],
@@ -581,10 +663,13 @@ export const missionRoutes: Record<
       ],
 
 
+<<<<<<< HEAD
       /* ------------------------------------------------------
          FASTEST
       ------------------------------------------------------ */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       fastest: [
 
         [11.7397, -70.7667],
@@ -610,10 +695,13 @@ export const missionRoutes: Record<
       ],
 
 
+<<<<<<< HEAD
       /* ------------------------------------------------------
          FUEL EFFICIENT
       ------------------------------------------------------ */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       fuel: [
 
         [11.7397, -70.7667],
@@ -673,6 +761,10 @@ export const missionRoutes: Record<
 
       ],
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       fastest: [
 
         [18.4232, -33.9249],
@@ -689,6 +781,10 @@ export const missionRoutes: Record<
 
       ],
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
       fuel: [
 
         [18.4232, -33.9249],
@@ -714,10 +810,13 @@ export const missionRoutes: Record<
 
 /* ============================================================
    5. ROUTE METADATA
+<<<<<<< HEAD
 ============================================================
 
    These values drive the dashboard cards.
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const routeMetadata: Record<
@@ -750,6 +849,10 @@ export const routeMetadata: Record<
 
   },
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   fastest: {
 
     name:
@@ -769,6 +872,10 @@ export const routeMetadata: Record<
 
   },
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   fuel: {
 
     name:
@@ -792,7 +899,11 @@ export const routeMetadata: Record<
 
 
 /* ============================================================
+<<<<<<< HEAD
    6. GET LOCATION
+=======
+   6. LOCATION HELPER
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const getLocationById = (
@@ -808,6 +919,7 @@ export const getLocationById = (
 
 
 /* ============================================================
+<<<<<<< HEAD
    7. GET MISSION ROUTE
 ============================================================
 
@@ -821,6 +933,9 @@ export const getLocationById = (
       'safest'
    );
 
+=======
+   7. MISSION ROUTE HELPER
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const getMissionRoute = (
@@ -856,7 +971,11 @@ export const getMissionRoute = (
 
 
 /* ============================================================
+<<<<<<< HEAD
    8. GET COMPLETE ROUTE OBJECT
+=======
+   8. COMPLETE ROUTE OBJECT
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const getMissionRouteData = (
@@ -912,12 +1031,16 @@ export const getMissionRouteData = (
 
 
 /* ============================================================
+<<<<<<< HEAD
    9. CREATE ROUTES FOR A MISSION
 ============================================================
 
    Returns all 3 routes for the selected
    origin → destination.
 
+=======
+   9. ALL MISSION ROUTES
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const getMissionRoutes = (
@@ -987,13 +1110,20 @@ export const defaultMission = {
 
 
 /* ============================================================
+<<<<<<< HEAD
    11. USNIC ANTARCTIC ICEBERG DATA
+=======
+   11. USNIC ICEBERG DATA
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const icebergs = [
 
+<<<<<<< HEAD
   /* ---------------- D23 ---------------- */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'D23',
     name: 'D23',
@@ -1007,11 +1137,16 @@ export const icebergs = [
     latitude: -69.4333,
 
     sizeNm: [7, 6],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 7,
     widthNm: 6,
 
     areaSqNm: 30.79,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1022,6 +1157,19 @@ export const icebergs = [
 
   /* ---------------- B09G ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'D',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'B09G',
     name: 'B09G',
@@ -1035,11 +1183,16 @@ export const icebergs = [
     latitude: -68.1833,
 
     sizeNm: [12, 7],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 12,
     widthNm: 7,
 
     areaSqNm: 46.66,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1050,6 +1203,19 @@ export const icebergs = [
 
   /* ---------------- C18B ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'B',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'C18B',
     name: 'C18B',
@@ -1063,11 +1229,16 @@ export const icebergs = [
     latitude: -67.0333,
 
     sizeNm: [10, 4],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 10,
     widthNm: 4,
 
     areaSqNm: 32.19,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1078,6 +1249,19 @@ export const icebergs = [
 
   /* ---------------- C18C ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'C',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'C18C',
     name: 'C18C',
@@ -1091,11 +1275,16 @@ export const icebergs = [
     latitude: -68.4667,
 
     sizeNm: [10, 2],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 10,
     widthNm: 2,
 
     areaSqNm: 15.47,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1106,6 +1295,19 @@ export const icebergs = [
 
   /* ---------------- D37 ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'C',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'D37',
     name: 'D37',
@@ -1119,11 +1321,16 @@ export const icebergs = [
     latitude: -69.2167,
 
     sizeNm: [30, 7],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 30,
     widthNm: 7,
 
     areaSqNm: 139.29,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1134,6 +1341,19 @@ export const icebergs = [
 
   /* ---------------- D34 ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'D',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'D34',
     name: 'D34',
@@ -1147,11 +1367,16 @@ export const icebergs = [
     latitude: -67.15,
 
     sizeNm: [11, 8],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 11,
     widthNm: 8,
 
     areaSqNm: 48.34,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1162,6 +1387,19 @@ export const icebergs = [
 
   /* ---------------- D15A ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'D',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'D15A',
     name: 'D15A',
@@ -1175,11 +1413,16 @@ export const icebergs = [
     latitude: -66.6333,
 
     sizeNm: [51, 22],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 51,
     widthNm: 22,
 
     areaSqNm: 885.59,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1190,6 +1433,19 @@ export const icebergs = [
 
   /* ---------------- D15B ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'D',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'D15B',
     name: 'D15B',
@@ -1203,11 +1459,16 @@ export const icebergs = [
     latitude: -67.0167,
 
     sizeNm: [20, 12],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 20,
     widthNm: 12,
 
     areaSqNm: 178.0,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1218,6 +1479,19 @@ export const icebergs = [
 
   /* ---------------- D15C ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'D',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'D15C',
     name: 'D15C',
@@ -1231,11 +1505,16 @@ export const icebergs = [
     latitude: -67.2,
 
     sizeNm: [14, 7],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 14,
     widthNm: 7,
 
     areaSqNm: 33.71,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1246,6 +1525,19 @@ export const icebergs = [
 
   /* ---------------- C39 ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'D',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'C39',
     name: 'C39',
@@ -1259,11 +1551,16 @@ export const icebergs = [
     latitude: -66.8167,
 
     sizeNm: [8, 3],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 8,
     widthNm: 3,
 
     areaSqNm: 15.2,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1274,6 +1571,19 @@ export const icebergs = [
 
   /* ---------------- C36 ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'C',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'C36',
     name: 'C36',
@@ -1287,11 +1597,16 @@ export const icebergs = [
     latitude: -67.5167,
 
     sizeNm: [23, 16],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 23,
     widthNm: 16,
 
     areaSqNm: 249.5,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1302,6 +1617,19 @@ export const icebergs = [
 
   /* ---------------- C21B ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'C',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'C21B',
     name: 'C21B',
@@ -1315,11 +1643,16 @@ export const icebergs = [
     latitude: -64.9833,
 
     sizeNm: [12, 8],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 12,
     widthNm: 8,
 
     areaSqNm: 75.5,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1330,6 +1663,19 @@ export const icebergs = [
 
   /* ---------------- C24 ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'C',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'C24',
     name: 'C24',
@@ -1343,11 +1689,16 @@ export const icebergs = [
     latitude: -64.8333,
 
     sizeNm: [11, 3],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 11,
     widthNm: 3,
 
     areaSqNm: 16.87,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1358,6 +1709,19 @@ export const icebergs = [
 
   /* ---------------- C30 ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'C',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'C30',
     name: 'C30',
@@ -1371,11 +1735,16 @@ export const icebergs = [
     latitude: -64.7833,
 
     sizeNm: [9, 3],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 9,
     widthNm: 3,
 
     areaSqNm: 21.89,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1386,6 +1755,19 @@ export const icebergs = [
 
   /* ---------------- C31 ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'C',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'C31',
     name: 'C31',
@@ -1399,11 +1781,16 @@ export const icebergs = [
     latitude: -64.6833,
 
     sizeNm: [9, 3],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 9,
     widthNm: 3,
 
     areaSqNm: 21.3,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1414,6 +1801,19 @@ export const icebergs = [
 
   /* ---------------- B22A ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'C',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'B22A',
     name: 'B22A',
@@ -1427,11 +1827,16 @@ export const icebergs = [
     latitude: -69.35,
 
     sizeNm: [29, 25],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 29,
     widthNm: 25,
 
     areaSqNm: 414.92,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1442,6 +1847,19 @@ export const icebergs = [
 
   /* ---------------- B22F ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'B',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'B22F',
     name: 'B22F',
@@ -1455,11 +1873,16 @@ export const icebergs = [
     latitude: -66.75,
 
     sizeNm: [14, 7],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 14,
     widthNm: 7,
 
     areaSqNm: 69.2,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1470,6 +1893,19 @@ export const icebergs = [
 
   /* ---------------- B22H ---------------- */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'B',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'B22H',
     name: 'B22H',
@@ -1483,11 +1919,16 @@ export const icebergs = [
     latitude: -70.25,
 
     sizeNm: [8, 6],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 8,
     widthNm: 6,
 
     areaSqNm: 22.18,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1500,6 +1941,19 @@ export const icebergs = [
      A76C
   ========================================================== */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'B',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'A76C',
     name: 'A76C',
@@ -1513,11 +1967,16 @@ export const icebergs = [
     latitude: -54.1167,
 
     sizeNm: [16, 7],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 16,
     widthNm: 7,
 
     areaSqNm: 84.9,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1530,6 +1989,19 @@ export const icebergs = [
      A81
   ========================================================== */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'A',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'A81',
     name: 'A81',
@@ -1543,11 +2015,16 @@ export const icebergs = [
     latitude: -62.4,
 
     sizeNm: [28, 25],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 28,
     widthNm: 25,
 
     areaSqNm: 411.88,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1560,6 +2037,19 @@ export const icebergs = [
      A83
   ========================================================== */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'A',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'A83',
     name: 'A83',
@@ -1573,11 +2063,16 @@ export const icebergs = [
     latitude: -63.7667,
 
     sizeNm: [12, 7],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 12,
     widthNm: 7,
 
     areaSqNm: 55.34,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1590,6 +2085,19 @@ export const icebergs = [
      A84
   ========================================================== */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'A',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'A84',
     name: 'A84',
@@ -1603,11 +2111,16 @@ export const icebergs = [
     latitude: -72.35,
 
     sizeNm: [12, 6],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 12,
     widthNm: 6,
 
     areaSqNm: 57.43,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1620,6 +2133,19 @@ export const icebergs = [
      A85
   ========================================================== */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'A',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'A85',
     name: 'A85',
@@ -1633,11 +2159,16 @@ export const icebergs = [
     latitude: -66.2167,
 
     sizeNm: [10, 3],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 10,
     widthNm: 3,
 
     areaSqNm: 18.26,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
@@ -1650,6 +2181,19 @@ export const icebergs = [
      B09B
   ========================================================== */
 
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'A',
+  },
+
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     id: 'B09B',
     name: 'B09B',
@@ -1663,31 +2207,53 @@ export const icebergs = [
     latitude: -66.0833,
 
     sizeNm: [27, 10],
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
     lengthNm: 27,
     widthNm: 10,
 
     areaSqNm: 148.38,
 
+<<<<<<< HEAD
     observationDate: '2026-06-25',
 
     source: 'USNIC',
 
     region: 'B',
+=======
+    observationDate:
+      '2026-06-25',
+
+    source:
+      'USNIC',
+
+    region:
+      'B',
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   },
 
 ];
 
 
 /* ============================================================
+<<<<<<< HEAD
    12. COPERNICUS DATA PRODUCTS
+=======
+   12. COPERNICUS DATASETS
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const copernicusDatasets = {
 
+<<<<<<< HEAD
   /* ----------------------------------------------------------
      GLOBAL SEA ICE
   ---------------------------------------------------------- */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   globalSeaIce: {
 
     id:
@@ -1729,10 +2295,13 @@ export const copernicusDatasets = {
   },
 
 
+<<<<<<< HEAD
   /* ----------------------------------------------------------
      ANTARCTIC HIGH RESOLUTION
   ---------------------------------------------------------- */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   antarcticHighResolution: {
 
     id:
@@ -1770,10 +2339,13 @@ export const copernicusDatasets = {
   },
 
 
+<<<<<<< HEAD
   /* ----------------------------------------------------------
      ANTARCTIC DRIFT
   ---------------------------------------------------------- */
 
+=======
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   antarcticDrift: {
 
     id:
@@ -1814,12 +2386,16 @@ export const copernicusDatasets = {
 
 
 /* ============================================================
+<<<<<<< HEAD
    13. COPERNICUS ENVIRONMENT
 ============================================================
 
    These are placeholders for values returned by your future
    Copernicus backend/API.
 
+=======
+   13. COPERNICUS ENVIRONMENT PLACEHOLDERS
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const copernicusEnvironment = {
@@ -1878,10 +2454,20 @@ export const copernicusEnvironment = {
 
 
 /* ============================================================
+<<<<<<< HEAD
    14. SELECTED ICEBERG TRAJECTORY
 ============================================================
 
    Temporary compatibility object.
+=======
+   14. ICEBERG TRAJECTORY
+============================================================
+
+   Temporary frontend trajectory.
+
+   Later your AI/backend can replace geoJsonCoords with
+   predicted trajectory coordinates.
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 
 ============================================================ */
 
@@ -1900,6 +2486,19 @@ export const icebergTrajectory = {
 
     [74.7167, -69.4333],
 
+<<<<<<< HEAD
+=======
+    [72.5, -69.1],
+
+    [70.0, -68.8],
+
+    [67.5, -68.4],
+
+    [65.0, -68.0],
+
+    [62.5, -67.6],
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   ],
 
   coordinates: [
@@ -1930,6 +2529,10 @@ export const icebergMotionData = [
       0,
   },
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     day:
       'Day 2',
@@ -1941,6 +2544,10 @@ export const icebergMotionData = [
       25,
   },
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     day:
       'Day 3',
@@ -1952,6 +2559,10 @@ export const icebergMotionData = [
       58,
   },
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
   {
     day:
       'Day 4',
@@ -2184,11 +2795,15 @@ export const getIcebergGeoJSON = () => {
 
 
 /* ============================================================
+<<<<<<< HEAD
    18. ROUTE GEOJSON HELPER
 ============================================================
 
    Useful for MapLibre / Leaflet / Mapbox / OpenLayers.
 
+=======
+   18. ROUTE GEOJSON
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
 ============================================================ */
 
 export const getRouteGeoJSON = (
@@ -2282,6 +2897,7 @@ export const getAllRoutesGeoJSON = (
 
   };
 
+<<<<<<< HEAD
 };
 =======
 >>>>>>> main
@@ -2390,3 +3006,6 @@ export const icebergMotionData = [
 ];
 >>>>>>> ice
 >>>>>>> main
+=======
+};
+>>>>>>> c1d91b3c42c1f7ff3b29b906db3cd264ef6158d3
