@@ -21,16 +21,196 @@ import {
   Thermometer,
   Database,
   Brain,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  Play,
+  CheckCircle2,
+  Loader2,
+  Clock3,
+  CalendarDays,
+  MapPin,
+} from 'lucide-react';
+
+import { useRoute } from '../../state/RouteContext';
+
+import {
+  locations,
+  routeMetadata,
+  missionRoutes,
+  type RouteType,
+} from '../../data/mockData';
+
+import ModelDiagnostics from './ModelDiagnostics';
+
+/* ============================================================
+   DASHBOARD
+============================================================ */
+
+=======
+>>>>>>> main
 } from 'lucide-react';
 
 import { useRoute } from '../../state/RouteContext';
 import { routes } from '../../data/mockData';
 import ModelDiagnostics from './ModelDiagnostics';
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
 export default function DashboardLayout() {
   const {
     viewMode,
     setViewMode,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+    introFinished,
+
+    selectedRoute,
+    setSelectedRoute,
+
+    mission,
+    setMission,
+  } = useRoute();
+
+  /* ==========================================================
+     LOCAL UI STATE
+  ========================================================== */
+
+  const [showDiagnostics, setShowDiagnostics] = useState(false);
+
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const [analysisComplete, setAnalysisComplete] = useState(false);
+
+  const [analysisProgress, setAnalysisProgress] = useState(0);
+
+  /* ==========================================================
+     AVAILABLE ROUTES
+  ========================================================== */
+
+  const availableRoutes: RouteType[] = [
+    'safest',
+    'fastest',
+    'fuel',
+  ];
+
+  /* ==========================================================
+     ACTIVE ROUTE
+  ========================================================== */
+
+  const activeRouteType: RouteType = availableRoutes.includes(
+    selectedRoute as RouteType
+  )
+    ? (selectedRoute as RouteType)
+    : 'safest';
+
+  const activeRouteMetadata = routeMetadata[activeRouteType];
+
+  /* ==========================================================
+     ACTIVE ORIGIN
+  ========================================================== */
+
+  const activeOrigin = locations.find(
+    (location) => location.id === mission.origin
+  );
+
+  /* ==========================================================
+     ACTIVE DESTINATION
+  ========================================================== */
+
+  const activeDestination = locations.find(
+    (location) => location.id === mission.destination
+  );
+
+  /* ==========================================================
+     ROUTE AVAILABILITY
+  ========================================================== */
+
+  const missionRouteExists = Boolean(
+    missionRoutes?.[mission.origin]?.[mission.destination]
+  );
+
+  /* ==========================================================
+     MISSION UPDATE
+  ========================================================== */
+
+  const updateMission = (changes: Partial<typeof mission>) => {
+    setAnalysisComplete(false);
+
+    setMission((current) => ({
+      ...current,
+      ...changes,
+    }));
+  };
+
+  /* ==========================================================
+     ROUTE CHANGE
+  ========================================================== */
+
+  const handleRouteChange = (route: RouteType) => {
+    if (isAnalyzing) return;
+
+    setSelectedRoute(route);
+    setAnalysisComplete(false);
+    setAnalysisProgress(0);
+  };
+
+  /* ==========================================================
+     RUN AI ROUTE ANALYSIS
+  ========================================================== */
+
+  const runRouteAnalysis = () => {
+    if (isAnalyzing) return;
+
+    setIsAnalyzing(true);
+    setAnalysisComplete(false);
+    setAnalysisProgress(0);
+
+    /*
+     * FRONTEND SIMULATION ONLY
+     *
+     * Later your backend / AI model can replace this
+     * function and return the actual route result.
+     *
+     * IMPORTANT:
+     * We intentionally DO NOT call:
+     *
+     * setSelectedRoute('safest')
+     *
+     * because the user's selected route must remain selected.
+     */
+
+    let progress = 0;
+
+    const interval = window.setInterval(() => {
+      progress += Math.floor(Math.random() * 13) + 7;
+
+      if (progress >= 100) {
+        progress = 100;
+
+        window.clearInterval(interval);
+
+        setAnalysisProgress(100);
+
+        window.setTimeout(() => {
+          setIsAnalyzing(false);
+          setAnalysisComplete(true);
+        }, 500);
+      } else {
+        setAnalysisProgress(progress);
+      }
+    }, 260);
+  };
+
+  /* ==========================================================
+     INTRO
+  ========================================================== */
+=======
+>>>>>>> main
     introFinished,
     selectedRoute,
     setSelectedRoute,
@@ -48,6 +228,10 @@ export default function DashboardLayout() {
    */
   const activeRoute =
     routes.find((route) => route.id === selectedRoute) ?? routes[0];
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
 
   if (!introFinished) {
     return null;
@@ -56,16 +240,181 @@ export default function DashboardLayout() {
   return (
     <AnimatePresence>
       <motion.div
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          duration: 0.8,
+        }}
+        className="
+          absolute
+          inset-0
+          z-20
+          flex
+          flex-col
+          pointer-events-none
+          text-slate-100
+        "
+      >
+=======
+>>>>>>> main
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="absolute inset-0 z-20 flex flex-col pointer-events-none text-slate-100"
       >
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
         {/* =====================================================
             TOP BAR
         ===================================================== */}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        <header
+          className="
+            h-16
+            shrink-0
+            bg-[#06111a]/95
+            backdrop-blur-xl
+            border-b
+            border-cyan-300/10
+            flex
+            items-center
+            justify-between
+            px-5
+            pointer-events-auto
+            shadow-[0_8px_30px_rgba(0,0,0,0.35)]
+          "
+        >
+          {/* BRAND */}
+
+          <div className="flex items-center gap-3">
+            <div
+              className="
+                w-9
+                h-9
+                rounded-lg
+                bg-cyan-400/10
+                border
+                border-cyan-300/20
+                flex
+                items-center
+                justify-center
+              "
+            >
+              <Shield
+                className="
+                  w-5
+                  h-5
+                  text-cyan-300
+                "
+              />
+            </div>
+
+            <div>
+              <div className="flex items-center gap-1">
+                <span
+                  className="
+                    text-[15px]
+                    font-bold
+                    tracking-[0.12em]
+                  "
+                >
+                  ICEROUTE
+                </span>
+
+                <span
+                  className="
+                    text-[15px]
+                    font-bold
+                    tracking-[0.12em]
+                    text-cyan-300
+                  "
+                >
+                  INDIA
+                </span>
+              </div>
+
+              <div
+                className="
+                  text-[9px]
+                  text-slate-500
+                  tracking-[0.2em]
+                  uppercase
+                "
+              >
+                Antarctic Navigation Intelligence
+              </div>
+            </div>
+
+            <div
+              className="
+                ml-5
+                hidden
+                md:flex
+                items-center
+                gap-2
+                px-3
+                py-1.5
+                rounded-full
+                bg-emerald-400/5
+                border
+                border-emerald-400/15
+              "
+            >
+              <span
+                className="
+                  status-dot
+                  status-dot-safe
+                  animate-pulse-glow
+                "
+              />
+
+              <span
+                className="
+                  text-[9px]
+                  font-bold
+                  tracking-[0.16em]
+                  text-emerald-300
+                "
+              >
+                SYSTEM OPERATIONAL
+              </span>
+            </div>
+          </div>
+
+          {/* CENTER STATUS */}
+
+          <div
+            className="
+              hidden
+              lg:flex
+              items-center
+              gap-7
+              text-[10px]
+            "
+          >
+            <div className="flex items-center gap-2">
+              <Database
+                className="
+                  w-3.5
+                  h-3.5
+                  text-slate-500
+                "
+              />
+=======
+>>>>>>> main
         <header className="h-16 shrink-0 bg-[#06111a]/95 backdrop-blur-xl border-b border-cyan-300/10 flex items-center justify-between px-5 pointer-events-auto shadow-[0_8px_30px_rgba(0,0,0,0.35)]">
 
           {/* Brand */}
@@ -116,6 +465,10 @@ export default function DashboardLayout() {
 
             <div className="flex items-center gap-2">
               <Database className="w-3.5 h-3.5 text-slate-500" />
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
 
               <span className="text-slate-500">
                 DATA
@@ -127,7 +480,21 @@ export default function DashboardLayout() {
             </div>
 
             <div className="flex items-center gap-2">
+<<<<<<< HEAD
               <Brain className="w-3.5 h-3.5 text-cyan-400" />
+=======
+<<<<<<< HEAD
+              <Brain
+                className="
+                  w-3.5
+                  h-3.5
+                  text-cyan-400
+                "
+              />
+=======
+              <Brain className="w-3.5 h-3.5 text-cyan-400" />
+>>>>>>> ice
+>>>>>>> main
 
               <span className="text-slate-500">
                 AI MODEL
@@ -139,7 +506,21 @@ export default function DashboardLayout() {
             </div>
 
             <div className="flex items-center gap-2">
+<<<<<<< HEAD
               <Gauge className="w-3.5 h-3.5 text-slate-500" />
+=======
+<<<<<<< HEAD
+              <Gauge
+                className="
+                  w-3.5
+                  h-3.5
+                  text-slate-500
+                "
+              />
+=======
+              <Gauge className="w-3.5 h-3.5 text-slate-500" />
+>>>>>>> ice
+>>>>>>> main
 
               <span className="text-slate-500">
                 CONFIDENCE
@@ -149,6 +530,53 @@ export default function DashboardLayout() {
                 91%
               </span>
             </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          </div>
+
+          {/* VIEW SWITCHER */}
+
+          <div
+            className="
+              flex
+              items-center
+              bg-black/30
+              border
+              border-white/5
+              rounded-lg
+              p-1
+            "
+          >
+            <button
+              type="button"
+              onClick={() => setViewMode('2D')}
+              className={`
+                flex
+                items-center
+                gap-2
+                px-3
+                py-2
+                rounded-md
+                text-[10px]
+                font-semibold
+                transition-all
+                ${
+                  viewMode === '2D'
+                    ? 'bg-cyan-400/15 text-cyan-300 border border-cyan-300/10'
+                    : 'text-slate-500 hover:text-slate-300'
+                }
+              `}
+            >
+              <MapIcon
+                className="
+                  w-3.5
+                  h-3.5
+                "
+              />
+
+=======
+>>>>>>> main
 
           </div>
 
@@ -165,10 +593,48 @@ export default function DashboardLayout() {
               }`}
             >
               <MapIcon className="w-3.5 h-3.5" />
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
               2D MAP
             </button>
 
             <button
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+              type="button"
+              onClick={() => setViewMode('3D')}
+              className={`
+                flex
+                items-center
+                gap-2
+                px-3
+                py-2
+                rounded-md
+                text-[10px]
+                font-semibold
+                transition-all
+                ${
+                  viewMode === '3D'
+                    ? 'bg-cyan-400/15 text-cyan-300 border border-cyan-300/10'
+                    : 'text-slate-500 hover:text-slate-300'
+                }
+              `}
+            >
+              <Globe
+                className="
+                  w-3.5
+                  h-3.5
+                "
+              />
+
+              3D GLOBE
+            </button>
+          </div>
+=======
+>>>>>>> main
               onClick={() => setViewMode('3D')}
               className={`flex items-center gap-2 px-3 py-2 rounded-md text-[10px] font-semibold transition-all ${
                 viewMode === '3D'
@@ -182,12 +648,44 @@ export default function DashboardLayout() {
 
           </div>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
         </header>
 
         {/* =====================================================
             MAIN AREA
         ===================================================== */}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        <div
+          className="
+            flex-1
+            min-h-0
+            flex
+          "
+        >
+          {/* SIDE NAVIGATION */}
+
+          <nav
+            className="
+              w-16
+              shrink-0
+              bg-[#030a10]/95
+              border-r
+              border-cyan-300/10
+              flex
+              flex-col
+              items-center
+              py-4
+              pointer-events-auto
+            "
+          >
+=======
+>>>>>>> main
         <div className="flex-1 min-h-0 flex">
 
           {/* ===================================================
@@ -196,6 +694,10 @@ export default function DashboardLayout() {
 
           <nav className="w-16 shrink-0 bg-[#030a10]/95 border-r border-cyan-300/10 flex flex-col items-center py-4 pointer-events-auto">
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
             <NavButton
               icon={<Home />}
               label="Dashboard"
@@ -233,13 +735,637 @@ export default function DashboardLayout() {
               icon={<Shield />}
               label="System"
             />
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> ice
+>>>>>>> main
           </nav>
 
           {/* ===================================================
               LEFT CONTROL PANEL
           =================================================== */}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          <aside
+            className="
+              w-[300px]
+              shrink-0
+              bg-[#07151f]/94
+              backdrop-blur-xl
+              border-r
+              border-cyan-300/10
+              pointer-events-auto
+              overflow-y-auto
+            "
+          >
+            {/* MISSION PLANNER */}
+
+            <section
+              className="
+                p-4
+                border-b
+                border-white/5
+              "
+            >
+              <div
+                className="
+                  flex
+                  items-center
+                  justify-between
+                "
+              >
+                <SectionTitle
+                  icon={<Navigation />}
+                  title="Mission Planner"
+                />
+
+                <span
+                  className={`
+                    text-[7px]
+                    font-bold
+                    tracking-wider
+                    px-2
+                    py-1
+                    rounded-full
+                    border
+                    ${
+                      isAnalyzing
+                        ? 'text-cyan-300 bg-cyan-400/5 border-cyan-300/15'
+                        : analysisComplete
+                          ? 'text-emerald-300 bg-emerald-400/5 border-emerald-400/15'
+                          : 'text-slate-500 bg-white/[0.02] border-white/5'
+                    }
+                  `}
+                >
+                  {isAnalyzing
+                    ? 'ANALYZING'
+                    : analysisComplete
+                      ? 'COMPLETE'
+                      : 'READY'}
+                </span>
+              </div>
+
+              <div
+                className="
+                  space-y-3
+                  mt-4
+                "
+              >
+                {/* ORIGIN */}
+
+                <SelectField
+                  label="ORIGIN"
+                  value={mission.origin}
+                  options={locations.map((location) => ({
+                    value: location.id,
+                    label: location.name,
+                  }))}
+                  onChange={(value) => {
+                    updateMission({
+                      origin: value,
+                    });
+                  }}
+                />
+
+                {/* DESTINATION */}
+
+                <SelectField
+                  label="DESTINATION"
+                  value={mission.destination}
+                  options={locations.map((location) => ({
+                    value: location.id,
+                    label: location.name,
+                  }))}
+                  onChange={(value) => {
+                    updateMission({
+                      destination: value,
+                    });
+                  }}
+                />
+
+                {/* VESSEL */}
+
+                <SelectField
+                  label="VESSEL"
+                  value={mission.vessel}
+                  options={[
+                    {
+                      value: 'PC6',
+                      label: 'Research Vessel · PC6',
+                    },
+                    {
+                      value: 'PC5',
+                      label: 'Research Vessel · PC5',
+                    },
+                    {
+                      value: 'PC4',
+                      label: 'Research Vessel · PC4',
+                    },
+                    {
+                      value: 'PC3',
+                      label: 'Research Vessel · PC3',
+                    },
+                  ]}
+                  onChange={(value) => {
+                    updateMission({
+                      vessel: value,
+                    });
+                  }}
+                />
+
+                {/* DATE + TIME */}
+
+                <div
+                  className="
+                    grid
+                    grid-cols-2
+                    gap-2
+                  "
+                >
+                  <DateField
+                    label="DEPARTURE DATE"
+                    value={mission.departureDate}
+                    onChange={(value) => {
+                      updateMission({
+                        departureDate: value,
+                      });
+                    }}
+                  />
+
+                  <TimeField
+                    label="TIME"
+                    value={mission.departureTime}
+                    onChange={(value) => {
+                      updateMission({
+                        departureTime: value,
+                      });
+                    }}
+                  />
+                </div>
+
+                {/* FORECAST */}
+
+                <SelectField
+                  label="FORECAST HORIZON"
+                  value={String(mission.forecastHours)}
+                  options={[
+                    {
+                      value: '24',
+                      label: '24 HOURS',
+                    },
+                    {
+                      value: '48',
+                      label: '48 HOURS',
+                    },
+                    {
+                      value: '72',
+                      label: '72 HOURS',
+                    },
+                    {
+                      value: '96',
+                      label: '96 HOURS',
+                    },
+                    {
+                      value: '120',
+                      label: '120 HOURS',
+                    },
+                    {
+                      value: '168',
+                      label: '168 HOURS',
+                    },
+                  ]}
+                  onChange={(value) => {
+                    updateMission({
+                      forecastHours: Number(value),
+                    });
+                  }}
+                />
+
+                {/* MISSION SUMMARY */}
+
+                <div
+                  className="
+                    rounded-lg
+                    bg-black/20
+                    border
+                    border-white/5
+                    p-3
+                  "
+                >
+                  <div
+                    className="
+                      text-[8px]
+                      text-slate-600
+                      uppercase
+                      tracking-wider
+                      mb-2
+                    "
+                  >
+                    Mission Summary
+                  </div>
+
+                  <div
+                    className="
+                      grid
+                      grid-cols-2
+                      gap-y-2
+                    "
+                  >
+                    <MiniSummary
+                      icon={<MapPin />}
+                      label="FROM"
+                      value={
+                        activeOrigin?.name ??
+                        mission.origin
+                      }
+                    />
+
+                    <MiniSummary
+                      icon={<Target />}
+                      label="TO"
+                      value={
+                        activeDestination?.name ??
+                        mission.destination
+                      }
+                    />
+
+                    <MiniSummary
+                      icon={<Ship />}
+                      label="VESSEL"
+                      value={mission.vessel}
+                    />
+
+                    <MiniSummary
+                      icon={<Clock3 />}
+                      label="HORIZON"
+                      value={`${mission.forecastHours}H`}
+                    />
+                  </div>
+                </div>
+
+                {/* ROUTE AVAILABILITY */}
+
+                <div
+                  className={`
+                    rounded-lg
+                    border
+                    px-3
+                    py-2.5
+                    ${
+                      missionRouteExists
+                        ? 'border-emerald-400/15 bg-emerald-400/5'
+                        : 'border-amber-400/15 bg-amber-400/5'
+                    }
+                  `}
+                >
+                  <div
+                    className="
+                      flex
+                      items-center
+                      gap-2
+                    "
+                  >
+                    {missionRouteExists ? (
+                      <CheckCircle2
+                        className="
+                          w-3.5
+                          h-3.5
+                          text-emerald-300
+                        "
+                      />
+                    ) : (
+                      <Target
+                        className="
+                          w-3.5
+                          h-3.5
+                          text-amber-300
+                        "
+                      />
+                    )}
+
+                    <span
+                      className={`
+                        text-[8px]
+                        font-semibold
+                        ${
+                          missionRouteExists
+                            ? 'text-emerald-300'
+                            : 'text-amber-300'
+                        }
+                      `}
+                    >
+                      {missionRouteExists
+                        ? 'ROUTE DATA AVAILABLE'
+                        : 'ROUTE DATA NOT AVAILABLE FOR THIS PAIR'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* ANALYSIS PROGRESS */}
+
+                <AnimatePresence>
+                  {isAnalyzing && (
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                        height: 0,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        height: 'auto',
+                      }}
+                      exit={{
+                        opacity: 0,
+                        height: 0,
+                      }}
+                      className="
+                        overflow-hidden
+                      "
+                    >
+                      <div
+                        className="
+                          rounded-lg
+                          border
+                          border-cyan-300/15
+                          bg-cyan-400/5
+                          p-3
+                        "
+                      >
+                        <div
+                          className="
+                            flex
+                            items-center
+                            justify-between
+                            mb-2
+                          "
+                        >
+                          <div
+                            className="
+                              flex
+                              items-center
+                              gap-2
+                            "
+                          >
+                            <Loader2
+                              className="
+                                w-3.5
+                                h-3.5
+                                text-cyan-300
+                                animate-spin
+                              "
+                            />
+
+                            <span
+                              className="
+                                text-[8px]
+                                text-cyan-300
+                                font-semibold
+                                uppercase
+                                tracking-wider
+                              "
+                            >
+                              AI Processing
+                            </span>
+                          </div>
+
+                          <span
+                            className="
+                              text-[9px]
+                              font-mono
+                              text-cyan-300
+                            "
+                          >
+                            {analysisProgress}%
+                          </span>
+                        </div>
+
+                        <div
+                          className="
+                            h-1.5
+                            rounded-full
+                            bg-black/40
+                            overflow-hidden
+                          "
+                        >
+                          <motion.div
+                            className="
+                              h-full
+                              bg-cyan-300
+                              rounded-full
+                              shadow-[0_0_12px_rgba(85,214,255,0.6)]
+                            "
+                            initial={{
+                              width: '0%',
+                            }}
+                            animate={{
+                              width: `${analysisProgress}%`,
+                            }}
+                            transition={{
+                              duration: 0.25,
+                            }}
+                          />
+                        </div>
+
+                        <div
+                          className="
+                            mt-2
+                            grid
+                            grid-cols-2
+                            gap-y-1
+                          "
+                        >
+                          <AnalysisStep
+                            label="Ocean conditions"
+                            done={analysisProgress >= 20}
+                          />
+
+                          <AnalysisStep
+                            label="Sea-ice data"
+                            done={analysisProgress >= 40}
+                          />
+
+                          <AnalysisStep
+                            label="Iceberg positions"
+                            done={analysisProgress >= 60}
+                          />
+
+                          <AnalysisStep
+                            label="Route optimization"
+                            done={analysisProgress >= 80}
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* COMPLETE MESSAGE */}
+
+                <AnimatePresence>
+                  {analysisComplete && !isAnalyzing && (
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                        y: 5,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      className="
+                        flex
+                        items-center
+                        gap-2
+                        rounded-lg
+                        border
+                        border-emerald-400/15
+                        bg-emerald-400/5
+                        px-3
+                        py-2
+                      "
+                    >
+                      <CheckCircle2
+                        className="
+                          w-4
+                          h-4
+                          text-emerald-300
+                        "
+                      />
+
+                      <div>
+                        <div
+                          className="
+                            text-[8px]
+                            font-bold
+                            text-emerald-300
+                          "
+                        >
+                          ROUTE ANALYSIS COMPLETE
+                        </div>
+
+                        <div
+                          className="
+                            text-[7px]
+                            text-slate-600
+                            mt-0.5
+                          "
+                        >
+                          {activeRouteMetadata.name} remains active
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* RUN ANALYSIS BUTTON */}
+
+                <button
+                  type="button"
+                  disabled={
+                    isAnalyzing ||
+                    !missionRouteExists
+                  }
+                  onClick={runRouteAnalysis}
+                  className={`
+                    w-full
+                    py-3
+                    rounded-lg
+                    text-[9px]
+                    font-bold
+                    tracking-[0.13em]
+                    transition-all
+                    flex
+                    items-center
+                    justify-center
+                    gap-2
+                    ${
+                      isAnalyzing
+                        ? 'bg-cyan-400/10 text-cyan-300 border border-cyan-300/20 cursor-wait'
+                        : missionRouteExists
+                          ? 'bg-cyan-400 text-[#031019] hover:bg-cyan-300 shadow-[0_0_24px_rgba(85,214,255,0.16)]'
+                          : 'bg-slate-700/40 text-slate-600 border border-white/5 cursor-not-allowed'
+                    }
+                  `}
+                >
+                  {isAnalyzing ? (
+                    <>
+                      <Loader2
+                        className="
+                          w-3.5
+                          h-3.5
+                          animate-spin
+                        "
+                      />
+
+                      ANALYZING MISSION
+                    </>
+                  ) : analysisComplete ? (
+                    <>
+                      <CheckCircle2
+                        className="
+                          w-3.5
+                          h-3.5
+                        "
+                      />
+
+                      RE-RUN AI ANALYSIS
+                    </>
+                  ) : (
+                    <>
+                      <Play
+                        className="
+                          w-3.5
+                          h-3.5
+                          fill-current
+                        "
+                      />
+
+                      GENERATE AI ROUTE
+                    </>
+                  )}
+                </button>
+
+                <div
+                  className="
+                    flex
+                    items-center
+                    justify-center
+                    gap-1.5
+                    text-[7px]
+                    text-slate-600
+                  "
+                >
+                  <Brain
+                    className="
+                      w-3
+                      h-3
+                    "
+                  />
+
+                  AI decision support · frontend simulation
+                </div>
+              </div>
+            </section>
+
+            {/* =================================================
+                ROUTE OPTIONS
+            ================================================= */}
+
+            <section
+              className="
+                p-4
+                border-b
+                border-white/5
+              "
+            >
+=======
+>>>>>>> main
           <aside className="w-[300px] shrink-0 bg-[#07151f]/94 backdrop-blur-xl border-r border-cyan-300/10 pointer-events-auto overflow-y-auto">
 
             {/* Route planner */}
@@ -294,11 +1420,163 @@ export default function DashboardLayout() {
 
             <section className="p-4 border-b border-white/5">
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
               <SectionTitle
                 icon={<Route />}
                 title="Recommended Routes"
               />
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+              <div
+                className="
+                  space-y-2
+                  mt-4
+                "
+              >
+                {availableRoutes.map((routeId) => {
+                  const route =
+                    routeMetadata[routeId];
+
+                  const isSelected =
+                    activeRouteType === routeId;
+
+                  const isSafest =
+                    routeId === 'safest';
+
+                  return (
+                    <button
+                      key={routeId}
+                      type="button"
+                      disabled={isAnalyzing}
+                      onClick={() =>
+                        handleRouteChange(
+                          routeId
+                        )
+                      }
+                      className={`
+                        w-full
+                        text-left
+                        p-3
+                        rounded-lg
+                        border
+                        transition-all
+                        ${
+                          isSelected
+                            ? 'bg-cyan-400/10 border-cyan-300/40 shadow-[0_0_25px_rgba(85,214,255,0.10)] scale-[1.01]'
+                            : 'bg-black/15 border-white/5 hover:border-white/10 hover:bg-white/[0.03]'
+                        }
+                        ${
+                          isAnalyzing
+                            ? 'opacity-60 cursor-wait'
+                            : ''
+                        }
+                      `}
+                    >
+                      <div
+                        className="
+                          flex
+                          items-center
+                          justify-between
+                        "
+                      >
+                        <div
+                          className="
+                            flex
+                            items-center
+                            gap-2
+                          "
+                        >
+                          <span
+                            className="
+                              w-2.5
+                              h-2.5
+                              rounded-full
+                            "
+                            style={{
+                              background:
+                                route.color,
+                              boxShadow:
+                                `0 0 10px ${route.color}`,
+                            }}
+                          />
+
+                          <span
+                            className="
+                              text-xs
+                              font-semibold
+                              text-slate-200
+                            "
+                          >
+                            {route.name}
+                          </span>
+                        </div>
+
+                        <div
+                          className="
+                            flex
+                            items-center
+                            gap-1
+                          "
+                        >
+                          {isSelected && (
+                            <span
+                              className="
+                                text-[7px]
+                                px-1.5
+                                py-0.5
+                                rounded
+                                bg-cyan-400/10
+                                border
+                                border-cyan-300/15
+                                text-cyan-300
+                              "
+                            >
+                              ACTIVE
+                            </span>
+                          )}
+
+                          {isSafest && (
+                            <span
+                              className="
+                                text-[8px]
+                                px-1.5
+                                py-0.5
+                                rounded
+                                bg-emerald-400/10
+                                border
+                                border-emerald-400/15
+                                text-emerald-300
+                              "
+                            >
+                              AI PICK
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div
+                        className="
+                          grid
+                          grid-cols-3
+                          mt-3
+                          text-[9px]
+                        "
+                      >
+                        <Metric
+                          label="RISK"
+                          value={
+                            route.risk ??
+                            (isSafest
+                              ? 'LOW'
+                              : 'MED')
+                          }
+=======
+>>>>>>> main
               <div className="space-y-2 mt-4">
 
                 {routes.map((route) => {
@@ -351,16 +1629,53 @@ export default function DashboardLayout() {
                         <Metric
                           label="RISK"
                           value={isSafest ? 'LOW' : 'MED'}
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
                           positive={isSafest}
                         />
 
                         <Metric
                           label="ETA"
+<<<<<<< HEAD
                           value={isSafest ? '74h' : '62h'}
+=======
+<<<<<<< HEAD
+                          value={
+                            route.eta ??
+                            '--'
+                          }
+=======
+                          value={isSafest ? '74h' : '62h'}
+>>>>>>> ice
+>>>>>>> main
                         />
 
                         <Metric
                           label="FUEL"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                          value={
+                            route.fuel ??
+                            '--'
+                          }
+                        />
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+
+            {/* =================================================
+                DATA LAYERS
+            ================================================= */}
+
+            <section className="p-4">
+=======
+>>>>>>> main
                           value={isSafest ? '18.4t' : '21.2t'}
                         />
 
@@ -378,13 +1693,31 @@ export default function DashboardLayout() {
 
             <section className="p-4">
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
               <SectionTitle
                 icon={<Layers />}
                 title="Data Layers"
               />
 
+<<<<<<< HEAD
               <div className="space-y-1 mt-4">
 
+=======
+<<<<<<< HEAD
+              <div
+                className="
+                  space-y-1
+                  mt-4
+                "
+              >
+=======
+              <div className="space-y-1 mt-4">
+
+>>>>>>> ice
+>>>>>>> main
                 <LayerToggle
                   label="Sea Ice Concentration"
                   active
@@ -423,6 +1756,45 @@ export default function DashboardLayout() {
                   active
                   icon={<Shield />}
                 />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+              </div>
+
+              {/* SEA ICE LEGEND */}
+
+              <div
+                className="
+                  mt-5
+                  p-3
+                  rounded-lg
+                  bg-black/20
+                  border
+                  border-white/5
+                "
+              >
+                <div
+                  className="
+                    text-[8px]
+                    text-slate-500
+                    uppercase
+                    tracking-wider
+                    mb-2
+                  "
+                >
+                  Sea Ice Concentration
+                </div>
+
+                <div
+                  className="
+                    flex
+                    h-2
+                    rounded
+                    overflow-hidden
+                  "
+                >
+=======
+>>>>>>> main
 
               </div>
 
@@ -436,31 +1808,144 @@ export default function DashboardLayout() {
 
                 <div className="flex h-2 rounded overflow-hidden">
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
                   <div className="flex-1 bg-blue-300" />
                   <div className="flex-1 bg-cyan-300" />
                   <div className="flex-1 bg-yellow-400" />
                   <div className="flex-1 bg-red-400" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                </div>
+
+                <div
+                  className="
+                    flex
+                    justify-between
+                    mt-1
+                    text-[8px]
+                    text-slate-600
+                  "
+                >
+=======
+>>>>>>> main
 
                 </div>
 
                 <div className="flex justify-between mt-1 text-[8px] text-slate-600">
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
                   <span>0%</span>
                   <span>25%</span>
                   <span>50%</span>
                   <span>75%</span>
                   <span>100%</span>
                 </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+              </div>
+            </section>
+=======
+>>>>>>> main
 
               </div>
 
             </section>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
           </aside>
 
           {/* ===================================================
               MAP AREA
           =================================================== */}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          <main
+            className="
+              flex-1
+              min-w-0
+              relative
+              pointer-events-none
+            "
+          >
+            {/* ACTIVE MISSION HUD */}
+
+            <div
+              className="
+                absolute
+                top-4
+                left-4
+                z-10
+              "
+            >
+              <div
+                className="
+                  ice-panel
+                  rounded-lg
+                  px-3
+                  py-2
+                  flex
+                  items-center
+                  gap-3
+                "
+              >
+                <div>
+                  <div
+                    className="
+                      text-[8px]
+                      text-slate-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Active Mission
+                  </div>
+
+                  <div
+                    className="
+                      text-xs
+                      font-semibold
+                      text-slate-200
+                    "
+                  >
+                    {activeOrigin?.name ??
+                      mission.origin}
+                    {' → '}
+                    {activeDestination?.name ??
+                      mission.destination}
+                  </div>
+                </div>
+
+                <div
+                  className="
+                    h-7
+                    w-px
+                    bg-white/10
+                  "
+                />
+
+                <div>
+                  <div
+                    className="
+                      text-[8px]
+                      text-slate-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+=======
+>>>>>>> main
           <main className="flex-1 min-w-0 relative pointer-events-none">
 
             {/* Map HUD */}
@@ -486,10 +1971,202 @@ export default function DashboardLayout() {
                 <div>
 
                   <div className="text-[8px] text-slate-500 uppercase tracking-wider">
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
                     Route
                   </div>
 
                   <div
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                    className="
+                      text-xs
+                      font-bold
+                    "
+                    style={{
+                      color:
+                        activeRouteMetadata.color,
+                    }}
+                  >
+                    {activeRouteMetadata.name.replace(
+                      ' Route',
+                      ''
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* MISSION DATE HUD */}
+
+            <div
+              className="
+                absolute
+                top-4
+                right-4
+                z-10
+              "
+            >
+              <div
+                className="
+                  ice-panel
+                  rounded-lg
+                  px-3
+                  py-2
+                  flex
+                  items-center
+                  gap-3
+                "
+              >
+                <CalendarDays
+                  className="
+                    w-3.5
+                    h-3.5
+                    text-cyan-300
+                  "
+                />
+
+                <div>
+                  <div
+                    className="
+                      text-[7px]
+                      text-slate-600
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Departure
+                  </div>
+
+                  <div
+                    className="
+                      text-[9px]
+                      font-mono
+                      text-slate-300
+                    "
+                  >
+                    {mission.departureDate}
+                    {' · '}
+                    {mission.departureTime}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* COORDINATES */}
+
+            <div
+              className="
+                absolute
+                bottom-4
+                left-4
+                z-10
+              "
+            >
+              <div
+                className="
+                  ice-panel
+                  rounded-lg
+                  px-3
+                  py-2
+                  text-[9px]
+                  font-mono
+                  text-slate-500
+                "
+              >
+                {activeDestination
+                  ? `LAT ${Math.abs(
+                      activeDestination.latitude
+                    ).toFixed(2)}° ${
+                      activeDestination.latitude <
+                      0
+                        ? 'S'
+                        : 'N'
+                    }`
+                  : 'LAT --'}
+
+                &nbsp;&nbsp;&nbsp;
+
+                {activeDestination
+                  ? `LNG ${Math.abs(
+                      activeDestination.longitude
+                    ).toFixed(2)}° ${
+                      activeDestination.longitude <
+                      0
+                        ? 'W'
+                        : 'E'
+                    }`
+                  : 'LNG --'}
+              </div>
+            </div>
+
+            {/* MAP CONTROLS */}
+
+            <div
+              className="
+                absolute
+                right-4
+                bottom-4
+                z-10
+                pointer-events-auto
+                flex
+                flex-col
+                gap-1
+              "
+            >
+              <button
+                type="button"
+                className="
+                  w-9
+                  h-9
+                  ice-panel
+                  rounded-lg
+                  flex
+                  items-center
+                  justify-center
+                  text-slate-400
+                  hover:text-cyan-300
+                  transition
+                "
+                aria-label="Center map"
+              >
+                <Target
+                  className="
+                    w-4
+                    h-4
+                  "
+                />
+              </button>
+
+              <button
+                type="button"
+                className="
+                  w-9
+                  h-9
+                  ice-panel
+                  rounded-lg
+                  flex
+                  items-center
+                  justify-center
+                  text-slate-400
+                  hover:text-cyan-300
+                  transition
+                "
+                aria-label="Map layers"
+              >
+                <Layers
+                  className="
+                    w-4
+                    h-4
+                  "
+                />
+              </button>
+            </div>
+=======
+>>>>>>> main
                     className="text-xs font-bold"
                     style={{
                       color: activeRoute.color,
@@ -534,12 +2211,243 @@ export default function DashboardLayout() {
 
             </div>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
           </main>
 
           {/* ===================================================
               RIGHT INTELLIGENCE PANEL
           =================================================== */}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          <aside
+            className="
+              w-[350px]
+              shrink-0
+              bg-[#07151f]/92
+              backdrop-blur-xl
+              border-l
+              border-cyan-300/10
+              pointer-events-auto
+              overflow-y-auto
+            "
+          >
+            {/* ROUTE INTELLIGENCE */}
+
+            <section
+              className="
+                border-b
+                border-white/5
+              "
+            >
+              <div
+                className="
+                  p-4
+                  flex
+                  items-center
+                  justify-between
+                "
+              >
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                  "
+                >
+                  <Brain
+                    className="
+                      w-4
+                      h-4
+                      text-cyan-300
+                    "
+                  />
+
+                  <div>
+                    <div
+                      className="
+                        text-xs
+                        font-bold
+                        text-slate-200
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      AI Route Analysis
+                    </div>
+
+                    <div
+                      className="
+                        text-[8px]
+                        text-slate-500
+                        mt-0.5
+                      "
+                    >
+                      Decision support output
+                    </div>
+                  </div>
+                </div>
+
+                <span
+                  className={`
+                    text-[8px]
+                    px-2
+                    py-1
+                    rounded
+                    ${
+                      isAnalyzing
+                        ? 'text-cyan-300 bg-cyan-400/5 border border-cyan-400/10'
+                        : analysisComplete
+                          ? 'text-emerald-300 bg-emerald-400/5 border border-emerald-400/10'
+                          : 'text-slate-500 bg-white/[0.02] border border-white/5'
+                    }
+                  `}
+                >
+                  {isAnalyzing
+                    ? 'PROCESSING'
+                    : analysisComplete
+                      ? 'COMPLETE'
+                      : 'READY'}
+                </span>
+              </div>
+
+              <div
+                className="
+                  px-4
+                  pb-4
+                "
+              >
+                <div
+                  className="
+                    p-4
+                    rounded-xl
+                    bg-gradient-to-br
+                    from-emerald-400/8
+                    to-transparent
+                    border
+                    border-emerald-400/15
+                  "
+                >
+                  <div
+                    className="
+                      flex
+                      justify-between
+                      items-end
+                    "
+                  >
+                    <div>
+                      <div
+                        className="
+                          text-[9px]
+                          text-slate-500
+                          uppercase
+                          tracking-wider
+                        "
+                      >
+                        Safety Score
+                      </div>
+
+                      <motion.div
+                        key={activeRouteType}
+                        initial={{
+                          opacity: 0,
+                          y: 5,
+                        }}
+                        animate={{
+                          opacity: 1,
+                          y: 0,
+                        }}
+                        className="
+                          text-3xl
+                          font-bold
+                          text-emerald-300
+                          mt-1
+                        "
+                      >
+                        {activeRouteType ===
+                        'safest'
+                          ? '82'
+                          : activeRouteType ===
+                              'fuel'
+                            ? '76'
+                            : '69'}
+
+                        <span className="text-base">
+                          %
+                        </span>
+                      </motion.div>
+                    </div>
+
+                    <Shield
+                      className="
+                        w-8
+                        h-8
+                        text-emerald-400/30
+                      "
+                    />
+                  </div>
+
+                  <div
+                    className="
+                      mt-3
+                      h-1.5
+                      rounded-full
+                      bg-black/40
+                      overflow-hidden
+                    "
+                  >
+                    <motion.div
+                      className="
+                        h-full
+                        bg-emerald-400
+                        rounded-full
+                        shadow-[0_0_10px_rgba(74,222,128,0.5)]
+                      "
+                      animate={{
+                        width:
+                          activeRouteType ===
+                          'safest'
+                            ? '82%'
+                            : activeRouteType ===
+                                'fuel'
+                              ? '76%'
+                              : '69%',
+                      }}
+                      transition={{
+                        duration: 0.4,
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div
+                  className="
+                    grid
+                    grid-cols-3
+                    gap-2
+                    mt-3
+                  "
+                >
+                  <RiskCard
+                    label="ICE"
+                    value={
+                      activeRouteType ===
+                      'safest'
+                        ? 'LOW'
+                        : 'MED'
+                    }
+                    type={
+                      activeRouteType ===
+                      'safest'
+                        ? 'safe'
+                        : 'warning'
+                    }
+=======
+>>>>>>> main
           <aside className="w-[350px] shrink-0 bg-[#07151f]/92 backdrop-blur-xl border-l border-cyan-300/10 pointer-events-auto overflow-y-auto">
 
             {/* Route intelligence */}
@@ -608,12 +2516,36 @@ export default function DashboardLayout() {
                     label="ICE"
                     value="LOW"
                     type="safe"
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
                   />
 
                   <RiskCard
                     label="ICEBERG"
+<<<<<<< HEAD
                     value="LOW"
                     type="safe"
+=======
+<<<<<<< HEAD
+                    value={
+                      activeRouteType ===
+                      'safest'
+                        ? 'LOW'
+                        : 'MED'
+                    }
+                    type={
+                      activeRouteType ===
+                      'safest'
+                        ? 'safe'
+                        : 'warning'
+                    }
+=======
+                    value="LOW"
+                    type="safe"
+>>>>>>> ice
+>>>>>>> main
                   />
 
                   <RiskCard
@@ -621,6 +2553,32 @@ export default function DashboardLayout() {
                     value="MED"
                     type="warning"
                   />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                </div>
+              </div>
+            </section>
+
+            {/* ICEBERG */}
+
+            <section
+              className="
+                p-4
+                border-b
+                border-white/5
+              "
+            >
+              <div
+                className="
+                  flex
+                  items-center
+                  justify-between
+                  mb-4
+                "
+              >
+=======
+>>>>>>> main
 
                 </div>
 
@@ -634,11 +2592,38 @@ export default function DashboardLayout() {
 
               <div className="flex items-center justify-between mb-4">
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
                 <SectionTitle
                   icon={<Crosshair />}
                   title="Iceberg Intelligence"
                 />
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                <span
+                  className="
+                    text-[9px]
+                    font-mono
+                    text-cyan-300
+                  "
+                >
+                  A102
+                </span>
+              </div>
+
+              <div
+                className="
+                  grid
+                  grid-cols-2
+                  gap-2
+                "
+              >
+=======
+>>>>>>> main
                 <span className="text-[9px] font-mono text-cyan-300">
                   A102
                 </span>
@@ -647,6 +2632,10 @@ export default function DashboardLayout() {
 
               <div className="grid grid-cols-2 gap-2">
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
                 <InfoCard
                   label="POSITION"
                   value="68.42° S"
@@ -670,6 +2659,78 @@ export default function DashboardLayout() {
                   value="26 AUG"
                   sub="Satellite"
                 />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+              </div>
+
+              {/* PREDICTION TIMELINE */}
+
+              <div
+                className="
+                  mt-4
+                  p-3
+                  rounded-lg
+                  bg-black/20
+                  border
+                  border-white/5
+                "
+              >
+                <div
+                  className="
+                    flex
+                    items-center
+                    justify-between
+                    mb-3
+                  "
+                >
+                  <span
+                    className="
+                      text-[8px]
+                      text-slate-500
+                      uppercase
+                      tracking-wider
+                    "
+                  >
+                    Predicted Trajectory
+                  </span>
+
+                  <span
+                    className="
+                      text-[8px]
+                      text-cyan-400
+                    "
+                  >
+                    +{mission.forecastHours}H
+                  </span>
+                </div>
+
+                <div
+                  className="
+                    relative
+                    h-10
+                  "
+                >
+                  <div
+                    className="
+                      absolute
+                      left-2
+                      right-2
+                      top-4
+                      h-px
+                      bg-slate-700
+                    "
+                  />
+
+                  <div
+                    className="
+                      relative
+                      flex
+                      justify-between
+                    "
+                  >
+=======
+>>>>>>> main
 
               </div>
 
@@ -695,11 +2756,71 @@ export default function DashboardLayout() {
 
                   <div className="relative flex justify-between">
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
                     {[
                       'NOW',
                       '+12H',
                       '+24H',
                       '+48H',
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                      `+${mission.forecastHours}H`,
+                    ].map(
+                      (time, index) => (
+                        <div
+                          key={`${time}-${index}`}
+                          className="
+                            flex
+                            flex-col
+                            items-center
+                          "
+                        >
+                          <div
+                            className={`
+                              w-2.5
+                              h-2.5
+                              rounded-full
+                              border-2
+                              ${
+                                index === 0
+                                  ? 'bg-cyan-400 border-cyan-200'
+                                  : 'bg-[#07151f] border-cyan-400/50'
+                              }
+                            `}
+                          />
+
+                          <span
+                            className="
+                              text-[7px]
+                              text-slate-600
+                              mt-2
+                            "
+                          >
+                            {time}
+                          </span>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* VESSEL */}
+
+            <section
+              className="
+                p-4
+                border-b
+                border-white/5
+              "
+            >
+=======
+>>>>>>> main
                       '+96H',
                     ].map((time, index) => (
 
@@ -736,16 +2857,38 @@ export default function DashboardLayout() {
 
             <section className="p-4 border-b border-white/5">
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
               <SectionTitle
                 icon={<Ship />}
                 title="Vessel Safety"
               />
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+              <div
+                className="
+                  mt-4
+                  space-y-2
+                "
+              >
+                <TelemetryRow
+                  label="Polar Class"
+                  value={mission.vessel}
+=======
+>>>>>>> main
               <div className="mt-4 space-y-2">
 
                 <TelemetryRow
                   label="Polar Class"
                   value="PC6"
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
                 />
 
                 <TelemetryRow
@@ -765,6 +2908,98 @@ export default function DashboardLayout() {
                   value="OPERATIONAL"
                   valueClass="text-emerald-300"
                 />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+              </div>
+            </section>
+
+            {/* MODEL DIAGNOSTICS */}
+
+            <section className="p-4">
+              <button
+                type="button"
+                onClick={() =>
+                  setShowDiagnostics(
+                    !showDiagnostics
+                  )
+                }
+                className="
+                  w-full
+                  flex
+                  items-center
+                  justify-between
+                  p-3
+                  rounded-lg
+                  bg-black/20
+                  border
+                  border-white/5
+                  hover:border-cyan-300/20
+                  transition
+                "
+              >
+                <div
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                  "
+                >
+                  <Activity
+                    className="
+                      w-4
+                      h-4
+                      text-cyan-300
+                    "
+                  />
+
+                  <div
+                    className="
+                      text-left
+                    "
+                  >
+                    <div
+                      className="
+                        text-[10px]
+                        font-bold
+                        text-slate-300
+                        uppercase
+                        tracking-wider
+                      "
+                    >
+                      Model Diagnostics
+                    </div>
+
+                    <div
+                      className="
+                        text-[8px]
+                        text-slate-600
+                      "
+                    >
+                      Parameters & telemetry
+                    </div>
+                  </div>
+                </div>
+
+                <ChevronDown
+                  className={`
+                    w-4
+                    h-4
+                    text-slate-500
+                    transition-transform
+                    ${
+                      showDiagnostics
+                        ? 'rotate-180'
+                        : ''
+                    }
+                  `}
+                />
+              </button>
+
+              <AnimatePresence>
+                {showDiagnostics && (
+=======
+>>>>>>> main
 
               </div>
 
@@ -813,6 +3048,10 @@ export default function DashboardLayout() {
 
                 {showDiagnostics && (
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
                   <motion.div
                     initial={{
                       opacity: 0,
@@ -826,6 +3065,22 @@ export default function DashboardLayout() {
                       opacity: 0,
                       height: 0,
                     }}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                    className="
+                      mt-3
+                      overflow-hidden
+                    "
+                  >
+                    <ModelDiagnostics />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </section>
+          </aside>
+=======
+>>>>>>> main
                     className="mt-3 overflow-hidden"
                   >
                     <ModelDiagnostics />
@@ -839,14 +3094,40 @@ export default function DashboardLayout() {
 
           </aside>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
         </div>
 
         {/* =====================================================
             BOTTOM TELEMETRY
         ===================================================== */}
 
+<<<<<<< HEAD
         <footer className="h-12 shrink-0 bg-[#030a10]/96 border-t border-cyan-300/10 backdrop-blur-xl flex items-center px-5 pointer-events-auto">
 
+=======
+<<<<<<< HEAD
+        <footer
+          className="
+            h-12
+            shrink-0
+            bg-[#030a10]/96
+            border-t
+            border-cyan-300/10
+            backdrop-blur-xl
+            flex
+            items-center
+            px-5
+            pointer-events-auto
+          "
+        >
+=======
+        <footer className="h-12 shrink-0 bg-[#030a10]/96 border-t border-cyan-300/10 backdrop-blur-xl flex items-center px-5 pointer-events-auto">
+
+>>>>>>> ice
+>>>>>>> main
           <Telemetry
             icon={<Snowflake />}
             label="SEA ICE"
@@ -899,6 +3180,35 @@ export default function DashboardLayout() {
 
           <div className="flex-1" />
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          <div
+            className="
+              hidden
+              md:flex
+              items-center
+              gap-2
+              text-[8px]
+              text-slate-600
+              font-mono
+            "
+          >
+            <span>
+              DEPARTURE
+            </span>
+
+            <span className="text-slate-400">
+              {mission.departureDate}
+            </span>
+
+            <span className="text-slate-400">
+              {mission.departureTime}
+            </span>
+          </div>
+        </footer>
+=======
+>>>>>>> main
           <div className="hidden md:flex items-center gap-2 text-[8px] text-slate-600 font-mono">
 
             <span>
@@ -913,6 +3223,10 @@ export default function DashboardLayout() {
 
         </footer>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
       </motion.div>
     </AnimatePresence>
   );
@@ -933,6 +3247,30 @@ function NavButton({
 }) {
   return (
     <button
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      type="button"
+      className={`
+        relative
+        w-10
+        h-10
+        mb-2
+        rounded-lg
+        flex
+        items-center
+        justify-center
+        group
+        transition-all
+        ${
+          active
+            ? 'bg-cyan-400/10 text-cyan-300 border border-cyan-300/15'
+            : 'text-slate-600 hover:text-slate-300 hover:bg-white/[0.03]'
+        }
+      `}
+    >
+=======
+>>>>>>> main
       className={`relative w-10 h-10 mb-2 rounded-lg flex items-center justify-center group transition-all ${
         active
           ? 'bg-cyan-400/10 text-cyan-300 border border-cyan-300/15'
@@ -940,14 +3278,50 @@ function NavButton({
       }`}
     >
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
       <span className="[&>svg]:w-4 [&>svg]:h-4">
         {icon}
       </span>
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      <span
+        className="
+          absolute
+          left-12
+          z-50
+          px-2
+          py-1
+          rounded
+          bg-[#0b1b26]
+          border
+          border-white/10
+          text-[9px]
+          text-slate-300
+          whitespace-nowrap
+          opacity-0
+          pointer-events-none
+          group-hover:opacity-100
+          transition-opacity
+          shadow-xl
+        "
+      >
+        {label}
+      </span>
+=======
+>>>>>>> main
       <span className="absolute left-12 z-50 px-2 py-1 rounded bg-[#0b1b26] border border-white/10 text-[9px] text-slate-300 whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity shadow-xl">
         {label}
       </span>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
     </button>
   );
 }
@@ -964,6 +3338,39 @@ function SectionTitle({
   title: string;
 }) {
   return (
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <div
+      className="
+        flex
+        items-center
+        gap-2
+      "
+    >
+      <span
+        className="
+          text-cyan-300
+          [&>svg]:w-3.5
+          [&>svg]:h-3.5
+        "
+      >
+        {icon}
+      </span>
+
+      <span
+        className="
+          text-[9px]
+          font-bold
+          text-slate-400
+          uppercase
+          tracking-[0.16em]
+        "
+      >
+        {title}
+      </span>
+=======
+>>>>>>> main
     <div className="flex items-center gap-2">
 
       <span className="text-cyan-300 [&>svg]:w-3.5 [&>svg]:h-3.5">
@@ -974,6 +3381,10 @@ function SectionTitle({
         {title}
       </span>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
     </div>
   );
 }
@@ -985,6 +3396,36 @@ function SectionTitle({
 function SelectField({
   label,
   value,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string;
+
+  options: {
+    value: string;
+    label: string;
+  }[];
+
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div>
+      <label
+        className="
+          block
+          text-[8px]
+          text-slate-600
+          uppercase
+          tracking-wider
+          mb-1.5
+        "
+      >
+=======
+>>>>>>> main
 }: {
   label: string;
   value: string;
@@ -993,10 +3434,280 @@ function SelectField({
     <div>
 
       <label className="block text-[8px] text-slate-600 uppercase tracking-wider mb-1.5">
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
         {label}
       </label>
 
       <div className="relative">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        <select
+          value={value}
+          onChange={(event) =>
+            onChange(event.target.value)
+          }
+          className="
+            appearance-none
+            w-full
+            bg-black/25
+            border
+            border-white/5
+            rounded-lg
+            px-3
+            py-2
+            pr-8
+            text-[10px]
+            text-slate-300
+            outline-none
+            focus:border-cyan-300/30
+            transition
+          "
+        >
+          {options.map((option) => (
+            <option
+              key={option.value}
+              value={option.value}
+              className="
+                bg-[#07151f]
+                text-slate-200
+              "
+            >
+              {option.label}
+            </option>
+          ))}
+        </select>
+
+        <ChevronDown
+          className="
+            absolute
+            right-2.5
+            top-2.5
+            w-3
+            h-3
+            text-slate-600
+            pointer-events-none
+          "
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   DATE FIELD
+============================================================ */
+
+function DateField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div>
+      <label
+        className="
+          block
+          text-[8px]
+          text-slate-600
+          uppercase
+          tracking-wider
+          mb-1.5
+        "
+      >
+        {label}
+      </label>
+
+      <input
+        type="date"
+        value={value}
+        onChange={(event) =>
+          onChange(event.target.value)
+        }
+        className="
+          w-full
+          bg-black/25
+          border
+          border-white/5
+          rounded-lg
+          px-3
+          py-2
+          text-[10px]
+          text-slate-300
+          outline-none
+          focus:border-cyan-300/30
+          transition
+          [color-scheme:dark]
+        "
+      />
+    </div>
+  );
+}
+
+/* ============================================================
+   TIME FIELD
+============================================================ */
+
+function TimeField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div>
+      <label
+        className="
+          block
+          text-[8px]
+          text-slate-600
+          uppercase
+          tracking-wider
+          mb-1.5
+        "
+      >
+        {label}
+      </label>
+
+      <input
+        type="time"
+        value={value}
+        onChange={(event) =>
+          onChange(event.target.value)
+        }
+        className="
+          w-full
+          bg-black/25
+          border
+          border-white/5
+          rounded-lg
+          px-3
+          py-2
+          text-[10px]
+          text-slate-300
+          outline-none
+          focus:border-cyan-300/30
+          transition
+          [color-scheme:dark]
+        "
+      />
+    </div>
+  );
+}
+
+/* ============================================================
+   MINI SUMMARY
+============================================================ */
+
+function MiniSummary({
+  icon,
+  label,
+  value,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div
+      className="
+        flex
+        items-center
+        gap-2
+      "
+    >
+      <span
+        className="
+          text-slate-600
+          [&>svg]:w-3
+          [&>svg]:h-3
+        "
+      >
+        {icon}
+      </span>
+
+      <div className="min-w-0">
+        <div
+          className="
+            text-[6px]
+            text-slate-600
+            uppercase
+          "
+        >
+          {label}
+        </div>
+
+        <div
+          className="
+            text-[8px]
+            text-slate-300
+            font-medium
+            truncate
+          "
+        >
+          {value}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   ANALYSIS STEP
+============================================================ */
+
+function AnalysisStep({
+  label,
+  done,
+}: {
+  label: string;
+  done: boolean;
+}) {
+  return (
+    <div
+      className="
+        flex
+        items-center
+        gap-1.5
+      "
+    >
+      <span
+        className={`
+          w-1.5
+          h-1.5
+          rounded-full
+          ${
+            done
+              ? 'bg-emerald-400'
+              : 'bg-slate-700'
+          }
+        `}
+      />
+
+      <span
+        className={`
+          text-[7px]
+          ${
+            done
+              ? 'text-slate-400'
+              : 'text-slate-700'
+          }
+        `}
+      >
+        {label}
+      </span>
+=======
+>>>>>>> main
 
         <select
           defaultValue={value}
@@ -1011,6 +3722,10 @@ function SelectField({
 
       </div>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
     </div>
   );
 }
@@ -1030,12 +3745,44 @@ function Metric({
 }) {
   return (
     <div>
+<<<<<<< HEAD
 
       <div className="text-[7px] text-slate-600 uppercase">
+=======
+<<<<<<< HEAD
+      <div
+        className="
+          text-[7px]
+          text-slate-600
+          uppercase
+        "
+      >
+=======
+
+      <div className="text-[7px] text-slate-600 uppercase">
+>>>>>>> ice
+>>>>>>> main
         {label}
       </div>
 
       <div
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        className={`
+          mt-0.5
+          font-semibold
+          ${
+            positive
+              ? 'text-emerald-300'
+              : 'text-slate-300'
+          }
+        `}
+      >
+        {value}
+      </div>
+=======
+>>>>>>> main
         className={`mt-0.5 font-semibold ${
           positive
             ? 'text-emerald-300'
@@ -1045,6 +3792,10 @@ function Metric({
         {value}
       </div>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
     </div>
   );
 }
@@ -1063,6 +3814,56 @@ function LayerToggle({
   active?: boolean;
 }) {
   return (
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <label
+      className="
+        flex
+        items-center
+        gap-3
+        px-2
+        py-2
+        rounded-md
+        hover:bg-white/[0.025]
+        cursor-pointer
+        group
+      "
+    >
+      <input
+        type="checkbox"
+        defaultChecked={active}
+        className="
+          accent-cyan-400
+          w-3
+          h-3
+        "
+      />
+
+      <span
+        className="
+          text-slate-600
+          group-hover:text-cyan-300
+          transition
+          [&>svg]:w-3.5
+          [&>svg]:h-3.5
+        "
+      >
+        {icon}
+      </span>
+
+      <span
+        className="
+          text-[10px]
+          text-slate-400
+          group-hover:text-slate-200
+          transition
+        "
+      >
+        {label}
+      </span>
+=======
+>>>>>>> main
     <label className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-white/[0.025] cursor-pointer group">
 
       <input
@@ -1079,6 +3880,10 @@ function LayerToggle({
         {label}
       </span>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
     </label>
   );
 }
@@ -1097,13 +3902,57 @@ function RiskCard({
   type: 'safe' | 'warning';
 }) {
   return (
+<<<<<<< HEAD
     <div className="p-2 rounded-lg bg-black/20 border border-white/5 text-center">
 
       <div className="text-[7px] text-slate-600 uppercase">
+=======
+<<<<<<< HEAD
+    <div
+      className="
+        p-2
+        rounded-lg
+        bg-black/20
+        border
+        border-white/5
+        text-center
+      "
+    >
+      <div
+        className="
+          text-[7px]
+          text-slate-600
+          uppercase
+        "
+      >
+=======
+    <div className="p-2 rounded-lg bg-black/20 border border-white/5 text-center">
+
+      <div className="text-[7px] text-slate-600 uppercase">
+>>>>>>> ice
+>>>>>>> main
         {label}
       </div>
 
       <div
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        className={`
+          text-[9px]
+          font-bold
+          mt-1
+          ${
+            type === 'safe'
+              ? 'text-emerald-300'
+              : 'text-amber-300'
+          }
+        `}
+      >
+        {value}
+      </div>
+=======
+>>>>>>> main
         className={`text-[9px] font-bold mt-1 ${
           type === 'safe'
             ? 'text-emerald-300'
@@ -1113,6 +3962,10 @@ function RiskCard({
         {value}
       </div>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
     </div>
   );
 }
@@ -1131,6 +3984,51 @@ function InfoCard({
   sub: string;
 }) {
   return (
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <div
+      className="
+        p-2.5
+        rounded-lg
+        bg-black/20
+        border
+        border-white/5
+      "
+    >
+      <div
+        className="
+          text-[7px]
+          text-slate-600
+          uppercase
+          tracking-wider
+        "
+      >
+        {label}
+      </div>
+
+      <div
+        className="
+          text-[11px]
+          font-semibold
+          text-slate-200
+          mt-1
+        "
+      >
+        {value}
+      </div>
+
+      <div
+        className="
+          text-[7px]
+          text-slate-600
+          mt-0.5
+        "
+      >
+        {sub}
+      </div>
+=======
+>>>>>>> main
     <div className="p-2.5 rounded-lg bg-black/20 border border-white/5">
 
       <div className="text-[7px] text-slate-600 uppercase tracking-wider">
@@ -1145,6 +4043,10 @@ function InfoCard({
         {sub}
       </div>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
     </div>
   );
 }
@@ -1163,18 +4065,61 @@ function TelemetryRow({
   valueClass?: string;
 }) {
   return (
+<<<<<<< HEAD
     <div className="flex items-center justify-between py-1.5 border-b border-white/[0.03] last:border-0">
 
       <span className="text-[9px] text-slate-600">
+=======
+<<<<<<< HEAD
+    <div
+      className="
+        flex
+        items-center
+        justify-between
+        py-1.5
+        border-b
+        border-white/[0.03]
+        last:border-0
+      "
+    >
+      <span
+        className="
+          text-[9px]
+          text-slate-600
+        "
+      >
+=======
+    <div className="flex items-center justify-between py-1.5 border-b border-white/[0.03] last:border-0">
+
+      <span className="text-[9px] text-slate-600">
+>>>>>>> ice
+>>>>>>> main
         {label}
       </span>
 
       <span
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        className={`
+          text-[9px]
+          font-semibold
+          ${valueClass}
+        `}
+      >
+        {value}
+      </span>
+=======
+>>>>>>> main
         className={`text-[9px] font-semibold ${valueClass}`}
       >
         {value}
       </span>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
     </div>
   );
 }
@@ -1195,6 +4140,37 @@ function Telemetry({
   status?: 'safe' | 'warning';
 }) {
   return (
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <div
+      className="
+        flex
+        items-center
+        gap-2
+        px-4
+      "
+    >
+      <span
+        className="
+          text-slate-600
+          [&>svg]:w-3
+          [&>svg]:h-3
+        "
+      >
+        {icon}
+      </span>
+
+      <span
+        className="
+          text-[7px]
+          text-slate-600
+          uppercase
+          tracking-wider
+        "
+      >
+=======
+>>>>>>> main
     <div className="flex items-center gap-2 px-4">
 
       <span className="text-slate-600 [&>svg]:w-3 [&>svg]:h-3">
@@ -1202,10 +4178,33 @@ function Telemetry({
       </span>
 
       <span className="text-[7px] text-slate-600 uppercase tracking-wider">
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
         {label}
       </span>
 
       <span
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        className={`
+          text-[9px]
+          font-bold
+          ${
+            status === 'safe'
+              ? 'text-emerald-300'
+              : status === 'warning'
+                ? 'text-amber-300'
+                : 'text-slate-300'
+          }
+        `}
+      >
+        {value}
+      </span>
+=======
+>>>>>>> main
         className={`text-[9px] font-bold ${
           status === 'safe'
             ? 'text-emerald-300'
@@ -1217,6 +4216,10 @@ function Telemetry({
         {value}
       </span>
 
+<<<<<<< HEAD
+=======
+>>>>>>> ice
+>>>>>>> main
     </div>
   );
 }
@@ -1227,6 +4230,20 @@ function Telemetry({
 
 function Divider() {
   return (
+<<<<<<< HEAD
     <div className="h-5 w-px bg-white/5" />
+=======
+<<<<<<< HEAD
+    <div
+      className="
+        h-5
+        w-px
+        bg-white/5
+      "
+    />
+=======
+    <div className="h-5 w-px bg-white/5" />
+>>>>>>> ice
+>>>>>>> main
   );
 }
