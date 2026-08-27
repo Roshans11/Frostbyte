@@ -31,6 +31,18 @@ export interface MissionConfig {
 
 
 /* ============================================================
+   DASHBOARD PANELS
+============================================================ */
+
+export type DashboardPanel =
+  | 'dashboard'
+  | 'routes'
+  | 'icebergs'
+  | 'forecast'
+  | 'vessel';
+
+
+/* ============================================================
    LAYER VISIBILITY
 ============================================================ */
 
@@ -73,13 +85,24 @@ export interface LayerVisibility {
 interface RouteState {
 
   /* ----------------------------------------------------------
-     VIEW
+     VIEW MODE
   ---------------------------------------------------------- */
 
   viewMode: '2D' | '3D';
 
   setViewMode: (
     mode: '2D' | '3D'
+  ) => void;
+
+
+  /* ----------------------------------------------------------
+     DASHBOARD PANEL
+  ---------------------------------------------------------- */
+
+  activePanel: DashboardPanel;
+
+  setActivePanel: (
+    panel: DashboardPanel
   ) => void;
 
 
@@ -95,8 +118,35 @@ interface RouteState {
 
 
   /* ----------------------------------------------------------
+     HERO / GLOBE INTRO
+  ---------------------------------------------------------- */
+
+  /*
+   * true:
+   *   User has clicked a launch button on the Hero.
+   *
+   * false:
+   *   Hero is still the first screen.
+   */
+
+  heroLaunched: boolean;
+
+  setHeroLaunched: (
+    launched: boolean
+  ) => void;
+
+
+  /* ----------------------------------------------------------
      INTRO
   ---------------------------------------------------------- */
+
+  /*
+   * true:
+   *   Cinematic globe intro has finished.
+   *
+   * false:
+   *   Globe intro is still running / has not started.
+   */
 
   introFinished: boolean;
 
@@ -184,6 +234,18 @@ export const RouteProvider: React.FC<{
 
 
   /* ==========================================================
+     ACTIVE DASHBOARD PANEL
+  ========================================================== */
+
+  const [
+    activePanel,
+    setActivePanel,
+  ] = useState<DashboardPanel>(
+    'dashboard'
+  );
+
+
+  /* ==========================================================
      VESSEL
   ========================================================== */
 
@@ -196,8 +258,44 @@ export const RouteProvider: React.FC<{
 
 
   /* ==========================================================
-     INTRO
+     HERO LAUNCHED
   ========================================================== */
+
+  /*
+   * The Hero is shown first.
+   *
+   * When the user clicks:
+   *
+   *   3D Explorer
+   *   Route Planner
+   *   Risk Analysis
+   *   Live Monitoring
+   *
+   * this becomes true.
+   *
+   * App.tsx will then mount GlobeView.
+   */
+
+  const [
+    heroLaunched,
+    setHeroLaunched,
+  ] = useState(
+    false
+  );
+
+
+  /* ==========================================================
+     INTRO FINISHED
+  ========================================================== */
+
+  /*
+   * This stays false while the cinematic globe animation
+   * is running.
+   *
+   * GlobeView will eventually call:
+   *
+   * setIntroFinished(true)
+   */
 
   const [
     introFinished,
@@ -272,28 +370,28 @@ export const RouteProvider: React.FC<{
 
     /* --------------------------------------------------------
        SEA ICE
-       -------------------------------------------------------- */
+    -------------------------------------------------------- */
 
     seaIce: true,
 
 
     /* --------------------------------------------------------
        ICEBERGS
-       -------------------------------------------------------- */
+    -------------------------------------------------------- */
 
     icebergs: true,
 
 
     /* --------------------------------------------------------
        TRAJECTORY
-       -------------------------------------------------------- */
+    -------------------------------------------------------- */
 
     trajectory: true,
 
 
     /* --------------------------------------------------------
        ENVIRONMENTAL DATA
-       -------------------------------------------------------- */
+    -------------------------------------------------------- */
 
     wind: false,
 
@@ -304,7 +402,7 @@ export const RouteProvider: React.FC<{
 
     /* --------------------------------------------------------
        ROUTE RISK
-       -------------------------------------------------------- */
+    -------------------------------------------------------- */
 
     routeRisk: true,
 
@@ -337,9 +435,11 @@ export const RouteProvider: React.FC<{
         if (
           next.vessel !== vessel
         ) {
+
           setVessel(
             next.vessel
           );
+
         }
 
 
@@ -370,12 +470,30 @@ export const RouteProvider: React.FC<{
 
 
         /* ----------------------------------------------------
+           DASHBOARD PANEL
+        ---------------------------------------------------- */
+
+        activePanel,
+
+        setActivePanel,
+
+
+        /* ----------------------------------------------------
            VESSEL
         ---------------------------------------------------- */
 
         vessel,
 
         setVessel,
+
+
+        /* ----------------------------------------------------
+           HERO
+        ---------------------------------------------------- */
+
+        heroLaunched,
+
+        setHeroLaunched,
 
 
         /* ----------------------------------------------------

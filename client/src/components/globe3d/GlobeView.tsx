@@ -2,11 +2,11 @@ import React, {
   useEffect,
   useMemo,
   useRef,
+  useState,
 } from 'react';
 
 import {
   Viewer,
-  CameraFlyTo,
   ImageryLayer,
   Entity,
   PolylineGraphics,
@@ -34,24 +34,51 @@ import {
 
 export default function GlobeView() {
 
+  /* ==========================================================
+     VIEWER READY
+  ========================================================== */
+
+  const [
+    viewerReady,
+    setViewerReady,
+  ] = useState(false);
+
+
+  /* ==========================================================
+     ROUTE CONTEXT
+  ========================================================== */
+
   const {
     introFinished,
     setIntroFinished,
-
     selectedRoute,
-
     showTrajectory,
-
     mission,
   } = useRoute();
 
 
   /* ==========================================================
-     VIEWER
+     CESIUM VIEWER
   ========================================================== */
 
   const viewerRef =
     useRef<Cesium.Viewer | null>(null);
+
+
+  /* ==========================================================
+     INTRO STATE
+  ========================================================== */
+
+  const introRunningRef =
+    useRef(false);
+
+
+  /* ==========================================================
+     TIMER
+  ========================================================== */
+
+  const stageOneTimerRef =
+    useRef<number | null>(null);
 
 
   /* ==========================================================
@@ -125,6 +152,7 @@ export default function GlobeView() {
         return [];
       }
 
+
       const destinationRoutes =
         originRoutes[
           mission.destination
@@ -134,11 +162,13 @@ export default function GlobeView() {
         return [];
       }
 
+
       const routeTypes: RouteType[] = [
         'safest',
         'fastest',
         'fuel',
       ];
+
 
       return routeTypes
         .map(routeType => {
@@ -148,12 +178,16 @@ export default function GlobeView() {
               routeType
             ];
 
+
           if (
             !coordinates ||
             coordinates.length < 2
           ) {
+
             return null;
+
           }
+
 
           return {
 
@@ -245,6 +279,7 @@ export default function GlobeView() {
 
     }
 
+
     return Cesium.Cartesian3.fromDegreesArray(
       coordinates.flat()
     );
@@ -270,31 +305,305 @@ export default function GlobeView() {
 
 
   /* ==========================================================
-     CAMERA
+     CINEMATIC INTRO
+     
+     FULL GLOBE
+          ↓
+     ANTARCTICA
+          ↓
+     ICEBERG REGION
+          ↓
+     DASHBOARD
   ========================================================== */
 
   useEffect(() => {
 
+    if (!viewerReady) {
+      return;
+    }
+
+
+    const viewer =
+      viewerRef.current;
+
+
     if (
-      viewerRef.current &&
-      introFinished
+      !viewer ||
+      viewer.isDestroyed() ||
+      introFinished ||
+      introRunningRef.current
     ) {
 
-      viewerRef.current.camera.setView({
-
-        destination:
-          Cesium.Cartesian3.fromDegrees(
-            55,
-            -68,
-            8500000
-          ),
-
-      });
+      return;
 
     }
 
+
+    introRunningRef.current =
+      true;
+
+
+    const camera =
+      viewer.camera;
+
+
+    /* ========================================================
+       STAGE 0
+       
+       FULL EARTH
+       
+       IMPORTANT:
+       This is intentionally very far away so the complete
+       globe is visible before the cinematic zoom begins.
+    ======================================================== */
+
+    camera.setView({
+
+      destination:
+        Cesium.Cartesian3.fromDegrees(
+          20,
+          -5,
+          42000000
+        ),
+
+      orientation: {
+
+        heading:
+          Cesium.Math.toRadians(
+            0
+          ),
+
+        pitch:
+          Cesium.Math.toRadians(
+            -90
+          ),
+
+        roll: 0,
+
+      },
+
+    });
+
+
+    /* ========================================================
+       STAGE 1
+       
+       LET THE USER SEE THE FULL GLOBE
+    ======================================================== */
+
+    stageOneTimerRef.current =
+      window.setTimeout(() => {
+
+        if (
+          !viewer ||
+          viewer.isDestroyed()
+        ) {
+
+          return;
+
+        }
+
+
+        /* ====================================================
+           STAGE 2
+           
+           MOVE TOWARD ANTARCTICA
+        ==================================================== */
+
+        camera.flyTo({
+
+          destination:
+            Cesium.Cartesian3.fromDegrees(
+              30,
+              -40,
+              18000000
+            ),
+
+          orientation: {
+
+            heading:
+              Cesium.Math.toRadians(
+                10
+              ),
+
+            pitch:
+              Cesium.Math.toRadians(
+                -90
+              ),
+
+            roll: 0,
+
+          },
+
+          duration: 4.0,
+
+          complete: () => {
+
+            if (
+              viewer.isDestroyed()
+            ) {
+
+              return;
+
+            }
+
+
+            /* ==============================================
+               STAGE 3
+               
+               ANTARCTICA
+            ============================================== */
+
+            camera.flyTo({
+
+              destination:
+                Cesium.Cartesian3.fromDegrees(
+                  60,
+                  -66,
+                  6500000
+                ),
+
+              orientation: {
+
+                heading:
+                  Cesium.Math.toRadians(
+                    5
+                  ),
+
+                pitch:
+                  Cesium.Math.toRadians(
+                    -90
+                  ),
+
+                roll: 0,
+
+              },
+
+              duration: 3.0,
+
+              complete: () => {
+
+                if (
+                  viewer.isDestroyed()
+                ) {
+
+                  return;
+
+                }
+
+
+                /* ==========================================
+                   STAGE 4
+                   
+                   ICEBERG OPERATING REGION
+                   
+                   IMPORTANT:
+                   Pitch = -90°
+                   
+                   This keeps the geographic target centered
+                   while the user zooms in and out.
+                ========================================== */
+
+                camera.flyTo({
+
+                  destination:
+                    Cesium.Cartesian3.fromDegrees(
+                      65,
+                      -68,
+                      3000000
+                    ),
+
+                  orientation: {
+
+                    heading:
+                      Cesium.Math.toRadians(
+                        0
+                      ),
+
+                    pitch:
+                      Cesium.Math.toRadians(
+                        -90
+                      ),
+
+                    roll: 0,
+
+                  },
+
+                  duration: 3.0,
+
+                  complete: () => {
+
+                    if (
+                      viewer.isDestroyed()
+                    ) {
+
+                      return;
+
+                    }
+
+
+                    introRunningRef.current =
+                      false;
+
+
+                    setIntroFinished(
+                      true
+                    );
+
+                  },
+
+                });
+
+              },
+
+            });
+
+          },
+
+        });
+
+      }, 1800);
+
+
+    /* ========================================================
+       CLEANUP
+    ======================================================== */
+
+    return () => {
+
+      if (
+        stageOneTimerRef.current !== null
+      ) {
+
+        window.clearTimeout(
+          stageOneTimerRef.current
+        );
+
+        stageOneTimerRef.current =
+          null;
+
+      }
+
+
+      if (
+        viewer &&
+        !viewer.isDestroyed()
+      ) {
+
+        viewer.camera.cancelFlight();
+
+      }
+
+
+      introRunningRef.current =
+        false;
+
+    };
+
   }, [
+    viewerReady,
     introFinished,
+    setIntroFinished,
   ]);
 
 
@@ -330,8 +639,55 @@ export default function GlobeView() {
             element?.cesiumElement
           ) {
 
-            viewerRef.current =
+            const viewer =
               element.cesiumElement;
+
+
+            viewerRef.current =
+              viewer;
+
+
+            /* ================================================
+               CAMERA CONTROLS
+               
+               Mouse:
+               - Wheel = zoom
+               - Left drag = rotate
+               - Right drag = tilt
+               - Middle drag = pan
+
+               Touchpad:
+               - Scroll = zoom
+               - Pinch = zoom
+            ================================================= */
+
+            const controller =
+              viewer.scene
+                .screenSpaceCameraController;
+
+
+            controller.enableInputs =
+              true;
+
+            controller.enableZoom =
+              true;
+
+            controller.enableRotate =
+              true;
+
+            controller.enableTranslate =
+              true;
+
+            controller.enableTilt =
+              true;
+
+            controller.enableLook =
+              true;
+
+
+            setViewerReady(
+              true
+            );
 
           }
 
@@ -364,15 +720,18 @@ export default function GlobeView() {
         ==================================================== */}
 
         <ImageryLayer
+
           imageryProvider={
             gridImagery
           }
+
           alpha={0.18}
+
         />
 
 
         {/* ====================================================
-            ALL THREE ROUTES
+            ROUTES
         ==================================================== */}
 
         {currentMissionRoutes.map(
@@ -401,9 +760,7 @@ export default function GlobeView() {
                 key={route.id}
               >
 
-                {/* ==================================================
-                    GLOW
-                ================================================== */}
+                {/* ROUTE GLOW */}
 
                 {isSelected && (
 
@@ -428,6 +785,7 @@ export default function GlobeView() {
                       }
 
                       clampToGround
+
                     />
 
                   </Entity>
@@ -435,9 +793,7 @@ export default function GlobeView() {
                 )}
 
 
-                {/* ==================================================
-                    CASING
-                ================================================== */}
+                {/* ROUTE CASING */}
 
                 <Entity
                   name={
@@ -466,14 +822,13 @@ export default function GlobeView() {
                     }
 
                     clampToGround
+
                   />
 
                 </Entity>
 
 
-                {/* ==================================================
-                    MAIN ROUTE
-                ================================================== */}
+                {/* MAIN ROUTE */}
 
                 <Entity
 
@@ -528,14 +883,13 @@ Fuel: ${route.fuel}
                     }
 
                     clampToGround
+
                   />
 
                 </Entity>
 
 
-                {/* ==================================================
-                    WAYPOINTS
-                ================================================== */}
+                {/* WAYPOINTS */}
 
                 {route.geoJsonCoords
                   .slice(1, -1)
@@ -618,6 +972,7 @@ Fuel: ${route.fuel}
             ] =
               activeRoute
                 .geoJsonCoords[0];
+
 
             return (
 
@@ -912,7 +1267,7 @@ Fuel: ${route.fuel}
 
 
         {/* ====================================================
-            USNIC ICEBERGS
+            ICEBERGS
         ==================================================== */}
 
         {icebergs.map(iceberg => {
@@ -922,6 +1277,7 @@ Fuel: ${route.fuel}
             latitude,
           ] =
             iceberg.geoJsonCoords[0];
+
 
           const pixelSize =
             Math.max(
@@ -935,6 +1291,7 @@ Fuel: ${route.fuel}
                   0.45
               )
             );
+
 
           return (
 
@@ -1076,8 +1433,6 @@ Position: ${
 
             <>
 
-              {/* GLOW */}
-
               <Entity
                 name="Iceberg Trajectory Glow"
               >
@@ -1102,12 +1457,11 @@ Position: ${
                   }
 
                   clampToGround
+
                 />
 
               </Entity>
 
-
-              {/* DASHED LINE */}
 
               <Entity
                 name="Iceberg Predicted Trajectory"
@@ -1138,12 +1492,11 @@ Position: ${
                   }
 
                   clampToGround
+
                 />
 
               </Entity>
 
-
-              {/* TRAJECTORY POINTS */}
 
               {icebergTrajectory
                 .geoJsonCoords
@@ -1216,6 +1569,7 @@ Position: ${
         >
 
           <PointGraphics
+
             pixelSize={11}
 
             color={
@@ -1233,6 +1587,7 @@ Position: ${
             disableDepthTestDistance={
               Number.POSITIVE_INFINITY
             }
+
           />
 
           <LabelGraphics
@@ -1427,36 +1782,10 @@ Position: ${
 
         </Entity>
 
-
-        {/* ====================================================
-            INTRO CAMERA
-        ==================================================== */}
-
-        {!introFinished && (
-
-          <CameraFlyTo
-
-            duration={5}
-
-            destination={
-              Cesium.Cartesian3.fromDegrees(
-                55,
-                -68,
-                8500000
-              )
-            }
-
-            onComplete={() =>
-              setIntroFinished(true)
-            }
-
-          />
-
-        )}
-
       </Viewer>
 
     </div>
 
   );
+
 }

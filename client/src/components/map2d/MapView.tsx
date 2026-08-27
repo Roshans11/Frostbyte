@@ -298,6 +298,9 @@ export default function MapView() {
         overflow-hidden
         bg-[#06111a]
       "
+      style={{
+        touchAction: 'none',
+      }}
     >
 
       <Map
@@ -319,6 +322,28 @@ export default function MapView() {
         attributionControl
 
         reuseMaps
+
+        /* ====================================================
+           MAP INTERACTION
+
+           Keep all normal MapLibre interactions enabled.
+           These explicitly enable mouse-wheel and touchpad
+           zoom/pan gestures without changing your UI.
+        ==================================================== */
+
+        scrollZoom={true}
+
+        dragPan={true}
+
+        dragRotate={true}
+
+        doubleClickZoom={true}
+
+        touchZoomRotate={true}
+
+        keyboard={true}
+
+        cooperativeGestures={false}
       >
 
         {/* ====================================================

@@ -64,6 +64,15 @@ export default function DashboardLayout() {
 
   const [showDiagnostics, setShowDiagnostics] = useState(false);
 
+  /* ==========================================================
+     SIDEBAR NAVIGATION STATE
+     ==========================================================
+     Kept local so DashboardLayout remains compatible with the
+     existing RouteContext and does not require extra context fields.
+  ========================================================== */
+
+  const [activeNav, setActiveNav] = useState('dashboard');
+
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const [analysisComplete, setAnalysisComplete] = useState(false);
@@ -506,27 +515,36 @@ export default function DashboardLayout() {
             <NavButton
               icon={<Home />}
               label="Dashboard"
-              active
+              active={activeNav === 'dashboard'}
+              onClick={() => setActiveNav('dashboard')}
             />
 
             <NavButton
               icon={<Route />}
               label="Routes"
+              active={activeNav === 'routes'}
+              onClick={() => setActiveNav('routes')}
             />
 
             <NavButton
               icon={<Crosshair />}
               label="Icebergs"
+              active={activeNav === 'icebergs'}
+              onClick={() => setActiveNav('icebergs')}
             />
 
             <NavButton
               icon={<Activity />}
               label="Forecast"
+              active={activeNav === 'forecast'}
+              onClick={() => setActiveNav('forecast')}
             />
 
             <NavButton
               icon={<Ship />}
               label="Vessel"
+              active={activeNav === 'vessel'}
+              onClick={() => setActiveNav('vessel')}
             />
 
             <div className="flex-1" />
@@ -534,11 +552,15 @@ export default function DashboardLayout() {
             <NavButton
               icon={<Database />}
               label="Datasets"
+              active={activeNav === 'datasets'}
+              onClick={() => setActiveNav('datasets')}
             />
 
             <NavButton
               icon={<Shield />}
               label="System"
+              active={activeNav === 'system'}
+              onClick={() => setActiveNav('system')}
             />
           </nav>
 
@@ -2402,14 +2424,17 @@ function NavButton({
   icon,
   label,
   active = false,
+  onClick,
 }: {
   icon: React.ReactNode;
   label: string;
   active?: boolean;
+  onClick?: () => void;
 }) {
   return (
     <button
       type="button"
+      onClick={onClick}
       className={`
         relative
         w-10

@@ -2,65 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* =========================================================
    ICEROUTE — GLOBAL DESIGN SYSTEM
    ========================================================= */
 
 :root {
+
   /* -------------------------------------------------------
      BACKGROUNDS
-     ------------------------------------------------------- */
+  ------------------------------------------------------- */
 
   --ice-bg: #06111a;
+
   --ice-bg-deep: #030a10;
 
   --ice-panel: #0b1b26;
+
   --ice-panel-light: #102632;
+
   --ice-panel-hover: #14303d;
+
 
   /* -------------------------------------------------------
      BORDERS
-     ------------------------------------------------------- */
+  ------------------------------------------------------- */
 
-  --ice-border: rgba(130, 210, 235, 0.14);
-  --ice-border-strong: rgba(130, 210, 235, 0.28);
+  --ice-border:
+    rgba(130, 210, 235, 0.14);
+
+  --ice-border-strong:
+    rgba(130, 210, 235, 0.28);
+
 
   /* -------------------------------------------------------
      PRIMARY COLORS
-     ------------------------------------------------------- */
+  ------------------------------------------------------- */
 
   --ice-cyan: #55d6ff;
+
   --ice-cyan-bright: #8be7ff;
+
   --ice-blue: #3b82f6;
+
 
   /* -------------------------------------------------------
      STATUS COLORS
-     ------------------------------------------------------- */
+  ------------------------------------------------------- */
 
   --ice-safe: #4ade80;
+
   --ice-warning: #fbbf24;
+
   --ice-danger: #ff5c5c;
+
 
   /* -------------------------------------------------------
      TEXT
-     ------------------------------------------------------- */
+  ------------------------------------------------------- */
 
   --ice-text: #eaf7fa;
+
   --ice-text-secondary: #8ba8b5;
+
   --ice-text-muted: #55717e;
+
 
   /* -------------------------------------------------------
      EFFECTS
-     ------------------------------------------------------- */
+  ------------------------------------------------------- */
 
-  --ice-glow: rgba(85, 214, 255, 0.18);
+  --ice-glow:
+    rgba(85, 214, 255, 0.18);
 
   --ice-shadow:
     0 12px 40px rgba(0, 0, 0, 0.35);
 
+
   /* -------------------------------------------------------
      FONT
-     ------------------------------------------------------- */
+  ------------------------------------------------------- */
 
   font-family:
     Inter,
@@ -71,232 +92,459 @@
     "Segoe UI",
     sans-serif;
 
-  color: var(--ice-text);
+  color:
+    var(--ice-text);
 
-  background: var(--ice-bg-deep);
+  background:
+    var(--ice-bg-deep);
 
-  font-synthesis: none;
+  font-synthesis:
+    none;
 
-  text-rendering: optimizeLegibility;
+  text-rendering:
+    optimizeLegibility;
 
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing:
+    antialiased;
 
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing:
+    grayscale;
 }
 
 
 /* =========================================================
    GLOBAL RESET
-   ========================================================= */
+========================================================= */
 
 * {
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+
+/*
+   IMPORTANT
+   
+   Do NOT use height: 100% here.
+   
+   The landing page is taller than the viewport and needs
+   the document to grow naturally.
+*/
 
 html {
-  background: var(--ice-bg-deep);
+
+  width: 100%;
+
+  min-height: 100%;
+
+  margin: 0;
+
+  padding: 0;
+
+  background:
+    var(--ice-bg-deep);
+
+  overflow-x: hidden;
+
+  overflow-y: auto;
+
+  scroll-behavior: smooth;
+
 }
 
+
+/*
+   BODY
+   
+   The previous version had:
+   
+       overflow: hidden;
+   
+   That was preventing the landing page from scrolling.
+*/
+
 body {
-  background: var(--ice-bg-deep);
-  color: var(--ice-text);
-  overflow: hidden;
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  margin: 0;
+
+  padding: 0;
+
+  background:
+    var(--ice-bg-deep);
+
+  color:
+    var(--ice-text);
+
+  overflow-x: hidden;
+
+  overflow-y: auto;
+
+}
+
+
+/*
+   ROOT
+   
+   Do not force #root to exactly 100% height.
+   Let the landing page determine the document height.
+*/
+
+#root {
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  margin: 0;
+
+  padding: 0;
+
 }
 
 
 /* =========================================================
    FORM ELEMENTS
-   ========================================================= */
+========================================================= */
 
 button,
 input,
 select,
 textarea {
+
   font: inherit;
+
 }
 
+
 button {
+
   cursor: pointer;
+
+}
+
+
+/* =========================================================
+   LANDING PAGE SCROLL SUPPORT
+========================================================= */
+
+/*
+   The landing page is a normal website.
+
+   It must be allowed to become taller than the viewport.
+*/
+
+.landing-page {
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  overflow-x: hidden;
+
+  overflow-y: visible;
+
+}
+
+
+/*
+   Landing sections should not accidentally create
+   horizontal scrolling.
+*/
+
+.landing-page section {
+
+  max-width: 100%;
+
 }
 
 
 /* =========================================================
    MAP / GLOBE FULLSCREEN SUPPORT
-   ========================================================= */
+========================================================= */
 
 .maplibregl-map {
+
   width: 100%;
+
   height: 100%;
+
 }
+
 
 .maplibregl-canvas {
+
   outline: none;
+
 }
 
+
 .cesium-viewer {
+
   width: 100%;
+
   height: 100%;
+
 }
+
 
 .cesium-viewer-cesiumWidget,
 .cesium-widget {
+
   width: 100%;
+
   height: 100%;
+
 }
 
 
 /* =========================================================
    CESIUM UI CLEANUP
-   ========================================================= */
+========================================================= */
 
 /*
    We are building our own navigation/dashboard UI,
-   so unnecessary Cesium controls should stay hidden.
+   so unnecessary Cesium controls stay hidden.
 */
 
 .cesium-viewer-toolbar,
 .cesium-viewer-animationContainer,
 .cesium-viewer-timelineContainer,
 .cesium-viewer-bottom {
-  display: none !important;
+
+  display:
+    none !important;
+
+}
+
+
+/* =========================================================
+   CESIUM INTERACTION
+========================================================= */
+
+/*
+   Make sure Cesium can receive mouse/touchpad events.
+*/
+
+.cesium-viewer,
+.cesium-viewer-cesiumWidget,
+.cesium-widget,
+.cesium-widget canvas {
+
+  touch-action:
+    none;
+
+}
+
+
+/*
+   Prevent the browser from interpreting dragging
+   inside the globe as normal page dragging.
+*/
+
+.cesium-widget canvas {
+
+  outline: none;
+
+}
+
+
+/* =========================================================
+   MAPLIBRE INTERACTION
+========================================================= */
+
+.maplibregl-map {
+
+  touch-action:
+    pan-x pan-y;
+
 }
 
 
 /* =========================================================
    SCROLLBAR
-   ========================================================= */
+========================================================= */
 
 ::-webkit-scrollbar {
+
   width: 6px;
+
   height: 6px;
+
 }
+
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+
+  background:
+    transparent;
+
 }
+
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(139, 231, 255, 0.2);
-  border-radius: 999px;
+
+  background:
+    rgba(139, 231, 255, 0.2);
+
+  border-radius:
+    999px;
+
 }
 
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(139, 231, 255, 0.4);
+
+  background:
+    rgba(139, 231, 255, 0.4);
+
 }
 
 
 /* =========================================================
    GLOBAL UTILITY CLASSES
-   ========================================================= */
+========================================================= */
 
 .ice-panel {
-  background: rgba(11, 27, 38, 0.88);
 
-  border: 1px solid var(--ice-border);
+  background:
+    rgba(11, 27, 38, 0.88);
 
-  box-shadow: var(--ice-shadow);
+  border:
+    1px solid
+    var(--ice-border);
 
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    var(--ice-shadow);
+
+  backdrop-filter:
+    blur(14px);
+
+  -webkit-backdrop-filter:
+    blur(14px);
+
 }
 
 
 /* =========================================================
    PANEL HOVER
-   ========================================================= */
+========================================================= */
 
 .ice-panel-hover {
+
   transition:
     background 180ms ease,
     border-color 180ms ease,
     box-shadow 180ms ease;
+
 }
 
-.ice-panel-hover:hover {
-  background: rgba(16, 38, 50, 0.94);
 
-  border-color: var(--ice-border-strong);
+.ice-panel-hover:hover {
+
+  background:
+    rgba(16, 38, 50, 0.94);
+
+  border-color:
+    var(--ice-border-strong);
 
   box-shadow:
     0 12px 40px rgba(0, 0, 0, 0.4),
     0 0 20px rgba(85, 214, 255, 0.04);
+
 }
 
 
 /* =========================================================
    ICE GLOW
-   ========================================================= */
+========================================================= */
 
 .ice-glow {
+
   box-shadow:
     0 0 20px rgba(85, 214, 255, 0.12),
     0 0 50px rgba(85, 214, 255, 0.05);
+
 }
 
 
 /* =========================================================
    GRADIENT TEXT
-   ========================================================= */
+========================================================= */
 
 .ice-text-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--ice-text),
-    var(--ice-cyan)
-  );
 
-  -webkit-background-clip: text;
-  background-clip: text;
+  background:
+    linear-gradient(
+      135deg,
+      var(--ice-text),
+      var(--ice-cyan)
+    );
 
-  color: transparent;
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  color:
+    transparent;
+
 }
 
 
 /* =========================================================
    MAP / HUD EFFECTS
-   ========================================================= */
+========================================================= */
 
 .hud-grid {
+
   background-image:
+
     linear-gradient(
       rgba(85, 214, 255, 0.035) 1px,
       transparent 1px
     ),
+
     linear-gradient(
       90deg,
       rgba(85, 214, 255, 0.035) 1px,
       transparent 1px
     );
 
-  background-size: 40px 40px;
+  background-size:
+    40px 40px;
+
 }
 
 
 /* =========================================================
    HUD SCANLINE
-   ========================================================= */
+========================================================= */
 
 .hud-scanline {
-  position: relative;
+
+  position:
+    relative;
+
 }
 
+
 .hud-scanline::after {
-  content: "";
 
-  position: absolute;
+  content:
+    "";
 
-  inset: 0;
+  position:
+    absolute;
 
-  pointer-events: none;
+  inset:
+    0;
+
+  pointer-events:
+    none;
 
   background:
     repeating-linear-gradient(
@@ -305,205 +553,303 @@ button {
       transparent 3px,
       rgba(255, 255, 255, 0.012) 4px
     );
+
 }
 
 
 /* =========================================================
    STATUS INDICATORS
-   ========================================================= */
+========================================================= */
 
 .status-dot {
-  width: 7px;
-  height: 7px;
 
-  border-radius: 999px;
+  width:
+    7px;
 
-  display: inline-block;
+  height:
+    7px;
+
+  border-radius:
+    999px;
+
+  display:
+    inline-block;
+
 }
 
 
 /* ---------------------------------------------------------
    SAFE
-   --------------------------------------------------------- */
+--------------------------------------------------------- */
 
 .status-dot-safe {
-  background: var(--ice-safe);
+
+  background:
+    var(--ice-safe);
 
   box-shadow:
     0 0 10px rgba(74, 222, 128, 0.7);
+
 }
 
 
 /* ---------------------------------------------------------
    WARNING
-   --------------------------------------------------------- */
+--------------------------------------------------------- */
 
 .status-dot-warning {
-  background: var(--ice-warning);
+
+  background:
+    var(--ice-warning);
 
   box-shadow:
     0 0 10px rgba(251, 191, 36, 0.7);
+
 }
 
 
 /* ---------------------------------------------------------
    DANGER
-   --------------------------------------------------------- */
+--------------------------------------------------------- */
 
 .status-dot-danger {
-  background: var(--ice-danger);
+
+  background:
+    var(--ice-danger);
 
   box-shadow:
     0 0 10px rgba(255, 92, 92, 0.7);
+
 }
 
 
 /* ---------------------------------------------------------
    INFO
-   --------------------------------------------------------- */
+--------------------------------------------------------- */
 
 .status-dot-info {
-  background: var(--ice-cyan);
+
+  background:
+    var(--ice-cyan);
 
   box-shadow:
     0 0 10px rgba(85, 214, 255, 0.7);
+
 }
 
 
 /* =========================================================
    ANIMATIONS
-   ========================================================= */
+========================================================= */
 
 @keyframes pulse-glow {
+
   0%,
   100% {
-    opacity: 0.65;
+
+    opacity:
+      0.65;
+
   }
 
   50% {
-    opacity: 1;
+
+    opacity:
+      1;
+
   }
+
 }
 
 
 @keyframes radar-pulse {
+
   0% {
-    transform: scale(0.85);
-    opacity: 0.8;
+
+    transform:
+      scale(0.85);
+
+    opacity:
+      0.8;
+
   }
 
   100% {
-    transform: scale(1.5);
-    opacity: 0;
+
+    transform:
+      scale(1.5);
+
+    opacity:
+      0;
+
   }
+
 }
 
 
 @keyframes slide-up {
+
   from {
-    opacity: 0;
-    transform: translateY(8px);
+
+    opacity:
+      0;
+
+    transform:
+      translateY(8px);
+
   }
 
   to {
-    opacity: 1;
-    transform: translateY(0);
+
+    opacity:
+      1;
+
+    transform:
+      translateY(0);
+
   }
+
 }
 
 
 /* =========================================================
    ANIMATION UTILITIES
-   ========================================================= */
+========================================================= */
 
 .animate-pulse-glow {
+
   animation:
     pulse-glow 2s ease-in-out infinite;
+
 }
 
+
 .animate-slide-up {
+
   animation:
     slide-up 300ms ease-out both;
+
 }
 
 
 /* =========================================================
    SELECTION
-   ========================================================= */
+========================================================= */
 
 ::selection {
-  background: rgba(85, 214, 255, 0.25);
-  color: white;
+
+  background:
+    rgba(85, 214, 255, 0.25);
+
+  color:
+    white;
+
 }
 
 
 /* =========================================================
    FOCUS
-   ========================================================= */
+========================================================= */
 
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 1px solid var(--ice-cyan);
 
-  outline-offset: 2px;
+  outline:
+    1px solid
+    var(--ice-cyan);
+
+  outline-offset:
+    2px;
+
 }
 
 
 /* =========================================================
-   DISABLE IMAGE DRAGGING
-   ========================================================= */
+   IMAGES
+========================================================= */
 
 img {
-  user-select: none;
+
+  user-select:
+    none;
+
+  -webkit-user-drag:
+    none;
+
 }
 
 
 /* =========================================================
    ROUTE COLORS
-   ========================================================= */
+========================================================= */
 
 .route-safe {
-  color: var(--ice-safe);
+
+  color:
+    var(--ice-safe);
+
 }
+
 
 .route-warning {
-  color: var(--ice-warning);
+
+  color:
+    var(--ice-warning);
+
 }
+
 
 .route-danger {
-  color: var(--ice-danger);
+
+  color:
+    var(--ice-danger);
+
 }
 
+
 .route-info {
-  color: var(--ice-cyan);
+
+  color:
+    var(--ice-cyan);
+
 }
 
 
 /* =========================================================
    SUBTLE GLASS EFFECT
-   ========================================================= */
+========================================================= */
 
 .ice-glass {
-  background: rgba(6, 17, 26, 0.72);
+
+  background:
+    rgba(6, 17, 26, 0.72);
 
   border:
     1px solid
     rgba(139, 231, 255, 0.1);
 
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
 }
 
 
 /* =========================================================
    HUD DIVIDER
-   ========================================================= */
+========================================================= */
 
 .ice-divider {
-  width: 100%;
-  height: 1px;
+
+  width:
+    100%;
+
+  height:
+    1px;
 
   background:
     linear-gradient(
@@ -512,36 +858,49 @@ img {
       rgba(85, 214, 255, 0.18),
       transparent
     );
+
 }
 
 
 /* =========================================================
    GLOWING DOT
-   ========================================================= */
+========================================================= */
 
 .ice-dot {
-  width: 6px;
-  height: 6px;
 
-  border-radius: 999px;
+  width:
+    6px;
 
-  background: var(--ice-cyan);
+  height:
+    6px;
+
+  border-radius:
+    999px;
+
+  background:
+    var(--ice-cyan);
 
   box-shadow:
     0 0 6px rgba(85, 214, 255, 0.8),
     0 0 14px rgba(85, 214, 255, 0.35);
+
 }
 
 
 /* =========================================================
    MOBILE / SMALL SCREEN
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 768px) {
 
   .ice-panel {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+
+    backdrop-filter:
+      blur(10px);
+
+    -webkit-backdrop-filter:
+      blur(10px);
+
   }
 
 }
