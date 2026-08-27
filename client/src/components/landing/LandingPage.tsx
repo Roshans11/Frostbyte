@@ -467,19 +467,7 @@ backgroundRepeat: 'no-repeat',
       </p>
 
       {/* Iceberg background image, anchored to the bottom of the column */}
-      <div style={{
-        marginTop: 'auto',
-        position: 'relative',
-        width: '100%',
-        height: '360px',
-        borderRadius: '16px',
-        overflow: 'hidden',
-        backgroundImage: `url('/iceberg-ship.png')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255,255,255,0.1)'
-      }}>
-      </div>
+      
     </div>
 
     {/* RIGHT COLUMN — 2x2 capability cards */}
