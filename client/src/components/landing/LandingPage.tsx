@@ -38,7 +38,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
       <section id="home" style={{
         position: 'relative',
         minHeight: '100vh',
-        backgroundImage: `linear-gradient(to bottom, rgba(7, 13, 25, 0.28) 0%, rgba(7, 13, 25, 0.68) 75%, #070d19 100%), url('/anat.jpg')`,
+        backgroundImage: `linear-gradient(to bottom, rgba(7, 13, 25, 0.1) 0%, rgba(7, 13, 25, 0.4) 60%, #070d19 100%), url('/hero-new.jpg')`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -46,21 +46,23 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: '0 4rem',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        boxShadow: 'inset 0 0 150px rgba(0,0,0,0.5)'
       }}>
-        {/* Navigation Header */}
+{/* Navigation Header */}
 <nav style={{
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: '28px',
-  padding: '24px 20px',
-  marginTop: '12px',
-  border: '1px solid rgba(255, 255, 255, 0.14)',
-  borderRadius: '10px',
-  background: 'rgba(7, 13, 25, 0.48)',
-  backdropFilter: 'blur(12px)',
-  boxShadow: '0 12px 30px rgba(0, 0, 0, 0.18)'
+  padding: '20px 24px',
+  marginTop: '20px',
+  border: '1px solid rgba(255, 255, 255, 0.08)',
+  borderRadius: '16px',
+  background: 'rgba(7, 13, 25, 0.25)',
+  backdropFilter: 'blur(24px)',
+  WebkitBackdropFilter: 'blur(24px)',
+  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1)'
 }}>
   {/* Logo */}
   <div
@@ -204,18 +206,24 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
             </div>
 
             <h1 style={{
-  fontFamily: "'Century Gothic', 'Quicksand', sans-serif",
-  fontSize: '84px',
-  fontWeight: 700,
-  lineHeight: '0.98',
-  letterSpacing: '-2px',
-  margin: '0 0 32px 0',
-  color: '#ffffff'
-}}>
-  Navigate<br />
-  the<br />
-  <span style={{ color: '#38bdf8' }}>unknown.</span>
-</h1>
+              fontFamily: "'Inter', -apple-system, sans-serif",
+              fontSize: '96px',
+              fontWeight: 800,
+              lineHeight: '0.92',
+              letterSpacing: '-3px',
+              margin: '0 0 32px 0',
+              color: '#ffffff',
+              textShadow: '0 4px 24px rgba(0,0,0,0.4)'
+            }}>
+              Navigate<br />
+              the<br />
+              <span style={{ 
+                background: 'linear-gradient(to right, #38bdf8, #00e5a3)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>unknown.</span>
+            </h1>
 
             <p style={{
               fontSize: '16px',
@@ -230,38 +238,57 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
             <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
               <button
                 onClick={() => onLaunchDashboard()}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 229, 163, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 229, 163, 0.2)';
+                }}
                 style={{
-                  backgroundColor: '#00e5a3',
+                  background: 'linear-gradient(135deg, #00e5a3, #00c78a)',
                   color: '#070d19',
                   border: 'none',
-                  padding: '14px 28px',
-                  borderRadius: '2px',
+                  padding: '16px 32px',
+                  borderRadius: '12px',
                   fontWeight: 700,
-                  fontSize: '13px',
+                  fontSize: '14px',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px'
+                  gap: '10px',
+                  transition: 'all 0.2s ease',
+                  boxShadow: '0 4px 12px rgba(0, 229, 163, 0.2)'
                 }}
               >
-                Explore the platform <ArrowUpRight style={{ width: '16px', height: '16px' }} />
+                Explore the platform <ArrowUpRight style={{ width: '18px', height: '18px' }} />
               </button>
 
               <button
                 onClick={() => onLaunchDashboard()}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#38bdf8';
+                  e.currentTarget.style.transform = 'translateX(4px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#ffffff';
+                  e.currentTarget.style.transform = 'translateX(0)';
+                }}
                 style={{
                   backgroundColor: 'transparent',
                   color: '#ffffff',
                   border: 'none',
-                  fontSize: '13px',
+                  fontSize: '14px',
                   fontWeight: 600,
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px'
+                  gap: '8px',
+                  transition: 'all 0.2s ease'
                 }}
               >
-                Discover IceRoute <ArrowRight style={{ width: '16px', height: '16px' }} />
+                Discover IceRoute <ArrowRight style={{ width: '18px', height: '18px' }} />
               </button>
             </div>
           </div>
@@ -272,20 +299,29 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
   onClick={() => onLaunchDashboard('3D')}
   style={{
     position: 'relative',
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-    backdropFilter: 'blur(16px)',
-    WebkitBackdropFilter: 'blur(16px)', // Safari support
-    border: '1px solid rgba(255, 255, 255, 0.15)',
-    borderRadius: '8px',
-    padding: '18px',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    backdropFilter: 'blur(24px)',
+    WebkitBackdropFilter: 'blur(24px)', // Safari support
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    borderRadius: '24px',
+    padding: '24px',
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-end',
-    width: '220px',
-    height: '220px',
+    width: '240px',
+    height: '240px',
     overflow: 'hidden',
-    boxShadow: '0 12px 28px -8px rgba(0, 0, 0, 0.4)'
+    boxShadow: '0 12px 32px -8px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255,255,255,0.05)',
+    transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform = 'translateY(-4px)';
+    e.currentTarget.style.boxShadow = '0 16px 40px -8px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255,255,255,0.1)';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform = 'translateY(0)';
+    e.currentTarget.style.boxShadow = '0 12px 32px -8px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255,255,255,0.05)';
   }}
 >
   {/* Globe sphere, bled off the top-right corner */}
@@ -338,7 +374,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
       position: 'absolute',
       inset: 0,
       background: 'linear-gradient(180deg, rgba(87, 123, 194, 0) 30%, rgba(72, 107, 177, 0.9) 75%, #4363a4 100%)',
-      
     }}
   />
 
@@ -367,10 +402,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onLaunchDashboard }) =
   linear-gradient(
     to bottom,
     #070d19 0%,
-    rgba(7, 13, 25, 0.92) 10%,
-    rgba(6, 30, 42, 0.72) 28%,
-    rgba(5, 45, 60, 0.55) 55%,
-    rgba(6, 25, 35, 0.78) 78%,
+    rgba(7, 13, 25, 0.95) 10%,
+    rgba(6, 30, 42, 0.82) 28%,
+    rgba(5, 45, 60, 0.75) 55%,
+    rgba(6, 25, 35, 0.88) 78%,
     #070d19 100%
   ),
   url('/second.png')
@@ -435,12 +470,14 @@ backgroundRepeat: 'no-repeat',
         marginTop: 'auto',
         position: 'relative',
         width: '100%',
-        height: '340px',
-        borderRadius: '4px',
-        overflow: 'hidden'
+        height: '360px',
+        borderRadius: '16px',
+        overflow: 'hidden',
+        backgroundImage: `url('/iceberg-ship.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255,255,255,0.1)'
       }}>
-        
-        
       </div>
     </div>
 
@@ -967,7 +1004,12 @@ backgroundRepeat: 'no-repeat',
 
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          backgroundImage: `url('/radar-bg.png')`,
+          backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          opacity: 0.8
         }}
       >
 
