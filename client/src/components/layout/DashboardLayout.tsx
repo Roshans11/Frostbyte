@@ -59,6 +59,8 @@ export default function DashboardLayout() {
     setViewMode,
 
     introFinished,
+    setHeroLaunched,
+    setIntroFinished,
 
     selectedRoute,
     setSelectedRoute,
@@ -416,77 +418,114 @@ export default function DashboardLayout() {
             </div>
           </div>
 
-          {/* VIEW SWITCHER */}
+          {/* VIEW SWITCHER & BACK */}
 
           <div
             className="
               flex
               items-center
-              bg-black/30
-              border
-              border-white/5
-              rounded-lg
-              p-1
+              gap-2
             "
           >
+            <div
+              className="
+                flex
+                items-center
+                bg-black/40
+                border
+                border-white/5
+                rounded-lg
+                p-1
+              "
+            >
+              <button
+                type="button"
+                onClick={() => setViewMode('2D')}
+                className={`
+                  flex
+                  items-center
+                  gap-2
+                  px-3
+                  py-2
+                  rounded-md
+                  text-[10px]
+                  font-semibold
+                  transition-all
+                  ${
+                    viewMode === '2D'
+                      ? 'bg-cyan-400/15 text-cyan-300 border border-cyan-300/10'
+                      : 'text-slate-500 hover:text-slate-300'
+                  }
+                `}
+              >
+                <MapIcon
+                  className="
+                    w-3.5
+                    h-3.5
+                  "
+                />
+
+                2D MAP
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setViewMode('3D')}
+                className={`
+                  flex
+                  items-center
+                  gap-2
+                  px-3
+                  py-2
+                  rounded-md
+                  text-[10px]
+                  font-semibold
+                  transition-all
+                  ${
+                    viewMode === '3D'
+                      ? 'bg-cyan-400/15 text-cyan-300 border border-cyan-300/10'
+                      : 'text-slate-500 hover:text-slate-300'
+                  }
+                `}
+              >
+                <Globe
+                  className="
+                    w-3.5
+                    h-3.5
+                  "
+                />
+
+                3D GLOBE
+              </button>
+            </div>
+
             <button
               type="button"
-              onClick={() => setViewMode('2D')}
-              className={`
+              onClick={() => {
+                setHeroLaunched(false);
+                setIntroFinished(false);
+              }}
+              className="
                 flex
                 items-center
                 gap-2
-                px-3
+                px-4
                 py-2
-                rounded-md
+                rounded-lg
+                bg-white/5
+                hover:bg-white/10
+                border
+                border-white/10
                 text-[10px]
                 font-semibold
+                text-slate-300
+                hover:text-white
                 transition-all
-                ${
-                  viewMode === '2D'
-                    ? 'bg-cyan-400/15 text-cyan-300 border border-cyan-300/10'
-                    : 'text-slate-500 hover:text-slate-300'
-                }
-              `}
+                ml-2
+              "
             >
-              <MapIcon
-                className="
-                  w-3.5
-                  h-3.5
-                "
-              />
-
-              2D MAP
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setViewMode('3D')}
-              className={`
-                flex
-                items-center
-                gap-2
-                px-3
-                py-2
-                rounded-md
-                text-[10px]
-                font-semibold
-                transition-all
-                ${
-                  viewMode === '3D'
-                    ? 'bg-cyan-400/15 text-cyan-300 border border-cyan-300/10'
-                    : 'text-slate-500 hover:text-slate-300'
-                }
-              `}
-            >
-              <Globe
-                className="
-                  w-3.5
-                  h-3.5
-                "
-              />
-
-              3D GLOBE
+              <Home className="w-3.5 h-3.5" />
+              HOME
             </button>
           </div>
         </header>

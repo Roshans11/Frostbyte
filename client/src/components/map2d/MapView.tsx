@@ -7,6 +7,7 @@ import Map, {
   NavigationControl,
 } from 'react-map-gl/maplibre';
 
+import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 import {
@@ -305,6 +306,7 @@ export default function MapView() {
 
       <Map
         key={`${mission.origin}-${mission.destination}`}
+        mapLib={maplibregl as any}
 
         initialViewState={{
           longitude:

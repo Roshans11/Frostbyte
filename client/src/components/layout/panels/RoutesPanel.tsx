@@ -13,6 +13,29 @@ export const RoutesPanel: React.FC = () => {
 
   const activeWaypoints = getMissionRoute(mission.origin, mission.destination, activeRouteType);
 
+  // Dynamic route predictions based on origin and destination
+  const getPredictions = (type: RouteType) => {
+    let baseTime = 74; // hours
+    let baseFuel = 18.4; // tonnes
+    
+    const key = `${mission.origin}-${mission.destination}`;
+    if (key.includes('hobart')) { baseTime = 110; baseFuel = 27.5; }
+    if (key.includes('ushuaia')) { baseTime = 85; baseFuel = 21.0; }
+
+    if (type === 'fastest') {
+      return { eta: Math.floor(baseTime * 0.85), fuel: (baseFuel * 1.15).toFixed(1), risk: 'MEDIUM' };
+    }
+    if (type === 'fuel') {
+      return { eta: Math.floor(baseTime * 1.1), fuel: (baseFuel * 0.8).toFixed(1), risk: 'MEDIUM' };
+    }
+    return { eta: baseTime, fuel: baseFuel.toFixed(1), risk: 'LOW' }; // safest
+  };
+
+  const safePred = getPredictions('safest');
+  const fastPred = getPredictions('fastest');
+  const fuelPred = getPredictions('fuel');
+
+
   return (
     <div className="p-4 space-y-4 text-slate-100">
       {/* HEADER */}
@@ -109,9 +132,9 @@ export const RoutesPanel: React.FC = () => {
             Maximizes open-water channels, avoids high-density sea ice (&gt;60%) and maintains &gt;15 NM buffer from iceberg drift paths.
           </p>
           <div className="flex items-center justify-between text-[9px] font-mono text-slate-300 pt-2 border-t border-white/5">
-            <span>ETA: 74 Hours</span>
-            <span>Fuel: 18.4t</span>
-            <span className="text-emerald-400 font-bold">Risk: LOW</span>
+            <span>ETA: {safePred.eta} Hours</span>
+            <span>Fuel: {safePred.fuel}t</span>
+            <span className="text-emerald-400 font-bold">Risk: {safePred.risk}</span>
           </div>
         </div>
 
@@ -143,9 +166,9 @@ export const RoutesPanel: React.FC = () => {
             Direct great-circle route through moderate pack ice. Reduces transit time by 12 hours with higher engine load and hull stress.
           </p>
           <div className="flex items-center justify-between text-[9px] font-mono text-slate-300 pt-2 border-t border-white/5">
-            <span>ETA: 62 Hours</span>
-            <span>Fuel: 21.2t</span>
-            <span className="text-amber-400 font-bold">Risk: MEDIUM</span>
+            <span>ETA: {fastPred.eta} Hours</span>
+            <span>Fuel: {fastPred.fuel}t</span>
+            <span className="text-amber-400 font-bold">Risk: {fastPred.risk}</span>
           </div>
         </div>
 
@@ -177,9 +200,9 @@ export const RoutesPanel: React.FC = () => {
             Leverages favorable Antarctic current drift (0.8 kts) and wind assistance to minimize fuel burn (16.9 tons).
           </p>
           <div className="flex items-center justify-between text-[9px] font-mono text-slate-300 pt-2 border-t border-white/5">
-            <span>ETA: 69 Hours</span>
-            <span>Fuel: 16.9t</span>
-            <span className="text-sky-400 font-bold">Risk: LOW</span>
+            <span>ETA: {fuelPred.eta} Hours</span>
+            <span>Fuel: {fuelPred.fuel}t</span>
+            <span className="text-sky-400 font-bold">Risk: {fuelPred.risk}</span>
           </div>
         </div>
       </div>

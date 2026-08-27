@@ -8,7 +8,8 @@ import {
   Anchor,
   Mail,
   Globe,
-  Radio
+  Radio,
+  ChevronUp
 } from 'lucide-react';
 
 interface LandingPageProps {
@@ -2462,6 +2463,41 @@ backgroundRepeat: 'no-repeat',
             © 2026 IceRoute India
           </div>
         </footer>
+
+        {/* Back to Top Button */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          style={{
+            position: 'fixed',
+            bottom: '40px',
+            right: '40px',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(56, 189, 248, 0.1)',
+            border: '1px solid rgba(56, 189, 248, 0.3)',
+            color: '#38bdf8',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            zIndex: 9999,
+            backdropFilter: 'blur(10px)',
+            transition: 'all 0.3s ease',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.2)';
+            e.currentTarget.style.transform = 'translateY(-3px)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(56, 189, 248, 0.1)';
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}
+        >
+          <ChevronUp style={{ width: '24px', height: '24px' }} />
+        </button>
+
     </div>
   );
 };
