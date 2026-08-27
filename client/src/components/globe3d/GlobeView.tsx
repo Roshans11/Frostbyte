@@ -131,7 +131,7 @@ export default function GlobeView() {
 
   const gridImagery = useMemo(
     () =>
-      new Cesium.GridImageryProvider(),
+      new Cesium.GridImageryProvider({}),
     []
   );
 

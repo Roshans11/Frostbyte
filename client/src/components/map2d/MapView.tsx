@@ -319,7 +319,7 @@ export default function MapView() {
 
         mapStyle={MAP_STYLE}
 
-        attributionControl
+        attributionControl={false}
 
         reuseMaps
 

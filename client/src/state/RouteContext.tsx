@@ -2,7 +2,7 @@ import React, {
   createContext,
   useContext,
   useState,
-  ReactNode,
+  type ReactNode,
 } from 'react';
 
 import {
@@ -39,7 +39,10 @@ export type DashboardPanel =
   | 'routes'
   | 'icebergs'
   | 'forecast'
-  | 'vessel';
+  | 'vessel'
+  | 'datasets'
+  | 'system'
+  | 'diagnostics';
 
 
 /* ============================================================
@@ -103,6 +106,17 @@ interface RouteState {
 
   setActivePanel: (
     panel: DashboardPanel
+  ) => void;
+
+
+  /* ----------------------------------------------------------
+     FULL SCREEN MODAL
+  ---------------------------------------------------------- */
+
+  isFullScreen: boolean;
+
+  setIsFullScreen: (
+    full: boolean
   ) => void;
 
 
@@ -243,6 +257,11 @@ export const RouteProvider: React.FC<{
   ] = useState<DashboardPanel>(
     'dashboard'
   );
+
+  const [
+    isFullScreen,
+    setIsFullScreen,
+  ] = useState(false);
 
 
   /* ==========================================================
@@ -476,6 +495,10 @@ export const RouteProvider: React.FC<{
         activePanel,
 
         setActivePanel,
+
+        isFullScreen,
+
+        setIsFullScreen,
 
 
         /* ----------------------------------------------------

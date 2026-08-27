@@ -27,6 +27,7 @@ import {
   Clock3,
   CalendarDays,
   MapPin,
+  TrendingUp,
 } from 'lucide-react';
 
 import { useRoute } from '../../state/RouteContext';
@@ -39,6 +40,14 @@ import {
 } from '../../data/mockData';
 
 import ModelDiagnostics from './ModelDiagnostics';
+import { DashboardPanel } from './panels/DashboardPanel';
+import { RoutesPanel } from './panels/RoutesPanel';
+import { IcebergsPanel } from './panels/IcebergsPanel';
+import { ForecastPanel } from './panels/ForecastPanel';
+import { VesselPanel } from './panels/VesselPanel';
+import { DatasetsPanel } from './panels/DatasetsPanel';
+import { SystemPanel } from './panels/SystemPanel';
+import { FullScreenViewModal } from './FullScreenViewModal';
 
 /* ============================================================
    DASHBOARD
@@ -56,6 +65,9 @@ export default function DashboardLayout() {
 
     mission,
     setMission,
+
+    activePanel,
+    setActivePanel,
   } = useRoute();
 
   /* ==========================================================
@@ -64,14 +76,8 @@ export default function DashboardLayout() {
 
   const [showDiagnostics, setShowDiagnostics] = useState(false);
 
-  /* ==========================================================
-     SIDEBAR NAVIGATION STATE
-     ==========================================================
-     Kept local so DashboardLayout remains compatible with the
-     existing RouteContext and does not require extra context fields.
-  ========================================================== */
-
-  const [activeNav, setActiveNav] = useState('dashboard');
+  const activeNav = activePanel;
+  const setActiveNav = (panel: any) => setActivePanel(panel);
 
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -557,8 +563,8 @@ export default function DashboardLayout() {
             />
 
             <NavButton
-              icon={<Shield />}
-              label="System"
+              icon={<TrendingUp />}
+              label="Graph"
               active={activeNav === 'system'}
               onClick={() => setActiveNav('system')}
             />
@@ -570,7 +576,7 @@ export default function DashboardLayout() {
 
           <aside
             className="
-              w-[300px]
+              w-[340px]
               shrink-0
               bg-[#07151f]/94
               backdrop-blur-xl
@@ -578,892 +584,31 @@ export default function DashboardLayout() {
               border-cyan-300/10
               pointer-events-auto
               overflow-y-auto
+              shadow-[8px_0_30px_rgba(0,0,0,0.4)]
             "
           >
-            {/* MISSION PLANNER */}
-
-            <section
-              className="
-                p-4
-                border-b
-                border-white/5
-              "
-            >
-              <div
-                className="
-                  flex
-                  items-center
-                  justify-between
-                "
-              >
-                <SectionTitle
-                  icon={<Navigation />}
-                  title="Mission Planner"
-                />
-
-                <span
-                  className={`
-                    text-[7px]
-                    font-bold
-                    tracking-wider
-                    px-2
-                    py-1
-                    rounded-full
-                    border
-                    ${
-                      isAnalyzing
-                        ? 'text-cyan-300 bg-cyan-400/5 border-cyan-300/15'
-                        : analysisComplete
-                          ? 'text-emerald-300 bg-emerald-400/5 border-emerald-400/15'
-                          : 'text-slate-500 bg-white/[0.02] border-white/5'
-                    }
-                  `}
-                >
-                  {isAnalyzing
-                    ? 'ANALYZING'
-                    : analysisComplete
-                      ? 'COMPLETE'
-                      : 'READY'}
-                </span>
-              </div>
-
-              <div
-                className="
-                  space-y-3
-                  mt-4
-                "
-              >
-                {/* ORIGIN */}
-
-                <SelectField
-                  label="ORIGIN"
-                  value={mission.origin}
-                  options={locations.map((location) => ({
-                    value: location.id,
-                    label: location.name,
-                  }))}
-                  onChange={(value) => {
-                    updateMission({
-                      origin: value,
-                    });
-                  }}
-                />
-
-                {/* DESTINATION */}
-
-                <SelectField
-                  label="DESTINATION"
-                  value={mission.destination}
-                  options={locations.map((location) => ({
-                    value: location.id,
-                    label: location.name,
-                  }))}
-                  onChange={(value) => {
-                    updateMission({
-                      destination: value,
-                    });
-                  }}
-                />
-
-                {/* VESSEL */}
-
-                <SelectField
-                  label="VESSEL"
-                  value={mission.vessel}
-                  options={[
-                    {
-                      value: 'PC6',
-                      label: 'Research Vessel · PC6',
-                    },
-                    {
-                      value: 'PC5',
-                      label: 'Research Vessel · PC5',
-                    },
-                    {
-                      value: 'PC4',
-                      label: 'Research Vessel · PC4',
-                    },
-                    {
-                      value: 'PC3',
-                      label: 'Research Vessel · PC3',
-                    },
-                  ]}
-                  onChange={(value) => {
-                    updateMission({
-                      vessel: value,
-                    });
-                  }}
-                />
-
-                {/* DATE + TIME */}
-
-                <div
-                  className="
-                    grid
-                    grid-cols-2
-                    gap-2
-                  "
-                >
-                  <DateField
-                    label="DEPARTURE DATE"
-                    value={mission.departureDate}
-                    onChange={(value) => {
-                      updateMission({
-                        departureDate: value,
-                      });
-                    }}
-                  />
-
-                  <TimeField
-                    label="TIME"
-                    value={mission.departureTime}
-                    onChange={(value) => {
-                      updateMission({
-                        departureTime: value,
-                      });
-                    }}
-                  />
-                </div>
-
-                {/* FORECAST */}
-
-                <SelectField
-                  label="FORECAST HORIZON"
-                  value={String(mission.forecastHours)}
-                  options={[
-                    {
-                      value: '24',
-                      label: '24 HOURS',
-                    },
-                    {
-                      value: '48',
-                      label: '48 HOURS',
-                    },
-                    {
-                      value: '72',
-                      label: '72 HOURS',
-                    },
-                    {
-                      value: '96',
-                      label: '96 HOURS',
-                    },
-                    {
-                      value: '120',
-                      label: '120 HOURS',
-                    },
-                    {
-                      value: '168',
-                      label: '168 HOURS',
-                    },
-                  ]}
-                  onChange={(value) => {
-                    updateMission({
-                      forecastHours: Number(value),
-                    });
-                  }}
-                />
-
-                {/* MISSION SUMMARY */}
-
-                <div
-                  className="
-                    rounded-lg
-                    bg-black/20
-                    border
-                    border-white/5
-                    p-3
-                  "
-                >
-                  <div
-                    className="
-                      text-[8px]
-                      text-slate-600
-                      uppercase
-                      tracking-wider
-                      mb-2
-                    "
-                  >
-                    Mission Summary
-                  </div>
-
-                  <div
-                    className="
-                      grid
-                      grid-cols-2
-                      gap-y-2
-                    "
-                  >
-                    <MiniSummary
-                      icon={<MapPin />}
-                      label="FROM"
-                      value={
-                        activeOrigin?.name ??
-                        mission.origin
-                      }
-                    />
-
-                    <MiniSummary
-                      icon={<Target />}
-                      label="TO"
-                      value={
-                        activeDestination?.name ??
-                        mission.destination
-                      }
-                    />
-
-                    <MiniSummary
-                      icon={<Ship />}
-                      label="VESSEL"
-                      value={mission.vessel}
-                    />
-
-                    <MiniSummary
-                      icon={<Clock3 />}
-                      label="HORIZON"
-                      value={`${mission.forecastHours}H`}
-                    />
-                  </div>
-                </div>
-
-                {/* ROUTE AVAILABILITY */}
-
-                <div
-                  className={`
-                    rounded-lg
-                    border
-                    px-3
-                    py-2.5
-                    ${
-                      missionRouteExists
-                        ? 'border-emerald-400/15 bg-emerald-400/5'
-                        : 'border-amber-400/15 bg-amber-400/5'
-                    }
-                  `}
-                >
-                  <div
-                    className="
-                      flex
-                      items-center
-                      gap-2
-                    "
-                  >
-                    {missionRouteExists ? (
-                      <CheckCircle2
-                        className="
-                          w-3.5
-                          h-3.5
-                          text-emerald-300
-                        "
-                      />
-                    ) : (
-                      <Target
-                        className="
-                          w-3.5
-                          h-3.5
-                          text-amber-300
-                        "
-                      />
-                    )}
-
-                    <span
-                      className={`
-                        text-[8px]
-                        font-semibold
-                        ${
-                          missionRouteExists
-                            ? 'text-emerald-300'
-                            : 'text-amber-300'
-                        }
-                      `}
-                    >
-                      {missionRouteExists
-                        ? 'ROUTE DATA AVAILABLE'
-                        : 'ROUTE DATA NOT AVAILABLE FOR THIS PAIR'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* ANALYSIS PROGRESS */}
-
-                <AnimatePresence>
-                  {isAnalyzing && (
-                    <motion.div
-                      initial={{
-                        opacity: 0,
-                        height: 0,
-                      }}
-                      animate={{
-                        opacity: 1,
-                        height: 'auto',
-                      }}
-                      exit={{
-                        opacity: 0,
-                        height: 0,
-                      }}
-                      className="
-                        overflow-hidden
-                      "
-                    >
-                      <div
-                        className="
-                          rounded-lg
-                          border
-                          border-cyan-300/15
-                          bg-cyan-400/5
-                          p-3
-                        "
-                      >
-                        <div
-                          className="
-                            flex
-                            items-center
-                            justify-between
-                            mb-2
-                          "
-                        >
-                          <div
-                            className="
-                              flex
-                              items-center
-                              gap-2
-                            "
-                          >
-                            <Loader2
-                              className="
-                                w-3.5
-                                h-3.5
-                                text-cyan-300
-                                animate-spin
-                              "
-                            />
-
-                            <span
-                              className="
-                                text-[8px]
-                                text-cyan-300
-                                font-semibold
-                                uppercase
-                                tracking-wider
-                              "
-                            >
-                              AI Processing
-                            </span>
-                          </div>
-
-                          <span
-                            className="
-                              text-[9px]
-                              font-mono
-                              text-cyan-300
-                            "
-                          >
-                            {analysisProgress}%
-                          </span>
-                        </div>
-
-                        <div
-                          className="
-                            h-1.5
-                            rounded-full
-                            bg-black/40
-                            overflow-hidden
-                          "
-                        >
-                          <motion.div
-                            className="
-                              h-full
-                              bg-cyan-300
-                              rounded-full
-                              shadow-[0_0_12px_rgba(85,214,255,0.6)]
-                            "
-                            initial={{
-                              width: '0%',
-                            }}
-                            animate={{
-                              width: `${analysisProgress}%`,
-                            }}
-                            transition={{
-                              duration: 0.25,
-                            }}
-                          />
-                        </div>
-
-                        <div
-                          className="
-                            mt-2
-                            grid
-                            grid-cols-2
-                            gap-y-1
-                          "
-                        >
-                          <AnalysisStep
-                            label="Ocean conditions"
-                            done={analysisProgress >= 20}
-                          />
-
-                          <AnalysisStep
-                            label="Sea-ice data"
-                            done={analysisProgress >= 40}
-                          />
-
-                          <AnalysisStep
-                            label="Iceberg positions"
-                            done={analysisProgress >= 60}
-                          />
-
-                          <AnalysisStep
-                            label="Route optimization"
-                            done={analysisProgress >= 80}
-                          />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* COMPLETE MESSAGE */}
-
-                <AnimatePresence>
-                  {analysisComplete && !isAnalyzing && (
-                    <motion.div
-                      initial={{
-                        opacity: 0,
-                        y: 5,
-                      }}
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      className="
-                        flex
-                        items-center
-                        gap-2
-                        rounded-lg
-                        border
-                        border-emerald-400/15
-                        bg-emerald-400/5
-                        px-3
-                        py-2
-                      "
-                    >
-                      <CheckCircle2
-                        className="
-                          w-4
-                          h-4
-                          text-emerald-300
-                        "
-                      />
-
-                      <div>
-                        <div
-                          className="
-                            text-[8px]
-                            font-bold
-                            text-emerald-300
-                          "
-                        >
-                          ROUTE ANALYSIS COMPLETE
-                        </div>
-
-                        <div
-                          className="
-                            text-[7px]
-                            text-slate-600
-                            mt-0.5
-                          "
-                        >
-                          {activeRouteMetadata.name} remains active
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* RUN ANALYSIS BUTTON */}
-
-                <button
-                  type="button"
-                  disabled={
-                    isAnalyzing ||
-                    !missionRouteExists
-                  }
-                  onClick={runRouteAnalysis}
-                  className={`
-                    w-full
-                    py-3
-                    rounded-lg
-                    text-[9px]
-                    font-bold
-                    tracking-[0.13em]
-                    transition-all
-                    flex
-                    items-center
-                    justify-center
-                    gap-2
-                    ${
-                      isAnalyzing
-                        ? 'bg-cyan-400/10 text-cyan-300 border border-cyan-300/20 cursor-wait'
-                        : missionRouteExists
-                          ? 'bg-cyan-400 text-[#031019] hover:bg-cyan-300 shadow-[0_0_24px_rgba(85,214,255,0.16)]'
-                          : 'bg-slate-700/40 text-slate-600 border border-white/5 cursor-not-allowed'
-                    }
-                  `}
-                >
-                  {isAnalyzing ? (
-                    <>
-                      <Loader2
-                        className="
-                          w-3.5
-                          h-3.5
-                          animate-spin
-                        "
-                      />
-
-                      ANALYZING MISSION
-                    </>
-                  ) : analysisComplete ? (
-                    <>
-                      <CheckCircle2
-                        className="
-                          w-3.5
-                          h-3.5
-                        "
-                      />
-
-                      RE-RUN AI ANALYSIS
-                    </>
-                  ) : (
-                    <>
-                      <Play
-                        className="
-                          w-3.5
-                          h-3.5
-                          fill-current
-                        "
-                      />
-
-                      GENERATE AI ROUTE
-                    </>
-                  )}
-                </button>
-
-                <div
-                  className="
-                    flex
-                    items-center
-                    justify-center
-                    gap-1.5
-                    text-[7px]
-                    text-slate-600
-                  "
-                >
-                  <Brain
-                    className="
-                      w-3
-                      h-3
-                    "
-                  />
-
-                  AI decision support · frontend simulation
-                </div>
-              </div>
-            </section>
-
-            {/* =================================================
-                ROUTE OPTIONS
-            ================================================= */}
-
-            <section
-              className="
-                p-4
-                border-b
-                border-white/5
-              "
-            >
-              <SectionTitle
-                icon={<Route />}
-                title="Recommended Routes"
+            {activeNav === 'dashboard' && (
+              <DashboardPanel
+                isAnalyzing={isAnalyzing}
+                analysisComplete={analysisComplete}
+                analysisProgress={analysisProgress}
+                runRouteAnalysis={runRouteAnalysis}
+                handleRouteChange={handleRouteChange}
+                updateMission={updateMission}
               />
+            )}
 
-              <div
-                className="
-                  space-y-2
-                  mt-4
-                "
-              >
-                {availableRoutes.map((routeId) => {
-                  const route =
-                    routeMetadata[routeId];
+            {activeNav === 'routes' && <RoutesPanel />}
 
-                  const isSelected =
-                    activeRouteType === routeId;
+            {activeNav === 'icebergs' && <IcebergsPanel />}
 
-                  const isSafest =
-                    routeId === 'safest';
+            {activeNav === 'forecast' && <ForecastPanel />}
 
-                  return (
-                    <button
-                      key={routeId}
-                      type="button"
-                      disabled={isAnalyzing}
-                      onClick={() =>
-                        handleRouteChange(
-                          routeId
-                        )
-                      }
-                      className={`
-                        w-full
-                        text-left
-                        p-3
-                        rounded-lg
-                        border
-                        transition-all
-                        ${
-                          isSelected
-                            ? 'bg-cyan-400/10 border-cyan-300/40 shadow-[0_0_25px_rgba(85,214,255,0.10)] scale-[1.01]'
-                            : 'bg-black/15 border-white/5 hover:border-white/10 hover:bg-white/[0.03]'
-                        }
-                        ${
-                          isAnalyzing
-                            ? 'opacity-60 cursor-wait'
-                            : ''
-                        }
-                      `}
-                    >
-                      <div
-                        className="
-                          flex
-                          items-center
-                          justify-between
-                        "
-                      >
-                        <div
-                          className="
-                            flex
-                            items-center
-                            gap-2
-                          "
-                        >
-                          <span
-                            className="
-                              w-2.5
-                              h-2.5
-                              rounded-full
-                            "
-                            style={{
-                              background:
-                                route.color,
-                              boxShadow:
-                                `0 0 10px ${route.color}`,
-                            }}
-                          />
+            {activeNav === 'vessel' && <VesselPanel />}
 
-                          <span
-                            className="
-                              text-xs
-                              font-semibold
-                              text-slate-200
-                            "
-                          >
-                            {route.name}
-                          </span>
-                        </div>
+            {activeNav === 'datasets' && <DatasetsPanel />}
 
-                        <div
-                          className="
-                            flex
-                            items-center
-                            gap-1
-                          "
-                        >
-                          {isSelected && (
-                            <span
-                              className="
-                                text-[7px]
-                                px-1.5
-                                py-0.5
-                                rounded
-                                bg-cyan-400/10
-                                border
-                                border-cyan-300/15
-                                text-cyan-300
-                              "
-                            >
-                              ACTIVE
-                            </span>
-                          )}
-
-                          {isSafest && (
-                            <span
-                              className="
-                                text-[8px]
-                                px-1.5
-                                py-0.5
-                                rounded
-                                bg-emerald-400/10
-                                border
-                                border-emerald-400/15
-                                text-emerald-300
-                              "
-                            >
-                              AI PICK
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      <div
-                        className="
-                          grid
-                          grid-cols-3
-                          mt-3
-                          text-[9px]
-                        "
-                      >
-                        <Metric
-                          label="RISK"
-                          value={
-                            route.risk ??
-                            (isSafest
-                              ? 'LOW'
-                              : 'MED')
-                          }
-                          positive={isSafest}
-                        />
-
-                        <Metric
-                          label="ETA"
-                          value={
-                            route.eta ??
-                            '--'
-                          }
-                        />
-
-                        <Metric
-                          label="FUEL"
-                          value={
-                            route.fuel ??
-                            '--'
-                          }
-                        />
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </section>
-
-            {/* =================================================
-                DATA LAYERS
-            ================================================= */}
-
-            <section className="p-4">
-              <SectionTitle
-                icon={<Layers />}
-                title="Data Layers"
-              />
-
-              <div
-                className="
-                  space-y-1
-                  mt-4
-                "
-              >
-                <LayerToggle
-                  label="Sea Ice Concentration"
-                  active
-                  icon={<Snowflake />}
-                />
-
-                <LayerToggle
-                  label="Iceberg Positions"
-                  active
-                  icon={<Target />}
-                />
-
-                <LayerToggle
-                  label="Iceberg Trajectory"
-                  active
-                  icon={<Navigation />}
-                />
-
-                <LayerToggle
-                  label="Wind Field"
-                  icon={<Wind />}
-                />
-
-                <LayerToggle
-                  label="Wave Height"
-                  icon={<Waves />}
-                />
-
-                <LayerToggle
-                  label="Temperature"
-                  icon={<Thermometer />}
-                />
-
-                <LayerToggle
-                  label="Route Risk"
-                  active
-                  icon={<Shield />}
-                />
-              </div>
-
-              {/* SEA ICE LEGEND */}
-
-              <div
-                className="
-                  mt-5
-                  p-3
-                  rounded-lg
-                  bg-black/20
-                  border
-                  border-white/5
-                "
-              >
-                <div
-                  className="
-                    text-[8px]
-                    text-slate-500
-                    uppercase
-                    tracking-wider
-                    mb-2
-                  "
-                >
-                  Sea Ice Concentration
-                </div>
-
-                <div
-                  className="
-                    flex
-                    h-2
-                    rounded
-                    overflow-hidden
-                  "
-                >
-                  <div className="flex-1 bg-blue-300" />
-                  <div className="flex-1 bg-cyan-300" />
-                  <div className="flex-1 bg-yellow-400" />
-                  <div className="flex-1 bg-red-400" />
-                </div>
-
-                <div
-                  className="
-                    flex
-                    justify-between
-                    mt-1
-                    text-[8px]
-                    text-slate-600
-                  "
-                >
-                  <span>0%</span>
-                  <span>25%</span>
-                  <span>50%</span>
-                  <span>75%</span>
-                  <span>100%</span>
-                </div>
-              </div>
-            </section>
+            {activeNav === 'system' && <SystemPanel />}
           </aside>
 
           {/* ===================================================
@@ -2411,6 +1556,9 @@ export default function DashboardLayout() {
             </span>
           </div>
         </footer>
+
+        {/* FULLSCREEN OVERLAY MODAL */}
+        <FullScreenViewModal />
       </motion.div>
     </AnimatePresence>
   );
